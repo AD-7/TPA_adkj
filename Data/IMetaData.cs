@@ -9,7 +9,8 @@ namespace Data
 {
     public interface IMetadata
     {
-        ObservableCollection<Tuple<string,IMetadata>> getChildren { get;  }
+        ObservableCollection<IMetadata> getChildren { get;  }
+        string MetadataName { get; }
         string Name { get; }
     }
 }

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF", "WPF\WPF.csproj", "{C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandLine", "CommandLine\CommandLine.csproj", "{63633EAD-B079-497F-A750-F5B0A53FC1CA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{5526F566-CD96-4634-8226-8B18F69FA928}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{63633EAD-B079-497F-A750-F5B0A53FC1CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{63633EAD-B079-497F-A750-F5B0A53FC1CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{63633EAD-B079-497F-A750-F5B0A53FC1CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5526F566-CD96-4634-8226-8B18F69FA928}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5526F566-CD96-4634-8226-8B18F69FA928}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5526F566-CD96-4634-8226-8B18F69FA928}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5526F566-CD96-4634-8226-8B18F69FA928}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -10,24 +10,25 @@ namespace Data.Metadata_Model
     public class NamespaceMetadata : IMetadata
     {
         public string Name { get; set; }
+        public string MetadataName { get; private set; }
         public IEnumerable<TypeMetadata> Types { get; set; }
 
         internal NamespaceMetadata(string name, IEnumerable<Type> types)
         {
             Name = name;
+            MetadataName = " Namespace: ";
             Types = from type in types orderby type.Name select new TypeMetadata(type);
         }
 
-        public ObservableCollection<Tuple<string,IMetadata>> getChildren
+        public ObservableCollection<IMetadata> getChildren
         {
             get
             {
-                Tuple<string, IMetadata> metadata;
-                ObservableCollection<Tuple<string, IMetadata>> children = new ObservableCollection<Tuple<string, IMetadata>>();
+        
+                ObservableCollection< IMetadata> children = new ObservableCollection<IMetadata>();
                 foreach (IMetadata i in Types)
                 {
-                    metadata = new Tuple<string, IMetadata>("Type: ", i);
-                    children.Add(metadata);
+                    children.Add(i);
                 }
                 return children;
             }

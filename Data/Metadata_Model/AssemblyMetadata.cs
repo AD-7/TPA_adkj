@@ -11,6 +11,7 @@ namespace Data.Metadata_Model
     public class AssemblyMetadata : IMetadata
     {
         public string Name { get; set; }
+        public string MetadataName { get; private set; }
         public IEnumerable<NamespaceMetadata> Namespaces { get; set; }
 
 
@@ -18,6 +19,7 @@ namespace Data.Metadata_Model
         internal AssemblyMetadata(Assembly assembly) 
         {
             Name = assembly.ManifestModule.Name;
+            MetadataName = "Assembly: ";
             Namespaces = from Type _type in assembly.GetTypes()
                          where _type.GetVisible()
                          group _type by _type.GetNamespace() into _group
@@ -26,17 +28,16 @@ namespace Data.Metadata_Model
         }
 
 
-        public ObservableCollection<Tuple<string, IMetadata>> getChildren
+        public ObservableCollection<IMetadata> getChildren
         {
 
             get
             {
                 Tuple<string, IMetadata> metadata;
-                ObservableCollection<Tuple<string, IMetadata>> children = new ObservableCollection<Tuple<string, IMetadata>>();
+                ObservableCollection<IMetadata> children = new ObservableCollection<IMetadata>();
                 foreach (IMetadata i in Namespaces)
                 {
-                    metadata = new Tuple<string, IMetadata>("Namespace: ", i);
-                    children.Add(metadata);
+                    children.Add(i);
                 }
                 return children;
             }
