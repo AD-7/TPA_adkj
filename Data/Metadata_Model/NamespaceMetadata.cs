@@ -17,7 +17,7 @@ namespace Data.Metadata_Model
         {
             Name = name;
             MetadataName = " Namespace: ";
-            Types = from type in types orderby type.Name select  TypeMetadata.AddType(type);
+            Types = from type in types orderby type.Name select new TypeMetadata(type,"Type: ");
         }
 
         public ObservableCollection<IMetadata> getChildren
