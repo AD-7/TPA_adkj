@@ -7,8 +7,7 @@
         mc:Ignorable="d"
         Title="DLL Browser- A.D.K.J." Height="350" Width="525">
     <Grid>
-        <Button Content="Load file" HorizontalAlignment="Left" Margin="50,261,0,0" VerticalAlignment="Top" Width="125"/>
-        <Button Content="Show tree" HorizontalAlignment="Left" Margin="205,261,0,0" VerticalAlignment="Top" Width="130"/>
+        <Button Content="Load file" HorizontalAlignment="Left" Margin="200,256,0,0" VerticalAlignment="Top" Width="125"/>
         <TreeView HorizontalAlignment="Left" Height="205" Margin="65,25,0,0" VerticalAlignment="Top" Width="385"/>
 
 

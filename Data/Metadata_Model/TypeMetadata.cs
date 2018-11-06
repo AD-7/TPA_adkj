@@ -26,7 +26,7 @@ namespace Data.Metadata_Model
             Name = type.Name;
             MetadataName = metadataName;
             GenericArguments = !type.IsGenericTypeDefinition ? null : TypeMetadata.EmitGenericArguments(type.GetGenericArguments());
-
+       
 
             exists = true;
         }
@@ -100,6 +100,10 @@ namespace Data.Metadata_Model
         }
 
         #endregion
+
+
+
+
 
        public ObservableCollection<IMetadata> getChildren
        {
