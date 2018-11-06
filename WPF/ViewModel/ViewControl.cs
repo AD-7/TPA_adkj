@@ -16,12 +16,12 @@ namespace WPF.ViewModel
 
 
         public Reflector Reflector;
-        public ObservableCollection<TreeView> TreeView;
-        public ICommand LoadClicked;
+        public ObservableCollection<TreeView> TV { get; set; }
+        public ICommand LoadClicked { get; }
         public string Path;
         public ViewControl()
         {
-            TreeView = new ObservableCollection<TreeView>();
+            TV = new ObservableCollection<TreeView>();
             LoadClicked = new DelegateCommand(Load);
             Reflector = new Reflector();
         }
@@ -39,7 +39,11 @@ namespace WPF.ViewModel
         private void LoadTree()
         {
             Reflector.Reflect(Path);
-            TreeView view = new TreeView
+            TreeView newTree = new TreeView(Reflector.AssemblyModel);
+            string tmpname = newTree.Name;
+            newTree.Name = "Assembly: " + tmpname;
+            TV.Add(newTree);
+            
 
         }
         public event PropertyChangedEventHandler PropertyChanged;

@@ -11,7 +11,7 @@ namespace Data.Metadata_Model
     public class AssemblyMetadata : IMetadata
     {
         public string Name { get; set; }
-        public string MetadataName { get; private set; }
+        public string MetadataName { get; set; }
         public IEnumerable<NamespaceMetadata> Namespaces { get; set; }
 
 
