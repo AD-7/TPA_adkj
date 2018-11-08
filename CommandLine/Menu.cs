@@ -41,13 +41,18 @@ namespace CommandLine
             Console.WriteLine("1) Show dll structure");
             string choice = Console.ReadLine();
             Console.WriteLine();
+         
 
             switch (choice)
             {
                 case "1":
                     Console.Clear();
                     Console.WriteLine("Press ENTER to expand childern object");
+<<<<<<< HEAD
 
+=======
+                       
+>>>>>>> 6211c9b1516dac774d77111603a9c2a075990127
                     consoleViewer.ShowTree(views, 0);
                     break;
             }

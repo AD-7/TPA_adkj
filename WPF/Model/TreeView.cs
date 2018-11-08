@@ -40,6 +40,7 @@ namespace WPF.Model
         }
         private void buildMyself()
         {
+            
             ObservableCollection<IMetadata> test = data.getChildren;
             foreach (var i in test)
             {
