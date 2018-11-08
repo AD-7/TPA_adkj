@@ -10,9 +10,9 @@ namespace CommandLine
     {
         static void Main(string[] args)
         {
-
-            Console.WriteLine("Hello");
-            Console.WriteLine("Hello2");
+            Menu menu = new Menu();
+            menu.ShowMenu();
+          
             Console.ReadKey();
         }
     }
