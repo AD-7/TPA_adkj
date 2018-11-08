@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reflection;
 
 namespace Data.Metadata_Model
 {
@@ -12,21 +13,22 @@ namespace Data.Metadata_Model
         public string MetadataName { get; set; }
         public static Dictionary<string, TypeMetadata> allTypes = new Dictionary<string, TypeMetadata>();
         public string namespaceName;
-        private TypeMetadata Base;
+    
         private IEnumerable<TypeMetadata> GenericArguments;
+        public IEnumerable<MethodMetadata> Methods { get; set; }
         bool exists= false;
 
         #endregion
 
 
         #region constructors
-        public TypeMetadata(Type type, string metadataName)
+        internal TypeMetadata(Type type, string metadataName)
         {
             
             Name = type.Name;
             MetadataName = metadataName;
             GenericArguments = !type.IsGenericTypeDefinition ? null : TypeMetadata.EmitGenericArguments(type.GetGenericArguments());
-       
+            Methods = MethodMetadata.EmitMethods(type.GetMethods());
 
             exists = true;
         }
@@ -99,6 +101,8 @@ namespace Data.Metadata_Model
             return from Type arg in args select EmitReference(arg);
         }
 
+       
+
         #endregion
 
 
@@ -112,11 +116,15 @@ namespace Data.Metadata_Model
            
                 ObservableCollection<IMetadata> children = new ObservableCollection<IMetadata>();
 
-                foreach(IMetadata i in GenericArguments)
+                foreach(IMetadata p in Methods )
                 {
-                    i.MetadataName = "Type: ";
+                    children.Add(p);
+                }
+                foreach(IMetadata i in GenericArguments ?? Enumerable.Empty<IMetadata>())
+                {
                     children.Add(i);
                 }
+
 
 
                 return children;

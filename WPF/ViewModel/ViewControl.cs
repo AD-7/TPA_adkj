@@ -41,7 +41,7 @@ namespace WPF.ViewModel
             Reflector.Reflect(Path);
             TreeView newTree = new TreeView(Reflector.AssemblyModel);
             string tmpname = newTree.Name;
-            newTree.Name = "Assembly: " + tmpname;
+            newTree.Name =  tmpname;
             TV.Add(newTree);
             
 

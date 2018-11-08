@@ -43,6 +43,7 @@
     <Compile Include="IMetadata.cs" />
     <Compile Include="Metadata_Model\AssemblyMetadata.cs" />
     <Compile Include="Metadata_Model\ExtensionMethods.cs" />
+    <Compile Include="Metadata_Model\MethodMetadata.cs" />
     <Compile Include="Metadata_Model\NamespaceMetadata.cs" />
     <Compile Include="Metadata_Model\TypeMetadata.cs" />
     <Compile Include="Reflector.cs" />
