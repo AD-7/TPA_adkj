@@ -1,4 +1,5 @@
 ﻿using Data;
+using Data.Tracing;
 using Microsoft.Win32;
 using System;
 using System.Collections.ObjectModel;
@@ -18,11 +19,15 @@ namespace WPF.ViewModel
         public Reflector Reflector;
         public ObservableCollection<TreeView> TV { get; set; }
         public ICommand LoadClicked { get; }
+        public MyTraceSource Tracer;
         public string Path;
+
         public ViewControl()
-        {
+
+        {    Tracer = new MyTraceSource("plik.txt");
             TV = new ObservableCollection<TreeView>();
             LoadClicked = new DelegateCommand(Load);
+            
             Reflector = new Reflector();
         }
 
@@ -33,16 +38,19 @@ namespace WPF.ViewModel
             file.Filter = "Dynamic Library File(*.dll)| *.dll";
             file.ShowDialog();
             Path = file.FileName;
+            string info = "Wczytano plik " + file.FileName ;
+            Tracer.TraceData(TraceEventType.Information,info );
             LoadTree();
         }
 
         private void LoadTree()
         {
-            Reflector.Reflect(Path);
+            Reflector.Reflect(Path,Tracer);
             TreeView newTree = new TreeView(Reflector.AssemblyModel);
             string tmpname = newTree.Name;
             newTree.Name =  tmpname;
             TV.Add(newTree);
+            Tracer.TraceData(TraceEventType.Information, "Dodano nowy widok drzewa dla pliku.");
             
 
         }

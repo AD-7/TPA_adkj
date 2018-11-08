@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 namespace Data.Tracing
 {
 
-    public class TraceSource : ITraceSource
+    public class MyTraceSource : ITraceSource
     {
         string file;
-        public TraceSource(string file)
+        public MyTraceSource(string file)
         {
             this.file = file;
         }
@@ -20,9 +20,9 @@ namespace Data.Tracing
         {
             DateTime now = DateTime.Now;
             string message;
-            message = eventType.ToString() + "->";
-            message += "(" + now.ToString() + ")";
-            message += data.ToString() + "/n/n";
+            message = "\n\n" + eventType.ToString() + "->";
+            message += "(" + now.ToString() + ")->";
+            message += data.ToString() + "\n\n";
             byte[] tmpMessage = new UTF8Encoding(true).GetBytes(message); 
             using (FileStream fs = new FileStream(file, FileMode.Append, FileAccess.Write, FileShare.Read))
             {

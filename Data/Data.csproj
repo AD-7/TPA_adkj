@@ -49,7 +49,7 @@
     <Compile Include="Reflector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tracing\ITraceSource.cs" />
-    <Compile Include="Tracing\TraceSource.cs" />
+    <Compile Include="Tracing\MyTraceSource.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
