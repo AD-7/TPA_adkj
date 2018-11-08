@@ -19,7 +19,7 @@ namespace CommandLine
         public TreeView tv { get; set; }
         ObservableCollection<TreeView> views;
 
-        string dllPath ;
+        string dllPath;
 
         public Menu()
         {
@@ -39,23 +39,35 @@ namespace CommandLine
             Console.Clear();
             Console.WriteLine("MENU \n\n");
             Console.WriteLine("1) Show dll structure");
+            Console.WriteLine("2) Change path to .dll file");
             string choice = Console.ReadLine();
             Console.WriteLine();
-         
+
 
             switch (choice)
             {
                 case "1":
                     Console.Clear();
-                    Console.WriteLine("Press ENTER to expand childern object");
-<<<<<<< HEAD
+                    Console.WriteLine("Press ENTER to expand childern object\n");
 
-=======
-                       
->>>>>>> 6211c9b1516dac774d77111603a9c2a075990127
                     consoleViewer.ShowTree(views, 0);
+                    ReloadMenu();
+                    break;
+
+                case "2":
+                    Console.Clear();
+                    Console.WriteLine("Add new path to .dll file:\n");
+                    dllPath = Console.ReadLine();
+                    ReloadMenu();
                     break;
             }
+        }
+
+        public void ReloadMenu()
+        {
+            Console.WriteLine("\nPress any key to return to menu");
+            Console.ReadKey();
+            ShowMenu();
         }
     }
 }
