@@ -29,7 +29,9 @@ namespace Data.Metadata_Model
 
 
         public ObservableCollection<IMetadata> getChildren {
-            get { return null; }
+            get { return new ObservableCollection<IMetadata>();
+
+            }
         }
 
     }
