@@ -2,6 +2,7 @@
 using Data.Tracing;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,7 @@ namespace CommandLine
         public ConsoleViewer consoleViewer { get; private set; }
         public MyTraceSource myTraceSource { get; set; }
         public TreeView tv { get; set; }
+        ObservableCollection<TreeView> views;
 
         string dllPath ;
 
@@ -27,13 +29,15 @@ namespace CommandLine
             reflector.Reflect(dllPath, myTraceSource);
             TreeView tv = new TreeView(reflector.AssemblyModel);
             consoleViewer = new ConsoleViewer(tv.Children);
+            views = new ObservableCollection<TreeView>();
+            views.Add(tv);
         }
 
 
         public void ShowMenu()
         {
             Console.Clear();
-            Console.WriteLine("--------------------MENU--------------------");
+            Console.WriteLine("MENU \n\n");
             Console.WriteLine("1) Show dll structure");
             string choice = Console.ReadLine();
             Console.WriteLine();
@@ -44,7 +48,7 @@ namespace CommandLine
                     Console.Clear();
                     Console.WriteLine("Press ENTER to expand childern object");
 
-                    consoleViewer.ShowTree(tv.Children, 0);
+                    consoleViewer.ShowTree(views, 0);
                     break;
             }
         }

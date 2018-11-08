@@ -12,7 +12,7 @@ namespace WPF.Model
     {
         public string Name { get; set; }
         public ObservableCollection<TreeView> Children { get; set; }
-        IMetadata data;
+        public IMetadata data;
         private bool wasBuilt;
         private bool isExpanded;
 
