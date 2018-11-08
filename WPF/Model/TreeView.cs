@@ -10,7 +10,7 @@ namespace WPF.Model
 {
     public class TreeView
     {
-        public string Name{get; set;}
+        public string Name { get; set; }
         public ObservableCollection<TreeView> Children { get; set; }
         IMetadata data;
         private bool wasBuilt;
