@@ -21,8 +21,13 @@ namespace Data
             AssemblyModel = new AssemblyMetadata(assembly);
             tracer.TraceData(System.Diagnostics.TraceEventType.Information, "Odczyt metadanych.");
         }
+        public void Reflect(string path)
+        {
+            Assembly assembly = Assembly.LoadFrom(path);
+            AssemblyModel = new AssemblyMetadata(assembly);
+        }
 
-      
+
 
 
 

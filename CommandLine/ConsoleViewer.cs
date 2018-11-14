@@ -28,7 +28,7 @@ namespace CommandLine
                     Console.Write("  ");
 
                 Console.Write(i.Name);
-                i.IsExpanded = true;
+               i.IsExpanded = true;
 
                 if (childLvl == 0)
                 {
@@ -45,9 +45,9 @@ namespace CommandLine
                     }
                 }
                 ShowTree(i.Children, lvl + 1);
-                childLvl++;
+               // childLvl++;
 
-            }
+            } 
         }
 
 
