@@ -1,52 +1,58 @@
-﻿using Data;
-using Data.Tracing;
-using Microsoft.Win32;
-using System;
+﻿using Data.Tracing;
+using Data.TreeViewModel;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.IO;
-using System.Windows;
 using System.Windows.Input;
-using WPF.Model;
+using System.IO;
+using Microsoft.Win32;
+using System;
 
-namespace WPF.ViewModel
+namespace Data.ViewModel
 {
     public class ViewControl : INotifyPropertyChanged
     {
 
 
         public Reflector Reflector;
-        public ObservableCollection<TreeView> TV { get; set; }
-        public ICommand LoadClicked { get; }
+        public ObservableCollection<MyTreeView> TV { get; set; }
+        public ICommand LoadFileClicked { get; }
+        public ICommand ShowTree { get; }
         public MyTraceSource Tracer;
         public string Path;
 
         public ViewControl()
 
         {    Tracer = new MyTraceSource("plik.txt");
-            TV = new ObservableCollection<TreeView>();
-            LoadClicked = new DelegateCommand(Load);
-            
+            TV = new ObservableCollection<MyTreeView>();
+            LoadFileClicked = new DelegateCommand(Load);
+            ShowTree = new DelegateCommand(LoadTree);
             Reflector = new Reflector();
         }
 
-
+         public void LoadFile(string path)
+        {
+            Path = path;
+            string info = "Wczytano plik " + Path;
+            Tracer.TraceData(TraceEventType.Information, info);
+        }
         private void Load()
         {
             OpenFileDialog file = new OpenFileDialog();
+
             file.Filter = "Dynamic Library File(*.dll)| *.dll";
             file.ShowDialog();
             Path = file.FileName;
-            string info = "Wczytano plik " + file.FileName ;
+           
+            string info = "Wczytano plik " + Path;
             Tracer.TraceData(TraceEventType.Information,info );
-            LoadTree();
+            
         }
 
         private void LoadTree()
         {
             Reflector.Reflect(Path,Tracer);
-            TreeView newTree = new TreeView(Reflector.AssemblyModel);
+            MyTreeView newTree = new MyTreeView(Reflector.AssemblyModel);
             string tmpname = newTree.Name;
             newTree.Name =  tmpname;
             TV.Add(newTree);
@@ -54,6 +60,9 @@ namespace WPF.ViewModel
             
 
         }
+    
+
+
         public event PropertyChangedEventHandler PropertyChanged;
         private void PropertyChangedHandler(string propertyName_)
         {

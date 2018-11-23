@@ -55,10 +55,6 @@
       <Project>{5526F566-CD96-4634-8226-8B18F69FA928}</Project>
       <Name>Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\WPF\WPF.csproj">
-      <Project>{CBB5A228-9917-49E3-B1A2-5D28D9E2D0CE}</Project>
-      <Name>WPF</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
