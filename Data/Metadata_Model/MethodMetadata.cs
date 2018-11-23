@@ -20,7 +20,7 @@ namespace Data.Metadata_Model
             return from MethodBase tmp in methods where tmp.GetVisible() select new MethodMetadata(tmp);
         }
 
-        public MethodMetadata(MethodBase method)
+         public MethodMetadata(MethodBase method)
         {
             MetadataName = "Method: ";
             Name = method.Name;
