@@ -47,6 +47,7 @@
     <Compile Include="Metadata_Model\MethodMetadata.cs" />
     <Compile Include="Metadata_Model\NamespaceMetadata.cs" />
     <Compile Include="Metadata_Model\ParameterMetadata.cs" />
+    <Compile Include="Metadata_Model\PropertyMetadata.cs" />
     <Compile Include="Metadata_Model\TypeMetadata.cs" />
     <Compile Include="Reflector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
