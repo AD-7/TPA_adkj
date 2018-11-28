@@ -39,6 +39,8 @@ namespace CommandLine
             Console.WriteLine("MENU \n\n");
             Console.WriteLine("1) Show dll structure");
             Console.WriteLine("2) Change path to .dll file");
+            Console.WriteLine("3) Serialize");
+            Console.WriteLine("4) Deserialize");
             string choice = Console.ReadLine();
             Console.WriteLine();
 
@@ -61,6 +63,18 @@ namespace CommandLine
 
                     ReloadMenu();
                     break;
+
+                case "3":
+
+                    view.Click_Ser.Execute(null);
+                    ReloadMenu();
+                    break;
+
+                case "4":
+                    view.Click_DeSer.Execute(null);
+                    ReloadMenu();
+                    break;
+
             }
         }
 

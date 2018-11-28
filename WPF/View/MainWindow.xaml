@@ -21,8 +21,10 @@
         </TreeView>
 
 
-        <Button Content="Load file" Command="{Binding LoadFileClicked}" HorizontalAlignment="Left" Margin="40,280,0,0" VerticalAlignment="Top" Width="100" Height="31"/>
-        <Button Content="Show Tree" Command="{Binding ShowTree}" HorizontalAlignment="Left" Margin="165,280,0,0" VerticalAlignment="Top" Width="100" Height="31"/>
+        <Button Content="Load file" Command="{Binding LoadFileClicked}" HorizontalAlignment="Left" Margin="25,280,0,0" VerticalAlignment="Top" Width="100" Height="31" RenderTransformOrigin="0.15,0.484"/>
+        <Button Content="Show Tree" Command="{Binding ShowTree}" HorizontalAlignment="Left" Margin="145,280,0,0" VerticalAlignment="Top" Width="100" Height="31"/>
+        <Button Content="Serialize" Command="{Binding Click_Ser}" HorizontalAlignment="Left" Margin="265,280,0,0" VerticalAlignment="Top" Width="100" Height="31"/>
+        <Button Content="Deserialize" Command="{Binding Click_DeSer}" HorizontalAlignment="Left" Margin="375,280,0,0" VerticalAlignment="Top" Width="100" Height="31"/>
 
 
     </Grid>

@@ -18,6 +18,8 @@ namespace Data.ViewModel
         public ObservableCollection<MyTreeView> TV { get; set; }
         public ICommand LoadFileClicked { get; }
         public ICommand ShowTree { get; }
+        public ICommand Click_Ser { get; }
+        public ICommand Click_DeSer { get; }
         public MyTraceSource Tracer;
         public string Path;
 
@@ -27,6 +29,8 @@ namespace Data.ViewModel
             TV = new ObservableCollection<MyTreeView>();
             LoadFileClicked = new DelegateCommand(Load);
             ShowTree = new DelegateCommand(LoadTree);
+            Click_DeSer = new DelegateCommand(Deserialize);
+            Click_Ser = new DelegateCommand(Serialize);
             Reflector = new Reflector();
         }
 
@@ -60,7 +64,14 @@ namespace Data.ViewModel
             
 
         }
-    
+        private void Serialize()
+        {
+
+        }
+        private void Deserialize()
+        {
+
+        }
 
 
         public event PropertyChangedEventHandler PropertyChanged;
