@@ -32,6 +32,7 @@ namespace Data.ViewModel
             Click_DeSer = new DelegateCommand(Deserialize);
             Click_Ser = new DelegateCommand(Serialize);
             Reflector = new Reflector();
+            Path = "";
         }
 
          public void LoadFile(string path)
@@ -55,13 +56,15 @@ namespace Data.ViewModel
 
         private void LoadTree()
         {
-            Reflector.Reflect(Path,Tracer);
-            MyTreeView newTree = new MyTreeView(Reflector.AssemblyModel);
-            string tmpname = newTree.Name;
-            newTree.Name =  tmpname;
-            TV.Add(newTree);
-            Tracer.TraceData(TraceEventType.Information, "Dodano nowy widok drzewa dla pliku.");
-            
+            if (Path != "")
+            {
+                Reflector.Reflect(Path, Tracer);
+                MyTreeView newTree = new MyTreeView(Reflector.AssemblyModel);
+                string tmpname = newTree.Name;
+                newTree.Name = tmpname;
+                TV.Add(newTree);
+                Tracer.TraceData(TraceEventType.Information, "Dodano nowy widok drzewa dla pliku.");
+            }
 
         }
         private void Serialize()
