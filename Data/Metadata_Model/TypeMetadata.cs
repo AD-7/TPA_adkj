@@ -31,7 +31,7 @@ namespace Data.Metadata_Model
         public IEnumerable<TypeMetadata> Interfaces { get; set; }
         [DataMember(Name = "Propertie")]
         public IEnumerable<PropertyMetadata> Properties { get; set; }
-        [DataMember(Name = "Attribute")]
+        
         public IEnumerable<Attribute> Attributes;
 
     

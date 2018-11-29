@@ -13,6 +13,7 @@ namespace Data.Metadata_Model
     {
         [DataMember(Name = "Name")]
         public string Name { get; set; }
+        [DataMember(Name = "Metadata_Name")]
         public string MetadataName { get;  set; }
         [DataMember(Name = "Type")]
         public IEnumerable<TypeMetadata> Types { get; set; }

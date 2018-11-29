@@ -42,6 +42,20 @@ namespace Data.ViewModel
             string info = "Wczytano plik " + Path;
             Tracer.TraceData(TraceEventType.Information, info);
         }
+        public void DeserializeInCommandLine(string path)
+        {
+            Path = path;
+
+            Reflector = Serialization.SerXML.Deserialize(Path);
+
+            MyTreeView rootItem = new MyTreeView(Reflector.AssemblyModel) { Name = Reflector.AssemblyModel.Name };
+            string tempRootName = rootItem.Name;
+            TV.Clear();
+            rootItem.Name = "Assembly: " + tempRootName;
+            TV.Add(rootItem);
+
+        }
+
         private void Load()
         {
             OpenFileDialog file = new OpenFileDialog();
@@ -71,7 +85,11 @@ namespace Data.ViewModel
 
         private void Serialize()
         {
-            Ser.Ser.Serialize(Reflector, "test.xml");
+            if (TV.Count > 0)
+            {
+                Serialization.SerXML.Serialize(Reflector, "test.xml");
+            }
+           
         }
 
 
@@ -83,7 +101,7 @@ namespace Data.ViewModel
             file.ShowDialog();
             Path = file.FileName;
 
-            Reflector = Ser.Ser.Deserialize(Path);
+            Reflector = Serialization.SerXML.Deserialize(Path);
 
             MyTreeView rootItem = new MyTreeView(Reflector.AssemblyModel) { Name = Reflector.AssemblyModel.Name };
             string tempRootName = rootItem.Name;

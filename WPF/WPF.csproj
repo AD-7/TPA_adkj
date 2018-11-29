@@ -98,10 +98,6 @@
       <Project>{5526f566-cd96-4634-8226-8b18f69fa928}</Project>
       <Name>Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Serialization\Serialization.csproj">
-      <Project>{1b3dcc76-a086-40c7-a783-c730541993f1}</Project>
-      <Name>Serialization</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

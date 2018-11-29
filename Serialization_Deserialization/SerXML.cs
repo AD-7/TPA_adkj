@@ -1,22 +1,21 @@
-﻿using System;
+﻿using Data;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
-using System.Xml.Serialization;
-using System.Runtime.Serialization;
 
-
-namespace Data.Ser
+namespace Serialization_Deserialization
 {
-    public static class Ser
+    public class SerXML
     {
         public static void Serialize(Reflector reflcetor, string fileName)
         {
             FileStream file = new FileStream(fileName, FileMode.Create, FileAccess.Write);
 
-            DataContractSerializer SerializerObj = new DataContractSerializer(typeof(Reflector), null, 0x7FFF,  false, true, null);
+            DataContractSerializer SerializerObj = new DataContractSerializer(typeof(Reflector), null, 0x7FFF, false, true, null);
 
             SerializerObj.WriteObject(file, reflcetor);
             file.Close();
@@ -32,8 +31,6 @@ namespace Data.Ser
             file.Close();
             return reflector;
         }
-
-
 
     }
 }

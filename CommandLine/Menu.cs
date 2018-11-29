@@ -71,7 +71,10 @@ namespace CommandLine
                     break;
 
                 case "4":
-                    view.Click_DeSer.Execute(null);
+                    string pathDeser;
+                    Console.WriteLine("Podaj ścieżkę pliku: ");
+                    pathDeser = Console.ReadLine();
+                    view.DeserializeInCommandLine(pathDeser);
                     ReloadMenu();
                     break;
 
