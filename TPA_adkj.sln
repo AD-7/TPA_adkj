@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandLine", "CommandLine\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{5526F566-CD96-4634-8226-8B18F69FA928}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestsData", "UnitTestsData\UnitTestsData.csproj", "{C6BECBE7-D9D6-4F3D-8FCE-5FCA154A78C9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{5526F566-CD96-4634-8226-8B18F69FA928}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5526F566-CD96-4634-8226-8B18F69FA928}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5526F566-CD96-4634-8226-8B18F69FA928}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6BECBE7-D9D6-4F3D-8FCE-5FCA154A78C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6BECBE7-D9D6-4F3D-8FCE-5FCA154A78C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6BECBE7-D9D6-4F3D-8FCE-5FCA154A78C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6BECBE7-D9D6-4F3D-8FCE-5FCA154A78C9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

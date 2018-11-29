@@ -6,19 +6,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WPF.Model
+namespace Data.TreeViewModel
 {
-    public class TreeView
+    public class MyTreeView
     {
         public string Name { get; set; }
-        public ObservableCollection<TreeView> Children { get; set; }
+        public ObservableCollection<MyTreeView> Children { get; set; }
         public IMetadata data;
         private bool wasBuilt;
         private bool isExpanded;
 
-        public TreeView(IMetadata metadata)
+        public MyTreeView(IMetadata metadata)
         {
-            Children = new ObservableCollection<TreeView>();
+            Children = new ObservableCollection<MyTreeView>();
             Children.Add(null);
             wasBuilt = false;
             data = metadata;
@@ -27,7 +27,7 @@ namespace WPF.Model
 
         public bool IsExpanded
         {
-            get { return isExpanded; }
+          //  get { return isExpanded; }
             set
             {
                 isExpanded = value;
@@ -44,7 +44,7 @@ namespace WPF.Model
             ObservableCollection<IMetadata> test = data.getChildren;
             foreach (var i in test)
             {
-                TreeView newtree = new TreeView(i);
+                MyTreeView newtree = new MyTreeView(i);
                 Children.Add(newtree);
             }
         }

@@ -3,18 +3,26 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Data.Metadata_Model
 {
+    [DataContract(IsReference = true)]
     public class AssemblyMetadata : IMetadata
     {
+        [DataMember(Name = "Name")]
         public string Name { get; set; }
+        [DataMember(Name = "Metadata_Name")]
         public string MetadataName { get; set; }
+        [DataMember(Name = "NamespaceList")]
         public IEnumerable<NamespaceMetadata> Namespaces { get; set; }
 
+        public AssemblyMetadata()
+        {
 
+        }
 
         internal AssemblyMetadata(Assembly assembly) 
         {
