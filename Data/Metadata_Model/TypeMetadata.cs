@@ -3,24 +3,38 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Serialization;
 
 namespace Data.Metadata_Model
 {
+    [DataContract(IsReference = true)]
     public class TypeMetadata : IMetadata
     {
         #region 
+        [DataMember(Name = "Type_Name")]
         public string Name { get; private set; }
+        [DataMember(Name = "Metadata_Name")]
         public string MetadataName { get; set; }
+        [DataMember(Name = "Types_Name")]
         public static Dictionary<string, TypeMetadata> allTypes = new Dictionary<string, TypeMetadata>();
+        [DataMember(Name = "Namespace_Name")]
         public string namespaceName;
-
+        [DataMember(Name = "Generic_Arguments")]
         private IEnumerable<TypeMetadata> GenericArguments;
+        [DataMember(Name = "Method")]
         public IEnumerable<MethodMetadata> Methods { get; set; }
+        [DataMember(Name = "Constructor")]
         public IEnumerable<MethodMetadata> Constructors { get; set; }
+        [DataMember(Name = "NestedType")]
         public IEnumerable<TypeMetadata> NestedTypes { get; set; }
+        [DataMember(Name = "Interface")]
         public IEnumerable<TypeMetadata> Interfaces { get; set; }
+        [DataMember(Name = "Propertie")]
         public IEnumerable<PropertyMetadata> Properties { get; set; }
+        [DataMember(Name = "Attribute")]
         public IEnumerable<Attribute> Attributes;
+
+    
         bool exists = false;
 
         #endregion

@@ -2,15 +2,19 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Data.Metadata_Model
 {
+    [DataContract(IsReference = true)]
     public class NamespaceMetadata : IMetadata
     {
+        [DataMember(Name = "Name")]
         public string Name { get; set; }
         public string MetadataName { get;  set; }
+        [DataMember(Name = "Type")]
         public IEnumerable<TypeMetadata> Types { get; set; }
 
         internal NamespaceMetadata(string name, IEnumerable<Type> types)

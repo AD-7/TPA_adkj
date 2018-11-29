@@ -7,6 +7,7 @@ using System.Windows.Input;
 using System.IO;
 using Microsoft.Win32;
 using System;
+using System.Windows;
 
 namespace Data.ViewModel
 {
@@ -67,13 +68,28 @@ namespace Data.ViewModel
             }
 
         }
+
         private void Serialize()
         {
-
+            Ser.Ser.Serialize(Reflector, "test.xml");
         }
+
+
         private void Deserialize()
         {
+            OpenFileDialog file = new OpenFileDialog();
 
+            file.Filter = "XML Files (*.xml)|*.xml";
+            file.ShowDialog();
+            Path = file.FileName;
+
+            Reflector = Ser.Ser.Deserialize(Path);
+
+            MyTreeView rootItem = new MyTreeView(Reflector.AssemblyModel) { Name = Reflector.AssemblyModel.Name };
+            string tempRootName = rootItem.Name;
+            TV.Clear();
+            rootItem.Name = "Assembly: " + tempRootName;
+            TV.Add(rootItem);
         }
 
 

@@ -1,7 +1,9 @@
 ﻿using System.Collections.ObjectModel;
+using System.Runtime.Serialization;
 
 namespace Data.Metadata_Model
 {
+    [DataContract(IsReference = true)]
     public class PropertyMetadata : IMetadata
     {
         public string Name { get; private set; }

@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Data.Metadata_Model
 {
+    [DataContract(IsReference = true)]
     internal static class ExtensionMethods
     {
 
