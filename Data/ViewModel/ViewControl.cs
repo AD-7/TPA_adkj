@@ -1,5 +1,4 @@
 ﻿using Data.Tracing;
-using Data.TreeViewModel;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -8,6 +7,7 @@ using System.IO;
 using Microsoft.Win32;
 using System;
 using System.Windows;
+using Data.Metadata_Model;
 
 namespace Data.ViewModel
 {
@@ -16,7 +16,7 @@ namespace Data.ViewModel
 
 
         public Reflector Reflector;
-        public ObservableCollection<MyTreeView> TV { get; set; }
+        public ObservableCollection<RootTreeView> TV { get; set; }
         public ICommand LoadFileClicked { get; }
         public ICommand ShowTree { get; }
         public ICommand Click_Ser { get; }
@@ -27,7 +27,7 @@ namespace Data.ViewModel
         public ViewControl()
 
         {    Tracer = new MyTraceSource("plik.txt");
-            TV = new ObservableCollection<MyTreeView>();
+            TV = new ObservableCollection<RootTreeView>();
             LoadFileClicked = new DelegateCommand(Load);
             ShowTree = new DelegateCommand(LoadTree);
             Click_DeSer = new DelegateCommand(Deserialize);
@@ -48,7 +48,7 @@ namespace Data.ViewModel
 
             Reflector = Serialization.SerXML.Deserialize(Path);
 
-            MyTreeView rootItem = new MyTreeView(Reflector.AssemblyModel) { Name = Reflector.AssemblyModel.Name };
+            RootTreeView rootItem = new RootTreeView(Reflector.AssemblyModel) { Name = Reflector.AssemblyModel.Name };
             string tempRootName = rootItem.Name;
             TV.Clear();
             rootItem.Name = "Assembly: " + tempRootName;
@@ -74,7 +74,7 @@ namespace Data.ViewModel
             if (Path != "")
             {
                 Reflector.Reflect(Path, Tracer);
-                MyTreeView newTree = new MyTreeView(Reflector.AssemblyModel);
+                RootTreeView newTree = new RootTreeView(Reflector.AssemblyModel);
                 string tmpname = newTree.Name;
                 newTree.Name = tmpname;
                 TV.Add(newTree);
@@ -103,7 +103,7 @@ namespace Data.ViewModel
 
             Reflector = Serialization.SerXML.Deserialize(Path);
 
-            MyTreeView rootItem = new MyTreeView(Reflector.AssemblyModel) { Name = Reflector.AssemblyModel.Name };
+            RootTreeView rootItem = new RootTreeView(Reflector.AssemblyModel) { Name = Reflector.AssemblyModel.Name };
             string tempRootName = rootItem.Name;
             TV.Clear();
             rootItem.Name = "Assembly: " + tempRootName;

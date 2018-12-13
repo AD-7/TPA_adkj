@@ -6,11 +6,11 @@ using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
-
+using Data.ViewModel;
 namespace Data.Metadata_Model
 {
     [DataContract(IsReference = true)]
-    public class AssemblyMetadata : IMetadata
+    public class AssemblyMetadata : TreeViewBase,IMetadata
     {
         [DataMember(Name = "Name")]
         public string Name { get; set; }
@@ -36,21 +36,30 @@ namespace Data.Metadata_Model
         }
 
 
-        public ObservableCollection<IMetadata> getChildren
-        {
+        //public ObservableCollection<IMetadata> getChildren
+        //{
 
-            get
-            {
-                Tuple<string, IMetadata> metadata;
+        //    get
+        //    {
+        //        Tuple<string, IMetadata> metadata;
+        //        ObservableCollection<IMetadata> children = new ObservableCollection<IMetadata>();
+        //        foreach (IMetadata i in Namespaces)
+        //        {
+        //            children.Add(i);
+        //        }
+        //        return children;
+        //    }
+        //}
+
+        public override ObservableCollection<IMetadata> getChildren()
+        {
+             Tuple<string, IMetadata> metadata;
                 ObservableCollection<IMetadata> children = new ObservableCollection<IMetadata>();
                 foreach (IMetadata i in Namespaces)
                 {
                     children.Add(i);
                 }
-                return children;
-            }
+            return children;
         }
-
-      
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Data.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 namespace Data.Metadata_Model
 {
     [DataContract(IsReference = true)]
-    public class NamespaceMetadata : IMetadata
+    public class NamespaceMetadata : TreeViewBase,IMetadata
     {
         [DataMember(Name = "Name")]
         public string Name { get; set; }
@@ -25,10 +26,9 @@ namespace Data.Metadata_Model
             Types = from type in types orderby type.Name select new TypeMetadata(type,"Type: ");
         }
 
-        public ObservableCollection<IMetadata> getChildren
+        public override ObservableCollection<IMetadata> getChildren()
         {
-            get
-            {
+            
         
                 ObservableCollection< IMetadata> children = new ObservableCollection<IMetadata>();
                 foreach (IMetadata i in Types)
@@ -37,7 +37,7 @@ namespace Data.Metadata_Model
                     children.Add(i);
                 }
                 return children;
-            }
+            
         }
 
 

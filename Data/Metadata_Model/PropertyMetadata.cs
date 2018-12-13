@@ -1,10 +1,11 @@
-﻿using System.Collections.ObjectModel;
+﻿using Data.ViewModel;
+using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 
 namespace Data.Metadata_Model
 {
     [DataContract(IsReference = true)]
-    public class PropertyMetadata : IMetadata
+    public class PropertyMetadata : TreeViewBase,IMetadata
     {
         [DataMember(Name = "Name")]
         public string Name { get; private set; }
@@ -22,16 +23,15 @@ namespace Data.Metadata_Model
 
 
 
-        public ObservableCollection<IMetadata> getChildren
+        public override ObservableCollection<IMetadata> getChildren()
         {
 
-            get
-            {
+           
                 ObservableCollection<IMetadata> children = new ObservableCollection<IMetadata>();
 
                 children.Add(Type);
                 return children;
-            }
+            
         }
     }
 }

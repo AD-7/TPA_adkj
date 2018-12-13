@@ -8,7 +8,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Data
+namespace Data.Metadata_Model
 {
     [DataContract(IsReference = true)]
     public class Reflector

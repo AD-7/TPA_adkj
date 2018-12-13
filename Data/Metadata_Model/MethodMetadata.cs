@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Data.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 namespace Data.Metadata_Model
 {
     [DataContract(IsReference = true)]
-    public class MethodMetadata : IMetadata
+    public class MethodMetadata : TreeViewBase,IMetadata
     {
         [DataMember(Name = "Metadata_Name")]
         public string MetadataName { get; set; }
@@ -46,11 +47,9 @@ namespace Data.Metadata_Model
                    select new ParameterMetadata(parameter.Name, TypeMetadata.EmitReference(parameter.ParameterType));
         }
 
-        public ObservableCollection<IMetadata> getChildren
+        public override ObservableCollection<IMetadata> getChildren()
         {
-            get
-            {
-
+           
                 ObservableCollection<IMetadata> children = new ObservableCollection<IMetadata>();
                 if (ReturnType != null)
                 {
@@ -59,13 +58,7 @@ namespace Data.Metadata_Model
 
                 }
 
-
-
-
-
-                return children;
-
-            }
+                return children;  
         }
 
     }

@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 using System.Runtime.Serialization;
-
+using Data.Metadata_Model;
 
 namespace Data.Serialization
 {

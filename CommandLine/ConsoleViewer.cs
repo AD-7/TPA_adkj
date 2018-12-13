@@ -6,25 +6,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Data;
-using Data.TreeViewModel;
+using Data.ViewModel;
 
 namespace CommandLine
 {
     public class ConsoleViewer
     {
-        ObservableCollection<MyTreeView> treeViews;
+        ObservableCollection<RootTreeView> treeViews;
 
-        public ConsoleViewer(ObservableCollection<MyTreeView> treeViews)
+        public ConsoleViewer(ObservableCollection<RootTreeView> treeViews)
         {
             this.treeViews = treeViews;
         }
 
-        public void ShowTree(ObservableCollection<MyTreeView> treeViews, int lvl)
+        public void ShowTree(ObservableCollection<RootTreeView> treeViews, int lvl)
         {
             if (lvl != 0)
                 Console.WriteLine();
             int childLvl = 0;
-            foreach (MyTreeView i in treeViews)
+            foreach (RootTreeView i in treeViews)
             {
                 for (int k = 0; k < lvl; k++)
                     Console.Write("  ");
