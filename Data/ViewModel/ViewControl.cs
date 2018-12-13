@@ -36,12 +36,7 @@ namespace Data.ViewModel
             Path = "";
         }
 
-         public void LoadFile(string path)
-        {
-            Path = path;
-            string info = "Wczytano plik " + Path;
-            Tracer.TraceData(TraceEventType.Information, info);
-        }
+     
         public void DeserializeInCommandLine(string path)
         {
             Path = path;

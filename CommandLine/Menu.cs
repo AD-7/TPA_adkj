@@ -89,7 +89,7 @@ namespace CommandLine
 
         private void loadViewModel(string path)
         {
-            view.LoadFile(path);
+            view.Path = path;
             view.ShowTree.Execute(null);
             consoleViewer = new ConsoleViewer(view.TV);
         }
