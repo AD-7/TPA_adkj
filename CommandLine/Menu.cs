@@ -1,12 +1,12 @@
 ﻿using Data;
-using Data.Tracing;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Data.ViewModel;
+using Trace;
+using ViewModel;
 
 namespace CommandLine
 {
@@ -23,7 +23,7 @@ namespace CommandLine
         public Menu()
         {
             dllPath = "Data.dll";
-            myTraceSource = new MyTraceSource("plik.txt");
+            //myTraceSource = new MyTraceSource("plik.txt");
             view = new ViewControl();
 
             loadViewModel(dllPath);

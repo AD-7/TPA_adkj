@@ -1,4 +1,4 @@
-﻿using Data.Tracing;
+﻿
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -8,8 +8,12 @@ using Microsoft.Win32;
 using System;
 using System.Windows;
 using Data.Metadata_Model;
+using Serialization;
+using Trace;
+using Data.TreeViewModel;
+using System.Linq;
 
-namespace Data.ViewModel
+namespace ViewModel
 {
     public class ViewControl : INotifyPropertyChanged
     {
@@ -17,22 +21,36 @@ namespace Data.ViewModel
 
         public Reflector Reflector;
         public ObservableCollection<RootTreeView> TV { get; set; }
+        public ObservableCollection<string> methods { get; set; }
+        public string methodTrace { get; set; }
+        public string methodSer { get; set; }
         public ICommand LoadFileClicked { get; }
         public ICommand ShowTree { get; }
         public ICommand Click_Ser { get; }
         public ICommand Click_DeSer { get; }
-        public MyTraceSource Tracer;
+        public MyTraceSource tracer;
+        public SerXML ser;
+        public MEFConfig MEF;
         public string Path;
 
         public ViewControl()
 
-        {    Tracer = new MyTraceSource("plik.txt");
+        {
+          //  tracer = new MyTraceSource("plik.txt");
             TV = new ObservableCollection<RootTreeView>();
+            methods = new ObservableCollection<string>();
+            methods.Add("File");
+            methods.Add("Database");
+            methodTrace = "File";
+            methodSer = "File";
             LoadFileClicked = new DelegateCommand(Load);
             ShowTree = new DelegateCommand(LoadTree);
             Click_DeSer = new DelegateCommand(Deserialize);
             Click_Ser = new DelegateCommand(Serialize);
             Reflector = new Reflector();
+         //   ser = new SerXML();
+            MEF = new MEFConfig();
+            MEF.GetComponents(@"../../Lib");
             Path = "";
         }
 
@@ -41,7 +59,7 @@ namespace Data.ViewModel
         {
             Path = path;
 
-            Reflector = Serialization.SerXML.Deserialize(Path);
+            Reflector = ser.Deserialize(Path);
 
             RootTreeView rootItem = new RootTreeView(Reflector.AssemblyModel) { Name = Reflector.AssemblyModel.Name };
             string tempRootName = rootItem.Name;
@@ -60,20 +78,24 @@ namespace Data.ViewModel
             Path = file.FileName;
            
             string info = "Wczytano plik " + Path;
-            Tracer.TraceData(TraceEventType.Information,info );
-            
+            MEF.kindOfTrace = methodTrace;
+            MEF.kindOfSerialize = methodSer;
+            MEF.tracer.TraceData(TraceEventType.Information, info);
         }
 
         private void LoadTree()
         {
             if (Path != "")
             {
-                Reflector.Reflect(Path, Tracer);
+                Reflector.Reflect(Path);
+                //tracer.TraceData(System.Diagnostics.TraceEventType.Information, "Odczyt metadanych.");
                 RootTreeView newTree = new RootTreeView(Reflector.AssemblyModel);
                 string tmpname = newTree.Name;
                 newTree.Name = tmpname;
                 TV.Add(newTree);
-                Tracer.TraceData(TraceEventType.Information, "Dodano nowy widok drzewa dla pliku.");
+                MEF.kindOfTrace = methodTrace;
+                MEF.kindOfSerialize = methodSer;
+                MEF.tracer.TraceData(TraceEventType.Information, "Dodano nowy widok drzewa dla pliku.");
             }
 
         }
@@ -82,9 +104,12 @@ namespace Data.ViewModel
         {
             if (TV.Count > 0)
             {
-                Serialization.SerXML.Serialize(Reflector, "test.xml");
+                MEF.serializer.Serialize(Reflector, "test.xml");
             }
-           
+
+            MEF.kindOfTrace = methodTrace;
+            MEF.kindOfSerialize = methodSer;
+            MEF.tracer.TraceData(TraceEventType.Information, "Dokonano serializacji");
         }
 
 
@@ -96,13 +121,16 @@ namespace Data.ViewModel
             file.ShowDialog();
             Path = file.FileName;
 
-            Reflector = Serialization.SerXML.Deserialize(Path);
+            Reflector = MEF.serializer.Deserialize(Path);
 
             RootTreeView rootItem = new RootTreeView(Reflector.AssemblyModel) { Name = Reflector.AssemblyModel.Name };
             string tempRootName = rootItem.Name;
             TV.Clear();
             rootItem.Name = "Assembly: " + tempRootName;
             TV.Add(rootItem);
+            MEF.kindOfTrace = methodTrace;
+            MEF.kindOfSerialize = methodSer;
+            MEF.tracer.TraceData(TraceEventType.Information, "Dokonano deserializacji.");
         }
 
 

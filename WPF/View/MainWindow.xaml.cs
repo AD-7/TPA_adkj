@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Data.ViewModel;
+using ViewModel;
 
 namespace WPF
 {
@@ -27,6 +27,9 @@ namespace WPF
             DataContext = new ViewControl();
         }
 
-       
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }

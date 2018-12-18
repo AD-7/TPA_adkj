@@ -1,4 +1,5 @@
 ﻿using Data.Metadata_Model;
+using Data.TreeViewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -6,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Data.ViewModel
+namespace ViewModel
 {
     public class RootTreeView
     {
@@ -35,11 +36,20 @@ namespace Data.ViewModel
                 if (wasBuilt)
                     return;
                 Children.Clear();
-               TreeViewBase.buildMyself(this);
+              buildMyself(this);
                 wasBuilt = true;
             }
         }
+        public static void buildMyself(RootTreeView root)
+        {
+            ObservableCollection<IMetadata> test = root.data.getChildren();
+            foreach (var i in test)
+            {
+                RootTreeView newtree = new RootTreeView(i);
+                root.Children.Add(newtree);
+            }
+        }
 
-       
+
     }
 }

@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Data.Metadata_Model;
+using Interfaces;
+using System.ComponentModel.Composition;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
 using System.Runtime.Serialization;
-using Data.Metadata_Model;
 
-namespace Data.Serialization
+namespace Serialization
 {
-    public static class SerXML
+    [Export(typeof(ISerialization))]
+    [ExportMetadata("Name","File")]
+    public   class SerXML :ISerialization
     {
-        public static void Serialize(Reflector reflcetor, string fileName)
+        public   void Serialize(Reflector reflcetor, string fileName)
         {
             FileStream file = new FileStream(fileName, FileMode.Create, FileAccess.Write);
 
@@ -22,7 +20,7 @@ namespace Data.Serialization
             file.Close();
         }
 
-        public static Reflector Deserialize(string fileName)
+        public  Reflector Deserialize(string fileName)
         {
             DataContractSerializer SerializerObj = new DataContractSerializer(typeof(Reflector), null, 0x7FFF, false, true, null);
 
