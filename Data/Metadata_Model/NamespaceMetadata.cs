@@ -1,5 +1,4 @@
 ﻿
-using Data.TreeViewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,7 +8,7 @@ using System.Runtime.Serialization;
 namespace Data.Metadata_Model
 {
     [DataContract(IsReference = true)]
-    public class NamespaceMetadata : TreeViewBase,IMetadata
+    public class NamespaceMetadata : IMetadata
     {
         [DataMember(Name = "Name")]
         public string Name { get; set; }
@@ -25,20 +24,7 @@ namespace Data.Metadata_Model
             Types = from type in types orderby type.Name select new TypeMetadata(type,"Type: ");
         }
 
-        public virtual ObservableCollection<IMetadata> getChildren()
-        {
-            
-        
-                ObservableCollection< IMetadata> children = new ObservableCollection<IMetadata>();
-                foreach (IMetadata i in Types)
-                {
-                    
-                    children.Add(i);
-                }
-                return children;
-            
-        }
-
+       
 
 
     }

@@ -1,13 +1,12 @@
 ﻿
 using Data.Metadata_Model;
-using Data.TreeViewModel;
 using Microsoft.Win32;
-using Serialization;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows.Input;
 using Trace;
+using ViewModel.TreeViewModel;
 
 namespace ViewModel
 {
@@ -16,7 +15,7 @@ namespace ViewModel
 
 
         public Reflector Reflector;
-        public ObservableCollection<RootTreeView> TV { get; set; }
+        public ObservableCollection<TreeViewBase> TV { get; set; }
         public ObservableCollection<string> methods { get; set; }
         public string methodTrace { get; set; }
         public string methodSer { get; set; }
@@ -33,7 +32,7 @@ namespace ViewModel
 
         {
           //  tracer = new MyTraceSource("plik.txt");
-            TV = new ObservableCollection<RootTreeView>();
+            TV = new ObservableCollection<TreeViewBase>();
             methods = new ObservableCollection<string>();
             methods.Add("File");
             //methods.Add("Database");
@@ -57,7 +56,7 @@ namespace ViewModel
 
             Reflector = MEF.serializer.Deserialize(Path);
 
-            RootTreeView rootItem = new RootTreeView(Reflector.AssemblyModel) { Name = Reflector.AssemblyModel.Name };
+            AssemblyTreeView rootItem = new AssemblyTreeView(Reflector.AssemblyModel) { Name = Reflector.AssemblyModel.Name };
             string tempRootName = rootItem.Name;
             TV.Clear();
             rootItem.Name = "Assembly: " + tempRootName;
@@ -84,7 +83,7 @@ namespace ViewModel
             {
                 Reflector.Reflect(Path);
                 //tracer.TraceData(System.Diagnostics.TraceEventType.Information, "Odczyt metadanych.");
-                RootTreeView newTree = new RootTreeView(Reflector.AssemblyModel);
+               AssemblyTreeView newTree = new AssemblyTreeView(Reflector.AssemblyModel);
                 string tmpname = newTree.Name;
                 newTree.Name = tmpname;
                 TV.Add(newTree);
@@ -114,7 +113,7 @@ namespace ViewModel
             MEF.kindOfSerialize = methodSer;
             Reflector = MEF.serializer.Deserialize(Path);
 
-            RootTreeView rootItem = new RootTreeView(Reflector.AssemblyModel) { Name = Reflector.AssemblyModel.Name };
+           AssemblyTreeView rootItem = new AssemblyTreeView(Reflector.AssemblyModel) { Name = Reflector.AssemblyModel.Name };
             string tempRootName = rootItem.Name;
             TV.Clear();
             rootItem.Name = "Assembly: " + tempRootName;

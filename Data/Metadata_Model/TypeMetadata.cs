@@ -1,4 +1,4 @@
-﻿using Data.TreeViewModel;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,7 +9,7 @@ using System.Runtime.Serialization;
 namespace Data.Metadata_Model
 {
     [DataContract(IsReference = true)]
-    public class TypeMetadata : TreeViewBase,IMetadata
+    public class TypeMetadata : IMetadata
     {
         #region 
         [DataMember(Name = "Type_Name")]
@@ -21,7 +21,7 @@ namespace Data.Metadata_Model
         [DataMember(Name = "Namespace_Name")]
         public string namespaceName;
         [DataMember(Name = "Generic_Arguments")]
-        private IEnumerable<TypeMetadata> GenericArguments;
+        public IEnumerable<TypeMetadata> GenericArguments;
         [DataMember(Name = "Method")]
         public IEnumerable<MethodMetadata> Methods { get; set; }
         [DataMember(Name = "Constructor")]
@@ -152,44 +152,7 @@ namespace Data.Metadata_Model
 
 
 
-        public virtual ObservableCollection<IMetadata> getChildren()
-        {
-           
-                ObservableCollection<IMetadata> children = new ObservableCollection<IMetadata>();
-
-                foreach (IMetadata p in Methods ?? Enumerable.Empty<IMetadata>())
-                {
-                    children.Add(p);
-                }
-                foreach (IMetadata i in GenericArguments ?? Enumerable.Empty<IMetadata>())
-                {
-                    children.Add(i);
-                }
-                foreach (IMetadata i in Constructors ?? Enumerable.Empty<IMetadata>())
-                {
-                    i.MetadataName = "Constructor: ";
-                    children.Add(i);
-                }
-                foreach (IMetadata i in NestedTypes ?? Enumerable.Empty<IMetadata>())
-                {
-                    children.Add(i);
-                }
-                foreach (IMetadata i in Interfaces ?? Enumerable.Empty<IMetadata>())
-                {
-                    i.MetadataName = "Implemented interface: ";
-                    children.Add(i);
-                }
-                foreach (IMetadata i in Properties ?? Enumerable.Empty<IMetadata>())
-                {
-                    children.Add(i);
-                }
-
-
-                return children;
-
-            
-
-        }
+        
 
 
 
