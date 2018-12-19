@@ -1,10 +1,4 @@
-﻿using Data;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using Trace;
 using ViewModel;
 
@@ -73,7 +67,8 @@ namespace CommandLine
                     string pathDeser;
                     Console.WriteLine("Podaj ścieżkę pliku: ");
                     pathDeser = Console.ReadLine();
-                    view.DeserializeInCommandLine(pathDeser);
+                    view.Path = pathDeser;
+                    view.Click_DeSer.Execute(null);
                     ReloadMenu();
                     break;
 

@@ -1,13 +1,9 @@
 ﻿using Data.TreeViewModel;
-
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Data.Metadata_Model
 {
@@ -48,7 +44,7 @@ namespace Data.Metadata_Model
                    select new ParameterMetadata(parameter.Name, TypeMetadata.EmitReference(parameter.ParameterType));
         }
 
-        public override ObservableCollection<IMetadata> getChildren()
+        public virtual ObservableCollection<IMetadata> getChildren()
         {
            
                 ObservableCollection<IMetadata> children = new ObservableCollection<IMetadata>();

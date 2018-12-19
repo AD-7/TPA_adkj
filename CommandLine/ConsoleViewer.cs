@@ -1,13 +1,7 @@
 ﻿
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Data;
 using Data.TreeViewModel;
-using ViewModel;
+using System;
+using System.Collections.ObjectModel;
 
 namespace CommandLine
 {

@@ -1,31 +1,24 @@
 ﻿using Data.Metadata_Model;
-using Data.TreeViewModel;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ViewModel
+namespace Data.TreeViewModel
 {
-    public class RootTreeView
+    public class RootTreeView :TreeViewBase
     {
         
 
-        public RootTreeView(IMetadata metadata)
+        public RootTreeView(IMetadata metadata) : base(metadata)
         {
             Children = new ObservableCollection<RootTreeView>();
             Children.Add(null);
-            data = metadata;
-            Name = metadata.MetadataName + " " + metadata.Name; ;
+
+
         }
 
-        public string Name { get; set; }
-        public ObservableCollection<RootTreeView> Children { get; set; }
         private bool wasBuilt;
         private bool isExpanded;
-        public IMetadata data;
+        public ObservableCollection<RootTreeView> Children { get; set; }
+        public virtual string Name { get { return base.Name; } set { base.Name = value; } }
 
         public bool IsExpanded
         {

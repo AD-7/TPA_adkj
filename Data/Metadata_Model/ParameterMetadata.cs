@@ -22,7 +22,7 @@ namespace Data.Metadata_Model
             Type = type;
         }
 
-        public override ObservableCollection<IMetadata> getChildren()
+        public virtual ObservableCollection<IMetadata> getChildren()
         {
 
               ObservableCollection<IMetadata> children = new ObservableCollection<IMetadata>();

@@ -5,8 +5,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Data.Metadata_Model
 {
@@ -27,7 +25,7 @@ namespace Data.Metadata_Model
             Types = from type in types orderby type.Name select new TypeMetadata(type,"Type: ");
         }
 
-        public override ObservableCollection<IMetadata> getChildren()
+        public virtual ObservableCollection<IMetadata> getChildren()
         {
             
         

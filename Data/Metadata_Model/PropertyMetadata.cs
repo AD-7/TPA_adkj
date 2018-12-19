@@ -23,7 +23,7 @@ namespace Data.Metadata_Model
 
 
 
-        public override ObservableCollection<IMetadata> getChildren()
+        public virtual ObservableCollection<IMetadata> getChildren()
         {
 
            

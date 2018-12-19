@@ -1,12 +1,10 @@
-﻿using System;
+﻿using Data.TreeViewModel;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
-using Data.TreeViewModel;
 
 namespace Data.Metadata_Model
 {
@@ -52,9 +50,9 @@ namespace Data.Metadata_Model
         //    }
         //}
 
-        public override ObservableCollection<IMetadata> getChildren()
+        public virtual ObservableCollection<IMetadata> getChildren()
         {
-             Tuple<string, IMetadata> metadata;
+          
                 ObservableCollection<IMetadata> children = new ObservableCollection<IMetadata>();
                 foreach (IMetadata i in Namespaces)
                 {

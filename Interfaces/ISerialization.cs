@@ -1,5 +1,4 @@
-﻿
-using Data.Metadata_Model;
+﻿using Data.Metadata_Model;
 
 namespace Interfaces
 {

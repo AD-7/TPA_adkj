@@ -1,6 +1,7 @@
 ﻿using Data;
-using Data.Serialization;
+using Data.Metadata_Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Serialization;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,11 +16,13 @@ namespace UnitTestsData
     {
 
         private Reflector refl;
+        private SerXML SerXML;
 
         [TestInitialize]
         public void Init()
         {
             this.refl = new Reflector();
+            this.SerXML = new SerXML();
             refl.Reflect("Data.dll");
         }
 
