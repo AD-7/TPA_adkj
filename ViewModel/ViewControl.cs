@@ -96,10 +96,11 @@ namespace ViewModel
 
         private void Deserialize()
         {
-            OpenFileDialog file = new OpenFileDialog();
-         
-            file.ShowDialog();
-            Path = file.FileName;
+            if(methodSer == "File")
+            {
+                LoadXML();
+            }
+           
 
             MEF.kindOfSerialize = methodSer;
             Reflector = MEF.serializer.Deserialize(Path);
@@ -114,22 +115,20 @@ namespace ViewModel
             MEF.tracer.TraceData(TraceEventType.Information, "Dokonano deserializacji.");
         }
 
-
-
-
-        public void DeserializeInCommandLine(string Path)
+        private void LoadXML()
         {
+            OpenFileDialog file = new OpenFileDialog();
+            file.Filter = "XML Files (*.xml)|*.xml";
+            file.ShowDialog();
+            Path = file.FileName;
 
-
-            Reflector = MEF.serializer.Deserialize(Path);
-
-            AssemblyTreeView rootItem = new AssemblyTreeView(Reflector.AssemblyModel) { Name = Reflector.AssemblyModel.Name };
-            string tempRootName = rootItem.Name;
-            TV.Clear();
-            rootItem.Name = "Assembly: " + tempRootName;
-            TV.Add(rootItem);
-
+            string info = "Wczytano plik " + Path;
+            MEF.kindOfTrace = methodTrace;
+            MEF.tracer.TraceData(TraceEventType.Information, info);
         }
+
+
+        
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void PropertyChangedHandler(string propertyName_)
