@@ -24,7 +24,6 @@ namespace ViewModel
         public ICommand Click_Ser { get; }
         public ICommand Click_DeSer { get; }
         public MyTraceSource tracer;
-        //public SerXML ser;
         public MEFConfig MEF;
         public string Path;
 
@@ -49,20 +48,8 @@ namespace ViewModel
             Path = "";
         }
 
-     
-        public void DeserializeInCommandLine(string Path)
-        {
-            
 
-            Reflector = MEF.serializer.Deserialize(Path);
 
-            AssemblyTreeView rootItem = new AssemblyTreeView(Reflector.AssemblyModel) { Name = Reflector.AssemblyModel.Name };
-            string tempRootName = rootItem.Name;
-            TV.Clear();
-            rootItem.Name = "Assembly: " + tempRootName;
-            TV.Add(rootItem);
-
-        }
 
         private void Load()
         {
@@ -109,7 +96,11 @@ namespace ViewModel
 
         private void Deserialize()
         {
-       
+            OpenFileDialog file = new OpenFileDialog();
+         
+            file.ShowDialog();
+            Path = file.FileName;
+
             MEF.kindOfSerialize = methodSer;
             Reflector = MEF.serializer.Deserialize(Path);
 
@@ -119,9 +110,26 @@ namespace ViewModel
             rootItem.Name = "Assembly: " + tempRootName;
             TV.Add(rootItem);
             MEF.kindOfTrace = methodTrace;
+
             MEF.tracer.TraceData(TraceEventType.Information, "Dokonano deserializacji.");
         }
 
+
+
+
+        public void DeserializeInCommandLine(string Path)
+        {
+
+
+            Reflector = MEF.serializer.Deserialize(Path);
+
+            AssemblyTreeView rootItem = new AssemblyTreeView(Reflector.AssemblyModel) { Name = Reflector.AssemblyModel.Name };
+            string tempRootName = rootItem.Name;
+            TV.Clear();
+            rootItem.Name = "Assembly: " + tempRootName;
+            TV.Add(rootItem);
+
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void PropertyChangedHandler(string propertyName_)
