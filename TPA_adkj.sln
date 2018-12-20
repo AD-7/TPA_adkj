@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serialization", "Serializat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModel", "ViewModel\ViewModel.csproj", "{C6AA6265-8E72-4B91-B392-02DD8A496742}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Composition", "Composition", "{5D416186-44A5-4A0D-BF67-AF841098CF8F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -60,6 +62,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{99750CBB-6CB7-4141-96FE-9ADEBE2F59F4} = {5D416186-44A5-4A0D-BF67-AF841098CF8F}
+		{CE782637-8DE0-41AD-B2F7-7D9E46CA1FD7} = {5D416186-44A5-4A0D-BF67-AF841098CF8F}
+		{567B5754-1C52-4E35-94BA-42FB8309BCEC} = {5D416186-44A5-4A0D-BF67-AF841098CF8F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B32D2C0B-13A1-460F-8166-573D496EA79C}
