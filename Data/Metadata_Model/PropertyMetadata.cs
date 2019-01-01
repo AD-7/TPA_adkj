@@ -11,7 +11,7 @@ namespace Data.Metadata_Model
         [DataMember(Name = "Metadata_Name")]
         public string MetadataName { get; set; }
         [DataMember(Name = "Type_Metadata")]
-        private TypeMetadata Type;
+        public TypeMetadata Type;
 
         public PropertyMetadata(string Name, TypeMetadata type)
         {
@@ -22,16 +22,6 @@ namespace Data.Metadata_Model
 
 
 
-        public ObservableCollection<IMetadata> getChildren
-        {
-
-            get
-            {
-                ObservableCollection<IMetadata> children = new ObservableCollection<IMetadata>();
-
-                children.Add(Type);
-                return children;
-            }
-        }
+       
     }
 }

@@ -1,11 +1,10 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Data.Metadata_Model
 {
@@ -36,21 +35,21 @@ namespace Data.Metadata_Model
         }
 
 
-        public ObservableCollection<IMetadata> getChildren
-        {
+        //public ObservableCollection<IMetadata> getChildren
+        //{
 
-            get
-            {
-                Tuple<string, IMetadata> metadata;
-                ObservableCollection<IMetadata> children = new ObservableCollection<IMetadata>();
-                foreach (IMetadata i in Namespaces)
-                {
-                    children.Add(i);
-                }
-                return children;
-            }
-        }
+        //    get
+        //    {
+        //        Tuple<string, IMetadata> metadata;
+        //        ObservableCollection<IMetadata> children = new ObservableCollection<IMetadata>();
+        //        foreach (IMetadata i in Namespaces)
+        //        {
+        //            children.Add(i);
+        //        }
+        //        return children;
+        //    }
+        //}
 
-      
+        
     }
 }

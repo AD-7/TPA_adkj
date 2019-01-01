@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace Data.Metadata_Model
         [DataMember(Name = "Namespace_Name")]
         public string namespaceName;
         [DataMember(Name = "Generic_Arguments")]
-        private IEnumerable<TypeMetadata> GenericArguments;
+        public IEnumerable<TypeMetadata> GenericArguments;
         [DataMember(Name = "Method")]
         public IEnumerable<MethodMetadata> Methods { get; set; }
         [DataMember(Name = "Constructor")]
@@ -151,46 +152,7 @@ namespace Data.Metadata_Model
 
 
 
-        public ObservableCollection<IMetadata> getChildren
-        {
-            get
-            {
-
-                ObservableCollection<IMetadata> children = new ObservableCollection<IMetadata>();
-
-                foreach (IMetadata p in Methods ?? Enumerable.Empty<IMetadata>())
-                {
-                    children.Add(p);
-                }
-                foreach (IMetadata i in GenericArguments ?? Enumerable.Empty<IMetadata>())
-                {
-                    children.Add(i);
-                }
-                foreach (IMetadata i in Constructors ?? Enumerable.Empty<IMetadata>())
-                {
-                    i.MetadataName = "Constructor: ";
-                    children.Add(i);
-                }
-                foreach (IMetadata i in NestedTypes ?? Enumerable.Empty<IMetadata>())
-                {
-                    children.Add(i);
-                }
-                foreach (IMetadata i in Interfaces ?? Enumerable.Empty<IMetadata>())
-                {
-                    i.MetadataName = "Implemented interface: ";
-                    children.Add(i);
-                }
-                foreach (IMetadata i in Properties ?? Enumerable.Empty<IMetadata>())
-                {
-                    children.Add(i);
-                }
-
-
-                return children;
-
-            }
-
-        }
+        
 
 
 

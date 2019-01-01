@@ -1,10 +1,9 @@
-﻿using System.Collections.ObjectModel;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 
 namespace Data.Metadata_Model
 {
     [DataContract(IsReference = true)]
-    public class ParameterMetadata : IMetadata
+    public class ParameterMetadata :IMetadata
     {
         [DataMember(Name = "Name")]
         public string Name { get; private set; }
@@ -20,15 +19,6 @@ namespace Data.Metadata_Model
             Type = type;
         }
 
-        public ObservableCollection<IMetadata> getChildren
-        {
-
-            get
-            {
-                ObservableCollection<IMetadata> children = new ObservableCollection<IMetadata>();
-                children.Add(Type);
-                return children;
-            }
-        }
+     
     }
 }

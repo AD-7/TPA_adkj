@@ -1,10 +1,9 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Data.Metadata_Model
 {
@@ -25,21 +24,7 @@ namespace Data.Metadata_Model
             Types = from type in types orderby type.Name select new TypeMetadata(type,"Type: ");
         }
 
-        public ObservableCollection<IMetadata> getChildren
-        {
-            get
-            {
-        
-                ObservableCollection< IMetadata> children = new ObservableCollection<IMetadata>();
-                foreach (IMetadata i in Types)
-                {
-                    
-                    children.Add(i);
-                }
-                return children;
-            }
-        }
-
+       
 
 
     }

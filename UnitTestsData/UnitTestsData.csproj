@@ -60,6 +60,14 @@
       <Project>{5526f566-cd96-4634-8226-8b18f69fa928}</Project>
       <Name>Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Serialization\Serialization.csproj">
+      <Project>{567b5754-1c52-4e35-94ba-42fb8309bcec}</Project>
+      <Name>Serialization</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Trace\Trace.csproj">
+      <Project>{ce782637-8de0-41ad-b2f7-7d9e46ca1fd7}</Project>
+      <Name>Trace</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

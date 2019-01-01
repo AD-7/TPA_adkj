@@ -1,21 +1,22 @@
-﻿using System;
+﻿using Interfaces;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Data.Tracing
+namespace Trace
 {
-
+    [Export(typeof(ITraceSource))]
+    [ExportMetadata("Name","File")]
     public class MyTraceSource : ITraceSource
     {
-        string file;
-        public MyTraceSource(string file)
-        {
-            this.file = file;
-        }
+     
+   
+     
         public void TraceData(TraceEventType eventType, object data)
         {
             DateTime now = DateTime.Now;
@@ -24,7 +25,7 @@ namespace Data.Tracing
             message += "(" + now.ToString() + ")->";
             message += data.ToString() + "\n\n";
             byte[] tmpMessage = new UTF8Encoding(true).GetBytes(message); 
-            using (FileStream fs = new FileStream(file, FileMode.Append, FileAccess.Write, FileShare.Read))
+            using (FileStream fs = new FileStream("plik.txt", FileMode.Append, FileAccess.Write, FileShare.Read))
             {
                 fs.Write(tmpMessage, 0, tmpMessage.Length);
             }

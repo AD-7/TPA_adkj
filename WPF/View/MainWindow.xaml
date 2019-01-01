@@ -3,9 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Data.ViewModel"       
+        xmlns:local="clr-namespace:ViewModel"       
         mc:Ignorable="d"
-        Title="DLL Browser- A.D.K.J." Height="350" Width="525">
+        Title="DLL Browser- A.D.K.J." Height="400" Width="525">
     <Grid>
         <TreeView ItemsSource="{Binding TV}" HorizontalAlignment="Left" Height="220" Margin="65,25,0,0" VerticalAlignment="Top" Width="410">
             <TreeView.ItemTemplate>
@@ -21,10 +21,20 @@
         </TreeView>
 
 
-        <Button Content="Load file" Command="{Binding LoadFileClicked}" HorizontalAlignment="Left" Margin="25,280,0,0" VerticalAlignment="Top" Width="100" Height="31" RenderTransformOrigin="0.15,0.484"/>
-        <Button Content="Show Tree" Command="{Binding ShowTree}" HorizontalAlignment="Left" Margin="145,280,0,0" VerticalAlignment="Top" Width="100" Height="31"/>
-        <Button Content="Serialize" Command="{Binding Click_Ser}" HorizontalAlignment="Left" Margin="265,280,0,0" VerticalAlignment="Top" Width="100" Height="31"/>
-        <Button Content="Deserialize" Command="{Binding Click_DeSer}" HorizontalAlignment="Left" Margin="375,280,0,0" VerticalAlignment="Top" Width="100" Height="31"/>
+        <Button Content="Load file" Command="{Binding LoadFileClicked}" HorizontalAlignment="Left" Margin="30,260,0,0" VerticalAlignment="Top" Width="85" Height="21" RenderTransformOrigin="0.15,0.484"/>
+        <Button Content="Show Tree" Command="{Binding ShowTree}" HorizontalAlignment="Left" Margin="140,260,0,0" VerticalAlignment="Top" Width="85" Height="21" RenderTransformOrigin="1.525,-0.219"/>
+        <Button Content="Serialize" Command="{Binding Click_Ser}" HorizontalAlignment="Left" Margin="245,260,0,0" VerticalAlignment="Top" Width="100" Height="21" RenderTransformOrigin="0.746,0.01"/>
+        <Button Content="Deserialize" Command="{Binding Click_DeSer}" HorizontalAlignment="Left" Margin="375,260,0,0" VerticalAlignment="Top" Width="100" Height="21"/>
+        <Label Content="Tracing method: " HorizontalAlignment="Left" Margin="20,309,0,0" VerticalAlignment="Top" Width="100" Height="26"/>
+        <ComboBox Margin="120,313,293.4,0" VerticalAlignment="Top"
+                   ItemsSource="{Binding Path=methods}"    
+                  SelectedItem="{Binding Path=methodTrace}"  
+                  />
+        <Label Content="Ser/Deser method: " HorizontalAlignment="Left" Margin="245,309,0,0" VerticalAlignment="Top" Width="115" Height="26"/>
+        <ComboBox Margin="355,313,63.4,0" VerticalAlignment="Top"
+            ItemsSource="{Binding  Path=methods}"    
+            SelectedItem="{Binding Path=methodSer}"  
+                  />
 
 
     </Grid>

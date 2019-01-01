@@ -1,13 +1,6 @@
-﻿using Data;
-using Data.Tracing;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Data.TreeViewModel;
-using Data.ViewModel;
+﻿using System;
+using Trace;
+using ViewModel;
 
 namespace CommandLine
 {
@@ -24,7 +17,7 @@ namespace CommandLine
         public Menu()
         {
             dllPath = "Data.dll";
-            myTraceSource = new MyTraceSource("plik.txt");
+            //myTraceSource = new MyTraceSource("plik.txt");
             view = new ViewControl();
 
             loadViewModel(dllPath);
@@ -74,7 +67,8 @@ namespace CommandLine
                     string pathDeser;
                     Console.WriteLine("Podaj ścieżkę pliku: ");
                     pathDeser = Console.ReadLine();
-                    view.DeserializeInCommandLine(pathDeser);
+                    view.Path = pathDeser;
+                    view.Click_DeSer.Execute(null);
                     ReloadMenu();
                     break;
 
@@ -90,7 +84,7 @@ namespace CommandLine
 
         private void loadViewModel(string path)
         {
-            view.LoadFile(path);
+            view.Path = path;
             view.ShowTree.Execute(null);
             consoleViewer = new ConsoleViewer(view.TV);
         }

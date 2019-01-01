@@ -1,30 +1,24 @@
-﻿
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Data;
-using Data.TreeViewModel;
+using ViewModel.TreeViewModel;
 
 namespace CommandLine
 {
     public class ConsoleViewer
     {
-        ObservableCollection<MyTreeView> treeViews;
+        ObservableCollection<TreeViewBase> treeViews;
 
-        public ConsoleViewer(ObservableCollection<MyTreeView> treeViews)
+        public ConsoleViewer(ObservableCollection<TreeViewBase> treeViews)
         {
             this.treeViews = treeViews;
         }
 
-        public void ShowTree(ObservableCollection<MyTreeView> treeViews, int lvl)
+        public void ShowTree(ObservableCollection<TreeViewBase> treeViews, int lvl)
         {
             if (lvl != 0)
                 Console.WriteLine();
             int childLvl = 0;
-            foreach (MyTreeView i in treeViews)
+            foreach (TreeViewBase i in treeViews)
             {
                 for (int k = 0; k < lvl; k++)
                     Console.Write("  ");
