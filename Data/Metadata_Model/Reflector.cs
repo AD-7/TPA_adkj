@@ -22,11 +22,7 @@ namespace Data.Metadata_Model
             AssemblyModel = new AssemblyMetadata(assembly);
         }
 
-        public void Reflect()
-        {
-            assembly = Assembly.ReflectionOnlyLoadFrom(Path);
-            AssemblyModel = new AssemblyMetadata(assembly);
-
+      
 
 
     }
