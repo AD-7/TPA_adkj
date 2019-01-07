@@ -43,6 +43,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SerializableData\SerializableMethod.cs" />
+    <Compile Include="SerializableData\SerializableNamespace.cs" />
+    <Compile Include="SerializableData\SerializableParameter.cs" />
+    <Compile Include="SerializableData\SerializableProperty.cs" />
+    <Compile Include="SerializableData\SerializableReflector.cs" />
+    <Compile Include="SerializableData\SerializableType.cs" />
+    <Compile Include="SerializableData\SeriazableAssembly.cs" />
     <Compile Include="SerXML.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 
 namespace Data.Metadata_Model
 {
-    [DataContract(IsReference = true)]
+    
     internal static class ExtensionMethods
     {
 

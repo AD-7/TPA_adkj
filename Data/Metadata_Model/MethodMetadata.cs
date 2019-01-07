@@ -6,16 +6,16 @@ using System.Runtime.Serialization;
 
 namespace Data.Metadata_Model
 {
-    [DataContract(IsReference = true)]
+    //[DataContract(IsReference = true)]
     public class MethodMetadata : IMetadata
     {
-        [DataMember(Name = "Metadata_Name")]
+        //[DataMember(Name = "Metadata_Name")]
         public string MetadataName { get; set; }
-        [DataMember(Name = "Method_Name")]
+        //[DataMember(Name = "Method_Name")]
         public string Name { get; set; }
-        [DataMember(Name = "Return_Type")]
+        //[DataMember(Name = "Return_Type")]
         public TypeMetadata ReturnType;
-        [DataMember(Name = "Parameters")]
+        //[DataMember(Name = "Parameters")]
         public IEnumerable<ParameterMetadata> Parameters;
 
         public MethodMetadata(MethodBase method)

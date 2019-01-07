@@ -7,14 +7,14 @@ using System.Runtime.Serialization;
 
 namespace Data.Metadata_Model
 {
-    [DataContract(IsReference = true)]
+    //[DataContract(IsReference = true)]
     public class NamespaceMetadata : IMetadata
     {
-        [DataMember(Name = "Name")]
+        //[DataMember(Name = "Name")]
         public string Name { get; set; }
-        [DataMember(Name = "Metadata_Name")]
+        //[DataMember(Name = "Metadata_Name")]
         public string MetadataName { get;  set; }
-        [DataMember(Name = "Type")]
+        //[DataMember(Name = "Type")]
         public IEnumerable<TypeMetadata> Types { get; set; }
 
         internal NamespaceMetadata(string name, IEnumerable<Type> types)

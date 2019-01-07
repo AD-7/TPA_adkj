@@ -8,32 +8,32 @@ using System.Runtime.Serialization;
 
 namespace Data.Metadata_Model
 {
-    [DataContract(IsReference = true)]
+    //[DataContract(IsReference = true)]
     public class TypeMetadata : IMetadata
     {
         #region 
-        [DataMember(Name = "Type_Name")]
+        //[DataMember(Name = "Type_Name")]
         public string Name { get; private set; }
-        [DataMember(Name = "Metadata_Name")]
+        //[DataMember(Name = "Metadata_Name")]
         public string MetadataName { get; set; }
-        [DataMember(Name = "Types_Name")]
-        public static Dictionary<string, TypeMetadata> allTypes = new Dictionary<string, TypeMetadata>();
-        [DataMember(Name = "Namespace_Name")]
+        //[DataMember(Name = "Types_Name")]
+        public static Dictionary<string, TypeMetadata> allTypes {get; set;}
+        //[DataMember(Name = "Namespace_Name")]
         public string namespaceName;
-        [DataMember(Name = "Generic_Arguments")]
+        //[DataMember(Name = "Generic_Arguments")]
         public IEnumerable<TypeMetadata> GenericArguments;
-        [DataMember(Name = "Method")]
+        //[DataMember(Name = "Method")]
         public IEnumerable<MethodMetadata> Methods { get; set; }
-        [DataMember(Name = "Constructor")]
+        //[DataMember(Name = "Constructor")]
         public IEnumerable<MethodMetadata> Constructors { get; set; }
-        [DataMember(Name = "NestedType")]
+        //[DataMember(Name = "NestedType")]
         public IEnumerable<TypeMetadata> NestedTypes { get; set; }
-        [DataMember(Name = "Interface")]
+        //[DataMember(Name = "Interface")]
         public IEnumerable<TypeMetadata> Interfaces { get; set; }
-        [DataMember(Name = "Propertie")]
+        //[DataMember(Name = "Propertie")]
         public IEnumerable<PropertyMetadata> Properties { get; set; }
         
-        public IEnumerable<Attribute> Attributes;
+       
 
     
         bool exists = false;
@@ -47,13 +47,13 @@ namespace Data.Metadata_Model
 
             Name = type.Name;
             MetadataName = metadataName;
+            allTypes  = new Dictionary<string, TypeMetadata>();
             GenericArguments = !type.IsGenericTypeDefinition ? null : TypeMetadata.EmitGenericArguments(type.GetGenericArguments());
             Methods = MethodMetadata.EmitMethods(type.GetMethods());
             Constructors = MethodMetadata.EmitMethods(type.GetConstructors());
             NestedTypes = EmitNestedTypes(type.GetNestedTypes());
             Interfaces = EmitInterfaces(type.GetInterfaces());
             Properties = EmitProperties(type.GetProperties());
-            Attributes = type.GetCustomAttributes(false).Cast<Attribute>();
             exists = true;
         }
 
@@ -99,9 +99,9 @@ namespace Data.Metadata_Model
         #region emiters
         internal static TypeMetadata EmitReference(Type type)
         {
-            if (allTypes.ContainsKey(type.FullName))
+            if (allTypes.ContainsKey(type.Name))
             {
-                return allTypes[type.FullName];
+                return allTypes[type.Name];
             }
 
             TypeMetadata tmp;
@@ -117,7 +117,7 @@ namespace Data.Metadata_Model
 
             if (type.FullName != null)
             {
-                allTypes.Add(type.FullName, tmp);
+                allTypes.Add(type.Name, tmp);
             }
             return tmp;
         }
