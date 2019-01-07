@@ -18,7 +18,7 @@ namespace Serialization.SerializableData
         public string MetadataName { get; set; }
        
         public IEnumerable<NamespaceMetadata> Namespaces { get; set; }
- [DataMember(Name = "NamespaceList")]
+        [DataMember(Name = "NamespaceList")]
         public IEnumerable<SerializableNamespace> SerializableNamespaces { get; set; }
 
         public SerializableAssembly(AssemblyMetadata assembly)
