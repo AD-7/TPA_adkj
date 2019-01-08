@@ -22,7 +22,11 @@ namespace Data.Metadata_Model
         {
 
         }
-
+        public AssemblyMetadata(string Name, string MetadataName)
+        {
+            this.Name = Name;
+            this.MetadataName = MetadataName;
+        }
         internal AssemblyMetadata(Assembly assembly) 
         {
             Name = assembly.ManifestModule.Name;

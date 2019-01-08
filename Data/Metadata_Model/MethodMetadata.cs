@@ -25,6 +25,11 @@ namespace Data.Metadata_Model
             ReturnType = EmitReturnType(method);
             Parameters = EmitParameters(method.GetParameters());
         }
+        public MethodMetadata(string Name, string Metadataname) 
+        {
+            this.Name = Name;
+            this.MetadataName = "Method: ";
+        }
 
         internal static IEnumerable<MethodMetadata> EmitMethods(IEnumerable<MethodBase> methods)
         {

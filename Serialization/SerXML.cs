@@ -1,4 +1,5 @@
-﻿using Data.Metadata_Model;
+﻿using AutoMapper;
+using Data.Metadata_Model;
 using Interfaces;
 using Serialization.SerializableData;
 using System.ComponentModel.Composition;
@@ -30,9 +31,11 @@ namespace Serialization
             FileStream file = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.Read);
 
             SerializableReflector reflector = (SerializableReflector)SerializerObj.ReadObject(file);
-            Reflector reflectorBase = new Reflector();
 
-   
+
+
+            Reflector reflectorBase = MapperXml.Map(reflector);
+
             file.Close();
             return reflectorBase;
         }

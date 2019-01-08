@@ -14,9 +14,9 @@ namespace Data.Metadata_Model
         public string Name { get; set; }
  
         public string MetadataName { get;  set; }
-
+       
         public IEnumerable<TypeMetadata> Types { get; set; }
-
+       
         internal NamespaceMetadata(string name, IEnumerable<Type> types)
         {
             Name = name;
@@ -24,6 +24,14 @@ namespace Data.Metadata_Model
             Types = from type in types orderby type.Name select new TypeMetadata(type,"Type: ");
         }
 
+
+
+        public NamespaceMetadata(string name, string metadataName)
+        {
+            Name = name;
+            MetadataName =metadataName;
+           
+        }
        
 
 

@@ -19,7 +19,11 @@ namespace Data.Metadata_Model
             Type = type;
         }
 
-
+        public PropertyMetadata(string Name,string Metadataname)
+        {
+            this.Name=Name;
+            this.MetadataName = Metadataname;
+        }
 
        
     }

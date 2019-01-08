@@ -6,14 +6,13 @@ namespace Data.Metadata_Model
 
     public class Reflector
     {
-        public Assembly assembly {get; set;}
-        public AssemblyMetadata AssemblyModel { get; private set; }
-        public string Path;
+     
+        public AssemblyMetadata AssemblyModel { get;  set; }
+     
 
         public void Reflect(string path)
         {
-            Path = path;
-             assembly = Assembly.ReflectionOnlyLoadFrom(Path);     
+            Assembly assembly = Assembly.ReflectionOnlyLoadFrom(path);     
             AssemblyModel = new AssemblyMetadata(assembly);
         }
 
@@ -21,9 +20,16 @@ namespace Data.Metadata_Model
         {
             AssemblyModel = new AssemblyMetadata(assembly);
         }
+        public Reflector()
+        {
 
+        }
+        public Reflector(string Name, string MetadataName)
+        {
+            AssemblyModel = new AssemblyMetadata(Name, MetadataName);
+        }
       
-
+        
 
     }
 }

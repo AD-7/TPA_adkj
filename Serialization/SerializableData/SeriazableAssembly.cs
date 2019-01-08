@@ -17,7 +17,7 @@ namespace Serialization.SerializableData
         [DataMember(Name = "Metadata_Name")]
         public string MetadataName { get; set; }
        
-        public IEnumerable<NamespaceMetadata> Namespaces { get; set; }
+       
         [DataMember(Name = "NamespaceList")]
         public IEnumerable<SerializableNamespace> SerializableNamespaces { get; set; }
 
@@ -25,11 +25,13 @@ namespace Serialization.SerializableData
         {
             Name = assembly.Name;
             MetadataName = assembly.MetadataName;
-            Namespaces = assembly.Namespaces;
             SerializableNamespaces = from NamespaceMetadata n in assembly.Namespaces
                          select new SerializableNamespace(n);
 
         }
+
+
+      
 
 
     }

@@ -8,14 +8,13 @@ namespace Serialization.SerializableData
     [DataContract(IsReference = true)]
     public class SerializableMethod
     {
-        [DataMember(Name = "Metadata_Name")]
+        [DataMember(Name = "MetadataName")]
         public string MetadataName { get; set; }
         [DataMember(Name = "Method_Name")]
         public string Name { get; set; }
         [DataMember(Name = "Return_Type")]
-        public SerializableType ReturnType;
-    
-        public IEnumerable<ParameterMetadata> Parameters;
+        public SerializableType SerReturnType;
+   
     [DataMember(Name = "Parameters")]
         public IEnumerable<SerializableParameter> SerParameters;
 
@@ -23,8 +22,8 @@ namespace Serialization.SerializableData
         {
             Name = method.Name;
             MetadataName = method.MetadataName;
-            ReturnType = new SerializableType( method.ReturnType);
-            Parameters = method.Parameters;
+            SerReturnType = new SerializableType( method.ReturnType);
+           
 
             SerParameters = from ParameterMetadata p in method.Parameters
                             select new SerializableParameter(p);

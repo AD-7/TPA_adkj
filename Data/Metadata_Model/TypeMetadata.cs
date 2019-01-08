@@ -13,7 +13,7 @@ namespace Data.Metadata_Model
     {
         #region 
        
-        public string Name { get; private set; }
+        public string Name { get; set; }
        
         public string MetadataName { get; set; }
      
@@ -65,7 +65,16 @@ namespace Data.Metadata_Model
             MetadataName = metadataName;
             this.namespaceName = namespaceName;
         }
-        public TypeMetadata(string name, string metadataName, string namespaceName, IEnumerable<TypeMetadata> genericArgs) : this(name, metadataName, namespaceName)
+
+            public TypeMetadata(string name, string metadataName )
+            {
+                Name = name;
+                MetadataName = metadataName;
+            exists = true;
+
+        }
+
+            public TypeMetadata(string name, string metadataName, string namespaceName, IEnumerable<TypeMetadata> genericArgs) : this(name, metadataName, namespaceName)
         {
             GenericArguments = genericArgs;
         }

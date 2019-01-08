@@ -20,15 +20,15 @@ namespace Serialization.SerializableData
         [DataMember(Name = "Generic_Arguments")]
         public IEnumerable<SerializableType> GenericArguments;
        
-        public IEnumerable<MethodMetadata> Methods { get; set; }
+       
       
-        public IEnumerable<MethodMetadata> Constructors { get; set; }
+        
         [DataMember(Name = "NestedType")]
         public IEnumerable<SerializableType> NestedTypes { get; set; }
         [DataMember(Name = "Interface")]
         public IEnumerable<SerializableType> Interfaces { get; set; }
       
-        public IEnumerable<PropertyMetadata> Properties { get; set; }
+       
  [DataMember(Name = "Method")]
         public IEnumerable<SerializableMethod> SerMethods { get; set; }
   [DataMember(Name = "Constructor")]
@@ -63,6 +63,7 @@ namespace Serialization.SerializableData
                 if (type.Properties != null)
                     SerProperties = from PropertyMetadata p in type.Properties
                                 select new SerializableProperty(p);
+               
             }
 
         }

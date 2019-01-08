@@ -70,7 +70,7 @@ namespace ViewModel
             {
                 Reflector.Reflect(Path);
                 //tracer.TraceData(System.Diagnostics.TraceEventType.Information, "Odczyt metadanych.");
-               AssemblyTreeView newTree = new AssemblyTreeView(Reflector.AssemblyModel);
+               TreeViewBase newTree = new AssemblyTreeView(Reflector.AssemblyModel);
                 string tmpname = newTree.Name;
                 newTree.Name = tmpname;
                 TV.Add(newTree);
