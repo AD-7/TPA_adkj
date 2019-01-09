@@ -16,21 +16,16 @@ namespace Serialization.SerializableData
       
 
         [DataMember(Name = "Assembly_Model")]
-        public SerializableAssembly SerializableAssembly { get; private set; }
-        //[DataMember(Name = "Assembly_Model2")]
-        //public AssemblyMetadata assembly { get; set; }
+        public SerializableAssembly SerializableAssembly { get;  set; }
+      
 
         public SerializableReflector(Reflector refl)
         {    
             SerializableAssembly = new SerializableAssembly(refl.AssemblyModel);
-            //assembly = refl.AssemblyModel;
+            
         }
 
 
-        //public Reflector CreateBase()
-        //{
-           
-        //    return reflBase;
-        //}
+       
     }
 }

@@ -23,7 +23,6 @@ namespace Serialization.SerializableData
             MetadataName = namespacee.MetadataName;
             SerializableTypes = 
                 from TypeMetadata t in namespacee.Types
-                
                     select new SerializableType(t);
 
         }

@@ -24,7 +24,6 @@ namespace ViewModel
         public ICommand ShowTree { get; }
         public ICommand Click_Ser { get; }
         public ICommand Click_DeSer { get; }
-        public MyTraceSource tracer;
         public string Path;
 
         public ViewControl()
@@ -46,6 +45,38 @@ namespace ViewModel
            
         }
 
+        private  void Save()
+        {
+            if (TV.Count > 0)
+            {
+                MEFConfig.Instance.kindOfSerialize = methodSer;
+                MEFConfig.Instance.GetComponentsSer(@"../../Lib").Serialize(Reflector, file);
+            }
+
+            MEFConfig.Instance.kindOfTrace = methodTrace;
+            MEFConfig.Instance.tracer.TraceData(TraceEventType.Information, "Dokonano serializacji");
+        }
+
+        private void Read()
+        {
+            if (methodSer == "File")
+            {
+                LoadXML();
+            }
+
+
+            MEFConfig.Instance.kindOfSerialize = methodSer;
+            Reflector = MEFConfig.Instance.serializer.Deserialize(Path);
+
+            AssemblyTreeView rootItem = new AssemblyTreeView(Reflector.AssemblyModel) { Name = Reflector.AssemblyModel.Name };
+            string tempRootName = rootItem.Name;
+            TV.Clear();
+            rootItem.Name = "Assembly: " + tempRootName;
+            TV.Add(rootItem);
+
+            MEFConfig.Instance.kindOfTrace = methodTrace;
+            MEFConfig.Instance.tracer.TraceData(TraceEventType.Information, "Dokonano deserializacji.");
+        }
 
 
 
@@ -80,40 +111,10 @@ namespace ViewModel
 
         }
 
-        private void Save()
-        {
-            if (TV.Count > 0)
-            {
-                MEFConfig.Instance.kindOfSerialize = methodSer;
-                MEFConfig.Instance.GetComponentsSer(@"../../Lib").Serialize(Reflector, file);
-            }
-           
-            MEFConfig.Instance.kindOfTrace = methodTrace;
-            MEFConfig.Instance.tracer.TraceData(TraceEventType.Information, "Dokonano serializacji");
-        }
+      
 
 
-        private void Read()
-        {
-            if(methodSer == "File")
-            {
-                LoadXML();
-            }
-           
-        
-            MEFConfig.Instance.kindOfSerialize = methodSer;
-            Reflector = MEFConfig.Instance.serializer.Deserialize(Path);
-
-           AssemblyTreeView rootItem = new AssemblyTreeView(Reflector.AssemblyModel) { Name = Reflector.AssemblyModel.Name };
-            string tempRootName = rootItem.Name;
-            TV.Clear();
-            rootItem.Name = "Assembly: " + tempRootName;
-            TV.Add(rootItem);
-         
-            MEFConfig.Instance.kindOfTrace = methodTrace;
-            MEFConfig.Instance.tracer.TraceData(TraceEventType.Information, "Dokonano deserializacji.");
-        }
-
+      
         private void LoadXML()
         {
             OpenFileDialog file = new OpenFileDialog();

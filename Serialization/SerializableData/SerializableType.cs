@@ -15,8 +15,8 @@ namespace Serialization.SerializableData
         public string MetadataName { get; set; }
         //[DataMember(Name = "Types_Name")]
         //public static Dictionary<string, TypeMetadata> allTypes = new Dictionary<string, TypeMetadata>();
-        //[DataMember(Name = "Namespace_Name")]
-        //public string namespaceName;
+        [DataMember(Name = "Namespace_Name")]
+        public string SernamespaceName;
         [DataMember(Name = "Generic_Arguments")]
         public IEnumerable<SerializableType> GenericArguments;
        
@@ -38,12 +38,12 @@ namespace Serialization.SerializableData
 
         public SerializableType(TypeMetadata type)
         {
-            if (type != null)
-            {
+            //if (type != null)
+            //{
                 Name = type.Name;
                 MetadataName = type.MetadataName;
-               // namespaceName = type.namespaceName;
-                if (type.GenericArguments != null)
+            SernamespaceName = type.namespaceName;
+            if (type.GenericArguments != null)
                     GenericArguments = from TypeMetadata t in type.GenericArguments
                                        select new SerializableType(t);
                 if (type.NestedTypes != null)
@@ -64,7 +64,7 @@ namespace Serialization.SerializableData
                     SerProperties = from PropertyMetadata p in type.Properties
                                 select new SerializableProperty(p);
                
-            }
+            //}
 
         }
     }
