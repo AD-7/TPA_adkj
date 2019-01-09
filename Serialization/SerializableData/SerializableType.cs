@@ -15,8 +15,8 @@ namespace Serialization.SerializableData
         public string MetadataName { get; set; }
         //[DataMember(Name = "Types_Name")]
         //public static Dictionary<string, TypeMetadata> allTypes = new Dictionary<string, TypeMetadata>();
-        [DataMember(Name = "Namespace_Name")]
-        public string namespaceName;
+        //[DataMember(Name = "Namespace_Name")]
+        //public string namespaceName;
         [DataMember(Name = "Generic_Arguments")]
         public IEnumerable<SerializableType> GenericArguments;
        
@@ -42,7 +42,7 @@ namespace Serialization.SerializableData
             {
                 Name = type.Name;
                 MetadataName = type.MetadataName;
-                namespaceName = type.namespaceName;
+               // namespaceName = type.namespaceName;
                 if (type.GenericArguments != null)
                     GenericArguments = from TypeMetadata t in type.GenericArguments
                                        select new SerializableType(t);

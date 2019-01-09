@@ -39,8 +39,8 @@ namespace ViewModel
             methodSer = "File";
             LoadFileClicked = new DelegateCommand(Load);
             ShowTree = new DelegateCommand(LoadTree);
-            Click_DeSer = new DelegateCommand(Deserialize);
-            Click_Ser = new DelegateCommand(Serialize);
+            Click_DeSer = new DelegateCommand(Read);
+            Click_Ser = new DelegateCommand(Save);
             Reflector = new Reflector();
             Path = "";
            
@@ -75,27 +75,25 @@ namespace ViewModel
                 TV.Add(newTree);
           
                 MEFConfig.Instance.kindOfTrace = methodTrace;
-                MEFConfig.Instance.kindOfSerialize = methodSer;
                 MEFConfig.Instance.tracer.TraceData(TraceEventType.Information, "Dodano nowy widok drzewa dla pliku.");
             }
 
         }
 
-        private void Serialize()
+        private void Save()
         {
             if (TV.Count > 0)
             {
                 MEFConfig.Instance.kindOfSerialize = methodSer;
                 MEFConfig.Instance.GetComponentsSer(@"../../Lib").Serialize(Reflector, file);
             }
-            //MEFConfig.Instance().GetComponents(@"../../Lib");
+           
             MEFConfig.Instance.kindOfTrace = methodTrace;
-            
             MEFConfig.Instance.tracer.TraceData(TraceEventType.Information, "Dokonano serializacji");
         }
 
 
-        private void Deserialize()
+        private void Read()
         {
             if(methodSer == "File")
             {
@@ -113,7 +111,6 @@ namespace ViewModel
             TV.Add(rootItem);
          
             MEFConfig.Instance.kindOfTrace = methodTrace;
-
             MEFConfig.Instance.tracer.TraceData(TraceEventType.Information, "Dokonano deserializacji.");
         }
 
