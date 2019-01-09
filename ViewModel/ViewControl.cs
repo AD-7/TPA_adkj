@@ -43,6 +43,7 @@ namespace ViewModel
             Click_Ser = new DelegateCommand(Serialize);
             Reflector = new Reflector();
             Path = "";
+           
         }
 
 
@@ -58,8 +59,8 @@ namespace ViewModel
            
             string info = "Wczytano plik " + Path;
 
-            MEFConfig.kindOfTrace = methodTrace;
-            MEFConfig.tracer.TraceData(TraceEventType.Information, info);
+            MEFConfig.Instance.kindOfTrace = methodTrace;
+            MEFConfig.Instance.GetComponents(@"../../Lib").TraceData(TraceEventType.Information, info);
         }
        
         private void LoadTree()
@@ -73,9 +74,9 @@ namespace ViewModel
                 newTree.Name = tmpname;
                 TV.Add(newTree);
           
-                MEFConfig.kindOfTrace = methodTrace;
-                MEFConfig.kindOfSerialize = methodSer;
-                MEFConfig.tracer.TraceData(TraceEventType.Information, "Dodano nowy widok drzewa dla pliku.");
+                MEFConfig.Instance.kindOfTrace = methodTrace;
+                MEFConfig.Instance.kindOfSerialize = methodSer;
+                MEFConfig.Instance.tracer.TraceData(TraceEventType.Information, "Dodano nowy widok drzewa dla pliku.");
             }
 
         }
@@ -84,12 +85,13 @@ namespace ViewModel
         {
             if (TV.Count > 0)
             {
-                MEFConfig.serializer.Serialize(Reflector, file);
+                MEFConfig.Instance.kindOfSerialize = methodSer;
+                MEFConfig.Instance.GetComponentsSer(@"../../Lib").Serialize(Reflector, file);
             }
             //MEFConfig.Instance().GetComponents(@"../../Lib");
-            MEFConfig.kindOfTrace = methodTrace;
-            MEFConfig.kindOfSerialize = methodSer;
-            MEFConfig.tracer.TraceData(TraceEventType.Information, "Dokonano serializacji");
+            MEFConfig.Instance.kindOfTrace = methodTrace;
+            
+            MEFConfig.Instance.tracer.TraceData(TraceEventType.Information, "Dokonano serializacji");
         }
 
 
@@ -101,8 +103,8 @@ namespace ViewModel
             }
            
         
-            MEFConfig.kindOfSerialize = methodSer;
-            Reflector = MEFConfig.serializer.Deserialize(Path);
+            MEFConfig.Instance.kindOfSerialize = methodSer;
+            Reflector = MEFConfig.Instance.serializer.Deserialize(Path);
 
            AssemblyTreeView rootItem = new AssemblyTreeView(Reflector.AssemblyModel) { Name = Reflector.AssemblyModel.Name };
             string tempRootName = rootItem.Name;
@@ -110,9 +112,9 @@ namespace ViewModel
             rootItem.Name = "Assembly: " + tempRootName;
             TV.Add(rootItem);
          
-            MEFConfig.kindOfTrace = methodTrace;
+            MEFConfig.Instance.kindOfTrace = methodTrace;
 
-            MEFConfig.tracer.TraceData(TraceEventType.Information, "Dokonano deserializacji.");
+            MEFConfig.Instance.tracer.TraceData(TraceEventType.Information, "Dokonano deserializacji.");
         }
 
         private void LoadXML()
@@ -123,8 +125,8 @@ namespace ViewModel
             Path = file.FileName;
        
             string info = "Wczytano plik " + Path;
-            MEFConfig.kindOfTrace = methodTrace;
-            MEFConfig.GetComponents(@"../../Lib").TraceData(TraceEventType.Information, info);
+            MEFConfig.Instance.kindOfTrace = methodTrace;
+            MEFConfig.Instance.GetComponents(@"../../Lib").TraceData(TraceEventType.Information, info);
         }
 
 

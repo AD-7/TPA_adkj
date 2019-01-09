@@ -8,61 +8,111 @@ using System.Linq;
 
 namespace ViewModel
 {
-    public static class MEFConfig
+
+    public sealed class MEFConfig
     {
+        private static readonly MEFConfig instance = new MEFConfig();
+
+        static MEFConfig()
+        {
+
+        }
+        private MEFConfig()
+        {
+
+        }
+        public static MEFConfig Instance
+        {
+            get
+            {
+                return instance;
+            }
+        }
+
         public interface IRepoMeta
         {
             string Name { get; }
         }
 
-        
+        [ImportMany(typeof(ITraceSource))]
+        public IEnumerable<Lazy<ITraceSource, IRepoMeta>> trace;
 
+        [ImportMany(typeof(ISerialization))]
+        public IEnumerable<Lazy<ISerialization, IRepoMeta>> ser;
 
-    [ImportMany(typeof(ITraceSource))]
-    public static IEnumerable<Lazy<ITraceSource, IRepoMeta>> trace;
+        public ISerialization serializer;
+        public ITraceSource tracer;
+        public string kindOfTrace = "File";
+        public string kindOfSerialize = "File";
 
-    [ImportMany(typeof(ISerialization))]
-    public static IEnumerable<Lazy<ISerialization, IRepoMeta>> ser;
-
-    public static ISerialization serializer;
-    public static ITraceSource tracer;
-    public static string kindOfTrace = "File";
-    public static string kindOfSerialize = "File";
-
-    public static ITraceSource GetComponents(string file)
-    {
-        try
+        public ITraceSource GetComponents(string file)
         {
-            var catalog = new AggregateCatalog();
-            catalog.Catalogs.Add(new AssemblyCatalog(typeof(MEFConfig).Assembly));
-            catalog.Catalogs.Add(new DirectoryCatalog(file, "*.dll"));
-            CompositionContainer _cont = new CompositionContainer(catalog);
+            try
+            {
+                var catalog = new AggregateCatalog();
+                catalog.Catalogs.Add(new AssemblyCatalog(typeof(MEFConfig).Assembly));
+                catalog.Catalogs.Add(new DirectoryCatalog(file, "*.dll"));
+                CompositionContainer _cont = new CompositionContainer(catalog);
 
 
-            _cont.ComposeParts();
+                _cont.ComposeParts(this);
 
 
-            tracer = trace.Where(x => x.Metadata.Name == kindOfTrace)
-                .Select(x => x.Value).First();
-            serializer = ser.Where(x => x.Metadata.Name == kindOfSerialize)
-               .Select(x => x.Value).First();
+                tracer = trace.Where(x => x.Metadata.Name == kindOfTrace)
+                    .Select(x => x.Value).First();
+                serializer = ser.Where(x => x.Metadata.Name == kindOfSerialize)
+                   .Select(x => x.Value).First();
                 return tracer;
-        }
-        catch (FileNotFoundException)
-        {
+            }
+            catch (FileNotFoundException)
+            {
 
-        }
-        catch (CompositionException)
-        {
+            }
+            catch (CompositionException)
+            {
 
-        }
-        catch (DirectoryNotFoundException)
-        {
+            }
+            catch (DirectoryNotFoundException)
+            {
 
-        }
+            }
             return null;
+        }
+
+        public ISerialization GetComponentsSer(string file)
+        {
+            try
+            {
+                var catalog = new AggregateCatalog();
+                catalog.Catalogs.Add(new AssemblyCatalog(typeof(MEFConfig).Assembly));
+                catalog.Catalogs.Add(new DirectoryCatalog(file, "*.dll"));
+                CompositionContainer _cont = new CompositionContainer(catalog);
+
+
+                _cont.ComposeParts(this);
+
+
+                tracer = trace.Where(x => x.Metadata.Name == kindOfTrace)
+                    .Select(x => x.Value).First();
+                serializer = ser.Where(x => x.Metadata.Name == kindOfSerialize)
+                   .Select(x => x.Value).First();
+                return serializer;
+            }
+            catch (FileNotFoundException)
+            {
+
+            }
+            catch (CompositionException)
+            {
+
+            }
+            catch (DirectoryNotFoundException)
+            {
+
+            }
+            return null;
+        }
     }
-   }
 }
 
 

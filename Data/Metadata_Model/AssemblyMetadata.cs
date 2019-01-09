@@ -31,6 +31,7 @@ namespace Data.Metadata_Model
         {
             Name = assembly.ManifestModule.Name;
             MetadataName = "Assembly: ";
+            
             Namespaces = from Type _type in assembly.GetTypes()
                          where _type.GetVisible()
                          group _type by _type.GetNamespace() into _group

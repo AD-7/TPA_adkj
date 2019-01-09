@@ -30,7 +30,7 @@ namespace Serialization
             }
             );
             iMapper = config.CreateMapper();
-
+            if(reflector.SerializableAssembly.SerializableNamespaces != null)
             Base.AssemblyModel.Namespaces = iMapper.Map<IEnumerable<SerializableNamespace>,IEnumerable<NamespaceMetadata>>(reflector.SerializableAssembly.SerializableNamespaces);
 
             config = new MapperConfiguration(cfg =>
@@ -47,12 +47,16 @@ namespace Serialization
                     cfg.CreateMap<SerializableType, TypeMetadata>();
                 }
                 );
+                if(reflector.SerializableAssembly.SerializableNamespaces.ToList()[i].SerializableTypes != null)
                 Base.AssemblyModel.Namespaces.ToList()[i].Types = iMapper.Map<IEnumerable<SerializableType>, IEnumerable<TypeMetadata>>(reflector.SerializableAssembly.SerializableNamespaces.ToList()[i].SerializableTypes);
 
                 for(int j=0; j< reflector.SerializableAssembly.SerializableNamespaces.ToList()[i].SerializableTypes.Count(); j++)
                 {
+                    if(reflector.SerializableAssembly.SerializableNamespaces.ToList()[i].SerializableTypes.ToList()[j].Interfaces != null)
                     Base.AssemblyModel.Namespaces.ToList()[i].Types.ToList()[j].Interfaces = iMapper.Map<IEnumerable<SerializableType>, IEnumerable<TypeMetadata>>(reflector.SerializableAssembly.SerializableNamespaces.ToList()[i].SerializableTypes.ToList()[j].Interfaces);
+                    if(reflector.SerializableAssembly.SerializableNamespaces.ToList()[i].SerializableTypes.ToList()[j].NestedTypes != null)
                     Base.AssemblyModel.Namespaces.ToList()[i].Types.ToList()[j].NestedTypes = iMapper.Map<IEnumerable<SerializableType>, IEnumerable<TypeMetadata>>(reflector.SerializableAssembly.SerializableNamespaces.ToList()[i].SerializableTypes.ToList()[j].NestedTypes);
+                    if(reflector.SerializableAssembly.SerializableNamespaces.ToList()[i].SerializableTypes.ToList()[j].GenericArguments != null)
                     Base.AssemblyModel.Namespaces.ToList()[i].Types.ToList()[j].GenericArguments = iMapper.Map<IEnumerable<SerializableType>, IEnumerable<TypeMetadata>>(reflector.SerializableAssembly.SerializableNamespaces.ToList()[i].SerializableTypes.ToList()[j].GenericArguments);
                     
                 }
@@ -63,8 +67,9 @@ namespace Serialization
                         cfg.CreateMap<SerializableMethod, MethodMetadata>();
                     });
                     iMapper = config.CreateMapper();
-
+                    if(reflector.SerializableAssembly.SerializableNamespaces.ToList()[i].SerializableTypes.ToList()[j].SerMethods != null)
                     Base.AssemblyModel.Namespaces.ToList()[i].Types.ToList()[j].Methods = iMapper.Map<IEnumerable<SerializableMethod>, IEnumerable<MethodMetadata>>(reflector.SerializableAssembly.SerializableNamespaces.ToList()[i].SerializableTypes.ToList()[j].SerMethods);
+                    if(reflector.SerializableAssembly.SerializableNamespaces.ToList()[i].SerializableTypes.ToList()[j].SerConstructors != null)
                     Base.AssemblyModel.Namespaces.ToList()[i].Types.ToList()[j].Constructors = iMapper.Map<IEnumerable<SerializableMethod>, IEnumerable<MethodMetadata>>(reflector.SerializableAssembly.SerializableNamespaces.ToList()[i].SerializableTypes.ToList()[j].SerConstructors);
                 }
                 for (int j = 0; j < reflector.SerializableAssembly.SerializableNamespaces.ToList()[i].SerializableTypes.Count(); j++)
@@ -74,7 +79,7 @@ namespace Serialization
                         cfg.CreateMap<SerializableProperty, PropertyMetadata>();
                     });
                     iMapper = config.CreateMapper();
-
+                    if(reflector.SerializableAssembly.SerializableNamespaces.ToList()[i].SerializableTypes.ToList()[j].SerProperties != null)
                     Base.AssemblyModel.Namespaces.ToList()[i].Types.ToList()[j].Properties = iMapper.Map<IEnumerable<SerializableProperty>, IEnumerable<PropertyMetadata>>(reflector.SerializableAssembly.SerializableNamespaces.ToList()[i].SerializableTypes.ToList()[j].SerProperties);
                 }
 
