@@ -8,57 +8,62 @@ using System.Linq;
 
 namespace ViewModel
 {
-    public class MEFConfig
+    public static class MEFConfig
     {
         public interface IRepoMeta
         {
             string Name { get; }
         }
 
-        [ImportMany(typeof(ITraceSource))]
-        public IEnumerable<Lazy<ITraceSource,IRepoMeta>> trace;
+        
 
-        [ImportMany(typeof(ISerialization))]
-        public IEnumerable<Lazy<ISerialization,IRepoMeta>> ser;
 
-        public ISerialization serializer;
-        public ITraceSource tracer;
-        public string kindOfTrace = "File";
-        public string kindOfSerialize = "File";
+    [ImportMany(typeof(ITraceSource))]
+    public static IEnumerable<Lazy<ITraceSource, IRepoMeta>> trace;
 
-        public void GetComponents(string file)
+    [ImportMany(typeof(ISerialization))]
+    public static IEnumerable<Lazy<ISerialization, IRepoMeta>> ser;
+
+    public static ISerialization serializer;
+    public static ITraceSource tracer;
+    public static string kindOfTrace = "File";
+    public static string kindOfSerialize = "File";
+
+    public static ITraceSource GetComponents(string file)
+    {
+        try
         {
-            try
-            {
-                var catalog = new AggregateCatalog();
-               catalog.Catalogs.Add(new AssemblyCatalog(typeof(MEFConfig).Assembly));
-                 catalog.Catalogs.Add(new DirectoryCatalog(file,"*.dll"));
-                CompositionContainer _cont = new CompositionContainer(catalog);
+            var catalog = new AggregateCatalog();
+            catalog.Catalogs.Add(new AssemblyCatalog(typeof(MEFConfig).Assembly));
+            catalog.Catalogs.Add(new DirectoryCatalog(file, "*.dll"));
+            CompositionContainer _cont = new CompositionContainer(catalog);
 
 
-                _cont.ComposeParts(this);
+            _cont.ComposeParts();
 
-               
-                tracer = trace.Where(x => x.Metadata.Name == kindOfTrace)
-                    .Select(x=>x.Value).First();
-                serializer = ser.Where(x => x.Metadata.Name ==kindOfSerialize)
-                   .Select(x => x.Value).First();
 
-            }
-            catch(FileNotFoundException)
-            {
-
-            }
-            catch (CompositionException)
-            {
-
-            }
-            catch (DirectoryNotFoundException)
-            {
-
-            }
+            tracer = trace.Where(x => x.Metadata.Name == kindOfTrace)
+                .Select(x => x.Value).First();
+            serializer = ser.Where(x => x.Metadata.Name == kindOfSerialize)
+               .Select(x => x.Value).First();
+                return tracer;
+        }
+        catch (FileNotFoundException)
+        {
 
         }
+        catch (CompositionException)
+        {
 
+        }
+        catch (DirectoryNotFoundException)
+        {
+
+        }
+            return null;
     }
+   }
 }
+
+
+

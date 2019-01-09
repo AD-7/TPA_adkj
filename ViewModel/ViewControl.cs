@@ -18,13 +18,13 @@ namespace ViewModel
         public ObservableCollection<TreeViewBase> TV { get; set; }
         public ObservableCollection<string> methods { get; set; }
         public string methodTrace { get; set; }
+        string file = "test";
         public string methodSer { get; set; }
         public ICommand LoadFileClicked { get; }
         public ICommand ShowTree { get; }
         public ICommand Click_Ser { get; }
         public ICommand Click_DeSer { get; }
         public MyTraceSource tracer;
-        public MEFConfig MEF;
         public string Path;
 
         public ViewControl()
@@ -42,9 +42,6 @@ namespace ViewModel
             Click_DeSer = new DelegateCommand(Deserialize);
             Click_Ser = new DelegateCommand(Serialize);
             Reflector = new Reflector();
-         //   ser = new SerXML();
-            MEF = new MEFConfig();
-            MEF.GetComponents(@"../../Lib");
             Path = "";
         }
 
@@ -60,23 +57,25 @@ namespace ViewModel
             Path = file.FileName;
            
             string info = "Wczytano plik " + Path;
-            MEF.kindOfTrace = methodTrace;
-            MEF.tracer.TraceData(TraceEventType.Information, info);
-        }
 
+            MEFConfig.kindOfTrace = methodTrace;
+            MEFConfig.tracer.TraceData(TraceEventType.Information, info);
+        }
+       
         private void LoadTree()
         {
             if (Path != "")
             {
                 Reflector.Reflect(Path);
-                //tracer.TraceData(System.Diagnostics.TraceEventType.Information, "Odczyt metadanych.");
+             
                TreeViewBase newTree = new AssemblyTreeView(Reflector.AssemblyModel);
                 string tmpname = newTree.Name;
                 newTree.Name = tmpname;
                 TV.Add(newTree);
-                MEF.kindOfTrace = methodTrace;
-                MEF.kindOfSerialize = methodSer;
-                MEF.tracer.TraceData(TraceEventType.Information, "Dodano nowy widok drzewa dla pliku.");
+          
+                MEFConfig.kindOfTrace = methodTrace;
+                MEFConfig.kindOfSerialize = methodSer;
+                MEFConfig.tracer.TraceData(TraceEventType.Information, "Dodano nowy widok drzewa dla pliku.");
             }
 
         }
@@ -85,12 +84,12 @@ namespace ViewModel
         {
             if (TV.Count > 0)
             {
-                MEF.serializer.Serialize(Reflector, "test.xml");
+                MEFConfig.serializer.Serialize(Reflector, file);
             }
-
-            MEF.kindOfTrace = methodTrace;
-            MEF.kindOfSerialize = methodSer;
-            MEF.tracer.TraceData(TraceEventType.Information, "Dokonano serializacji");
+            //MEFConfig.Instance().GetComponents(@"../../Lib");
+            MEFConfig.kindOfTrace = methodTrace;
+            MEFConfig.kindOfSerialize = methodSer;
+            MEFConfig.tracer.TraceData(TraceEventType.Information, "Dokonano serializacji");
         }
 
 
@@ -101,18 +100,19 @@ namespace ViewModel
                 LoadXML();
             }
            
-
-            MEF.kindOfSerialize = methodSer;
-            Reflector = MEF.serializer.Deserialize(Path);
+        
+            MEFConfig.kindOfSerialize = methodSer;
+            Reflector = MEFConfig.serializer.Deserialize(Path);
 
            AssemblyTreeView rootItem = new AssemblyTreeView(Reflector.AssemblyModel) { Name = Reflector.AssemblyModel.Name };
             string tempRootName = rootItem.Name;
             TV.Clear();
             rootItem.Name = "Assembly: " + tempRootName;
             TV.Add(rootItem);
-            MEF.kindOfTrace = methodTrace;
+         
+            MEFConfig.kindOfTrace = methodTrace;
 
-            MEF.tracer.TraceData(TraceEventType.Information, "Dokonano deserializacji.");
+            MEFConfig.tracer.TraceData(TraceEventType.Information, "Dokonano deserializacji.");
         }
 
         private void LoadXML()
@@ -121,10 +121,10 @@ namespace ViewModel
             file.Filter = "XML Files (*.xml)|*.xml";
             file.ShowDialog();
             Path = file.FileName;
-
+       
             string info = "Wczytano plik " + Path;
-            MEF.kindOfTrace = methodTrace;
-            MEF.tracer.TraceData(TraceEventType.Information, info);
+            MEFConfig.kindOfTrace = methodTrace;
+            MEFConfig.GetComponents(@"../../Lib").TraceData(TraceEventType.Information, info);
         }
 
 

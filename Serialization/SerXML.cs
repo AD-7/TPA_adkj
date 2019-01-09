@@ -14,6 +14,7 @@ namespace Serialization
     {
         public   void Serialize(Reflector reflector, string fileName)
         {
+            fileName += ".xml";
             SerializableReflector serRefl = new SerializableReflector(reflector); 
             FileStream file = new FileStream(fileName, FileMode.Create, FileAccess.Write);
 
@@ -25,7 +26,7 @@ namespace Serialization
 
         public  Reflector Deserialize(string fileName)
         {
-
+           
             DataContractSerializer SerializerObj = new DataContractSerializer(typeof(SerializableReflector), null, 0x7FFF, false, true, null);
 
             FileStream file = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.Read);
