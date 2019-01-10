@@ -1,5 +1,4 @@
-﻿using Data;
-using Data.Metadata_Model;
+﻿using Data.Metadata_Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Serialization;
 using System;
@@ -9,12 +8,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UnitTestsData
+namespace Serialization.Tests
 {
-    [TestClass]
-   public  class SerializationTests
+    [TestClass()]
+    public class SerXMLTests
     {
-
         private Reflector refl;
         private SerXML SerXML;
 
