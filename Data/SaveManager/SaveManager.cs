@@ -21,7 +21,7 @@ namespace Reflection.SaveManager
             serializer = ser.Where(x => x.Metadata.Name == kindOfSerialize)
                  .Select(x => x.Value).First();
             AssemblyDTG assemblyDTG = MapperToDTG.MapperToDTG.AssemblyDtg(assemblyModel);
-            serializer.Serialize(assemblyDTG);
+            serializer.Serialize(assemblyDTG,"test");
         }
 
 
@@ -29,7 +29,7 @@ namespace Reflection.SaveManager
         {
             serializer = ser.Where(x => x.Metadata.Name == kindOfSerialize)
                  .Select(x => x.Value).First();
-            AssemblyDTG assemblyDTG = serializer.Deserialize();
+            AssemblyDTG assemblyDTG = serializer.Deserialize(path);
             AssemblyMetadata assemblyModel = new AssemblyMetadata(assemblyDTG);
             return assemblyModel;
         }
