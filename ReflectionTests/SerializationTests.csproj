@@ -48,11 +48,25 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ReflectionTests.cs" />
+    <Compile Include="SerializationTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Data\Reflection.csproj">
+      <Project>{5526f566-cd96-4634-8226-8b18f69fa928}</Project>
+      <Name>Reflection</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DTG\DTG_Transfer.csproj">
+      <Project>{44d0c986-02fa-4d1e-9d7e-901ef707a02f}</Project>
+      <Name>DTG_Transfer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Serialization\Serialization.csproj">
+      <Project>{567b5754-1c52-4e35-94ba-42fb8309bcec}</Project>
+      <Name>Serialization</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

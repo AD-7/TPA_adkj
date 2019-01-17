@@ -25,7 +25,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseTrace", "DatabaseTr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseSerialization", "DatabaseSerialization\DatabaseSerialization.csproj", "{C6113496-6F48-4B6F-A0EB-AA9449C00B1F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReflectionTests", "ReflectionTests\ReflectionTests.csproj", "{561A15F1-EC84-4004-A78B-EA6B4358CEFE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerializationTests", "ReflectionTests\SerializationTests.csproj", "{561A15F1-EC84-4004-A78B-EA6B4358CEFE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
