@@ -39,25 +39,29 @@ namespace ViewModel
 
        
         public ITraceSource tracer;
-        public string kindOfTrace = "File";
-        public string kindOfSerialize = "File";
+        public void kindOfTrace(string kind)
+        {
+            tracer = trace.Where(x => x.Metadata.Name == kind)
+              .Select(x => x.Value).First();
+        }
+      
         public void GetComp()
         {
             try
             {
                 AggregateCatalog catalog = new AggregateCatalog();
-                catalog.Catalogs.Add(new AssemblyCatalog(typeof(MEFConfig).Assembly));
+                //catalog.Catalogs.Add(new AssemblyCatalog(typeof(MEFConfig).Assembly));
                 catalog.Catalogs.Add(new DirectoryCatalog(@"../../Lib", "*.dll"));
                 CompositionContainer _cont = new CompositionContainer(catalog);
 
 
                 _cont.ComposeParts(this);
 
+                tracer = trace.Where(x => x.Metadata.Name == "File")
+           .Select(x => x.Value).First();
 
-                tracer = trace.Where(x => x.Metadata.Name == kindOfTrace)
-                    .Select(x => x.Value).First();
-               
-           
+
+
             }     
             catch (FileNotFoundException)
             {

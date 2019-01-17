@@ -34,7 +34,7 @@ namespace ViewModel
             TV = new ObservableCollection<TreeViewBase>();
             methods = new ObservableCollection<string>();
             methods.Add("File");
-            //methods.Add("Database");
+            methods.Add("Database");
             methodTrace = "File";
             methodSer = "File";
             LoadFileClicked = new DelegateCommand(Load);
@@ -54,7 +54,7 @@ namespace ViewModel
                 SaveManager.Save(Reflector.AssemblyModel, methodSer);
             }
 
-            MEFConfig.Instance.kindOfTrace = methodTrace;
+            MEFConfig.Instance.kindOfTrace(methodTrace);
             MEFConfig.Instance.tracer.TraceData( "Dokonano serializacji");
         }
 
@@ -66,16 +66,16 @@ namespace ViewModel
             }
 
 
-           
+            
           
-            Reflector.AssemblyModel = SaveManager.Load(Path, methodSer);
+            Reflector.AssemblyModel = SaveManager.Load(methodSer);
             AssemblyTreeView rootItem = new AssemblyTreeView(Reflector.AssemblyModel) { Name = Reflector.AssemblyModel.Name };
             string tempRootName = rootItem.Name;
             TV.Clear();
             rootItem.Name = "Assembly: " + tempRootName;
             TV.Add(rootItem);
 
-            MEFConfig.Instance.kindOfTrace = methodTrace;
+           MEFConfig.Instance.kindOfTrace(methodTrace);
             MEFConfig.Instance.tracer.TraceData( "Dokonano deserializacji.");
         }
 
@@ -91,7 +91,7 @@ namespace ViewModel
            
             string info = "Wczytano plik " + Path;
 
-            MEFConfig.Instance.kindOfTrace = methodTrace;
+            MEFConfig.Instance.kindOfTrace(methodTrace);
             MEFConfig.Instance.tracer.TraceData( info);
         }
        
@@ -106,7 +106,7 @@ namespace ViewModel
                 newTree.Name = tmpname;
                 TV.Add(newTree);
           
-                MEFConfig.Instance.kindOfTrace = methodTrace;
+                MEFConfig.Instance.kindOfTrace(methodTrace);
                 MEFConfig.Instance.tracer.TraceData( "Dodano nowy widok drzewa dla pliku.");
             }
 
@@ -120,7 +120,7 @@ namespace ViewModel
             Path = file.FileName;
        
             string info = "Wczytano plik " + Path;
-            MEFConfig.Instance.kindOfTrace = methodTrace;
+            MEFConfig.Instance.kindOfTrace(methodTrace);
             MEFConfig.Instance.tracer.TraceData( info);
         }
 
