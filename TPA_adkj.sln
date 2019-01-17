@@ -21,6 +21,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Composition", "Composition"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTG_Transfer", "DTG\DTG_Transfer.csproj", "{44D0C986-02FA-4D1E-9D7E-901EF707A02F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseTrace", "DatabaseTrace\DatabaseTrace.csproj", "{0E9E3999-03DE-427C-94ED-D57DE89BF0B4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,10 @@ Global
 		{44D0C986-02FA-4D1E-9D7E-901EF707A02F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{44D0C986-02FA-4D1E-9D7E-901EF707A02F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{44D0C986-02FA-4D1E-9D7E-901EF707A02F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E9E3999-03DE-427C-94ED-D57DE89BF0B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E9E3999-03DE-427C-94ED-D57DE89BF0B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E9E3999-03DE-427C-94ED-D57DE89BF0B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E9E3999-03DE-427C-94ED-D57DE89BF0B4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,6 +72,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{CE782637-8DE0-41AD-B2F7-7D9E46CA1FD7} = {5D416186-44A5-4A0D-BF67-AF841098CF8F}
 		{567B5754-1C52-4E35-94BA-42FB8309BCEC} = {5D416186-44A5-4A0D-BF67-AF841098CF8F}
+		{0E9E3999-03DE-427C-94ED-D57DE89BF0B4} = {5D416186-44A5-4A0D-BF67-AF841098CF8F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B32D2C0B-13A1-460F-8166-573D496EA79C}
