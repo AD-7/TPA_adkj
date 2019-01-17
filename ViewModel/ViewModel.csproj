@@ -59,9 +59,9 @@
     <Compile Include="ViewControl.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Data\Logic.csproj">
+    <ProjectReference Include="..\Data\Reflection.csproj">
       <Project>{5526f566-cd96-4634-8226-8b18f69fa928}</Project>
-      <Name>Logic</Name>
+      <Name>Reflection</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

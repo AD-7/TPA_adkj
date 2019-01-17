@@ -62,9 +62,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Data\Logic.csproj">
+    <ProjectReference Include="..\Data\Reflection.csproj">
       <Project>{5526f566-cd96-4634-8226-8b18f69fa928}</Project>
-      <Name>Logic</Name>
+      <Name>Reflection</Name>
     </ProjectReference>
     <ProjectReference Include="..\Serialization\Serialization.csproj">
       <Project>{567b5754-1c52-4e35-94ba-42fb8309bcec}</Project>

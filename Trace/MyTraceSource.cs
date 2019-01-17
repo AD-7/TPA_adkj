@@ -14,18 +14,9 @@ namespace Trace
      
    
      
-        public void TraceData(TraceEventType eventType, object data)
+        public void TraceData(string mes)
         {
-            DateTime now = DateTime.Now;
-            string message;
-            message = "\n\n" + eventType.ToString() + "->";
-            message += "(" + now.ToString() + ")->";
-            message += data.ToString() + "\n\n";
-            byte[] tmpMessage = new UTF8Encoding(true).GetBytes(message); 
-            using (FileStream fs = new FileStream("plik.txt", FileMode.Append, FileAccess.Write, FileShare.Read))
-            {
-                fs.Write(tmpMessage, 0, tmpMessage.Length);
-            }
+            System.Diagnostics.Trace.WriteLine("(" + DateTime.Now + ") -> " + mes);
         }
     }
 }

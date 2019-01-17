@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF", "WPF\WPF.csproj", "{C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandLine", "CommandLine\CommandLine.csproj", "{63633EAD-B079-497F-A750-F5B0A53FC1CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logic", "Data\Logic.csproj", "{5526F566-CD96-4634-8226-8B18F69FA928}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reflection", "Data\Reflection.csproj", "{5526F566-CD96-4634-8226-8B18F69FA928}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestsData", "UnitTestsData\UnitTestsData.csproj", "{C6BECBE7-D9D6-4F3D-8FCE-5FCA154A78C9}"
 EndProject
