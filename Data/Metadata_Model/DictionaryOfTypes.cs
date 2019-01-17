@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Reflection.Metadata_Model
 {
-    public sealed class DictionaryOfTypes
+    public class DictionaryOfTypes
     {
         private static DictionaryOfTypes _instance = null;
 
