@@ -1,4 +1,4 @@
-﻿using Data.Metadata_Model;
+﻿using Reflection.Metadata_Model;
 using DTG;
 using DTG_Transfer.Service;
 using System;
@@ -7,7 +7,7 @@ using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.Linq;
 
-namespace Data.SaveManager
+namespace Reflection.SaveManager
 {
     public class SaveManager
     {

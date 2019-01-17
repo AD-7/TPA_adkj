@@ -1,4 +1,4 @@
-﻿using Data.Metadata_Model;
+﻿using Reflection.Metadata_Model;
 using DTG;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Data.MapperToDTG
+namespace Reflection.MapperToDTG
 {
     public static class MapperToDTG
     {

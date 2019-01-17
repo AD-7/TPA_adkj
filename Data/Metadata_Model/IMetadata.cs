@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 
-namespace Data.Metadata_Model
+namespace Reflection.Metadata_Model
 {
     public interface IMetadata
     {
