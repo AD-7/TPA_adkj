@@ -39,8 +39,7 @@ namespace Serialization.SerializableData
         public SerializableType(TypeDTG type)
         {
             DictionaryOfTypes.Instance.RegisterType(type.Name, this);
-            if (type != null)
-            {
+        
                 Name = type.Name;
                 MetadataName = type.MetadataName;
             SernamespaceName = type.SernamespaceName;
@@ -60,7 +59,7 @@ namespace Serialization.SerializableData
                     SerProperties = type.SerProperties?.Select(p => new SerializableProperty(p)).ToList();
                 
 
-            }
+            
 
         }
 
