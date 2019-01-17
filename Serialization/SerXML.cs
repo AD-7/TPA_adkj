@@ -13,7 +13,7 @@ namespace Serialization
     {
         public void Serialize(AssemblyDTG assembly)
         {
-            string fileName = "fileSave.xml";
+            string fileName = "saveFile.xml";
             SerializableAssembly serRefl = new SerializableAssembly(assembly); 
             FileStream file = new FileStream(fileName, FileMode.Create, FileAccess.Write);
 
@@ -25,7 +25,7 @@ namespace Serialization
 
         public  AssemblyDTG Deserialize()
         {
-            string fileName = "fileSave.xml";
+            string fileName = "saveFile.xml";
             DataContractSerializer SerializerObj = new DataContractSerializer(typeof(SerializableAssembly), null, 0x7FFF, false, true, null);
 
             FileStream file = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.Read);
