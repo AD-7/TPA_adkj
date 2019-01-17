@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 
-namespace Data.Metadata_Model
+namespace Reflection.Metadata_Model
 {
     public class PropertyMetadata : IMetadata
     {

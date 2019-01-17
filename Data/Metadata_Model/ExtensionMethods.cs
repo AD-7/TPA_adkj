@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.Runtime.Serialization;
 
-namespace Data.Metadata_Model
+namespace Reflection.Metadata_Model
 {
     
     internal static class ExtensionMethods

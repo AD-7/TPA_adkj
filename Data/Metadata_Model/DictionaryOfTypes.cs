@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Data.Metadata_Model
+namespace Reflection.Metadata_Model
 {
     public class DictionaryOfTypes
     {
