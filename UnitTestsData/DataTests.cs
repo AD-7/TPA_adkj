@@ -14,7 +14,7 @@ namespace UnitTestsData
         public void Init()
         {
             this.refl = new Reflector();
-            refl.Reflect("Data.dll");
+            refl.Reflect("Reflection.dll");
         }
 
         [TestMethod]
@@ -22,7 +22,7 @@ namespace UnitTestsData
         {
 
 
-            Assert.AreEqual("Data.dll", refl.AssemblyModel.Name);
+            Assert.AreEqual("Reflection.dll", refl.AssemblyModel.Name);
         }
 
 
@@ -30,9 +30,9 @@ namespace UnitTestsData
         public void NamespaceNameTest()
         {
 
-            Assert.AreEqual("Data.MapperToDTG", refl.AssemblyModel.Namespaces.ToList().ElementAt(0).Name);
-            Assert.AreEqual("Data.Metadata_Model", refl.AssemblyModel.Namespaces.ToList().ElementAt(1).Name);
-            Assert.AreEqual("Data.SaveManager", refl.AssemblyModel.Namespaces.ToList().ElementAt(2).Name);
+            Assert.AreEqual("Reflection.MapperToDTG", refl.AssemblyModel.Namespaces.ToList().ElementAt(0).Name);
+            Assert.AreEqual("Reflection.Metadata_Model", refl.AssemblyModel.Namespaces.ToList().ElementAt(1).Name);
+            Assert.AreEqual("Reflection.SaveManager", refl.AssemblyModel.Namespaces.ToList().ElementAt(2).Name);
 
         }
 
