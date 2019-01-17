@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Serialization.SerializableData
+namespace DatabaseSerialization.Model
 {
     public sealed class DictionaryOfTypes
     {
+
         private static DictionaryOfTypes _instance = null;
 
         public static DictionaryOfTypes Instance
@@ -26,14 +27,14 @@ namespace Serialization.SerializableData
 
         private static readonly object _padlock = new object();
 
-        private readonly Dictionary<string, SerializableType> _data;
+        private readonly Dictionary<string, TypeDb> _data;
 
         private DictionaryOfTypes()
         {
-            _data = new Dictionary<string, SerializableType >();
+            _data = new Dictionary<string, TypeDb>();
         }
 
-        public void RegisterType(string name, SerializableType type)
+        public void RegisterType(string name, TypeDb type)
         {
             _data.Add(name, type);
         }
@@ -43,9 +44,9 @@ namespace Serialization.SerializableData
             return _data.ContainsKey(name);
         }
 
-        public SerializableType GetType(string key)
+        public TypeDb GetType(string key)
         {
-            _data.TryGetValue(key, out SerializableType value);
+            _data.TryGetValue(key, out TypeDb value);
             return value;
         }
 

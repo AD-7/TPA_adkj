@@ -68,7 +68,7 @@ namespace ViewModel
 
             
           
-            Reflector.AssemblyModel = SaveManager.Load(Path, methodSer);
+            Reflector.AssemblyModel = SaveManager.Load(methodSer);
             AssemblyTreeView rootItem = new AssemblyTreeView(Reflector.AssemblyModel) { Name = Reflector.AssemblyModel.Name };
             string tempRootName = rootItem.Name;
             TV.Clear();

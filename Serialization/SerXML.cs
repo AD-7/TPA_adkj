@@ -11,9 +11,9 @@ namespace Serialization
     [ExportMetadata("Name","File")]
     public   class SerXML :ISerialization
     {
-        public void Serialize(AssemblyDTG assembly, string fileName)
+        public void Serialize(AssemblyDTG assembly)
         {
-            fileName += ".xml";
+            string fileName = "fileSave.xml";
             SerializableAssembly serRefl = new SerializableAssembly(assembly); 
             FileStream file = new FileStream(fileName, FileMode.Create, FileAccess.Write);
 
@@ -23,9 +23,9 @@ namespace Serialization
             file.Close();
         }
 
-        public  AssemblyDTG Deserialize(string fileName)
+        public  AssemblyDTG Deserialize()
         {
-           
+           string fileName = "fileSave.xml";
             DataContractSerializer SerializerObj = new DataContractSerializer(typeof(SerializableAssembly), null, 0x7FFF, false, true, null);
 
             FileStream file = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.Read);
