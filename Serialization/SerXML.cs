@@ -25,7 +25,7 @@ namespace Serialization
 
         public  AssemblyDTG Deserialize()
         {
-            string fileName = "fileSave.xml";
+           string fileName = "fileSave.xml";
             DataContractSerializer SerializerObj = new DataContractSerializer(typeof(SerializableAssembly), null, 0x7FFF, false, true, null);
 
             FileStream file = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.Read);
