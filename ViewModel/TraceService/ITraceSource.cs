@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 
-namespace Interfaces
+namespace ViewModel.TraceService
+
 {
     public interface ITraceSource
     {

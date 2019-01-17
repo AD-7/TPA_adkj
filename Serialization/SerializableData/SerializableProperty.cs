@@ -1,4 +1,4 @@
-﻿using Data.Metadata_Model;
+﻿using DTG;
 using System.Runtime.Serialization;
 
 namespace Serialization.SerializableData
@@ -13,11 +13,11 @@ namespace Serialization.SerializableData
         [DataMember(Name = "Type_Metadata")]
         public SerializableType SerType;
 
-        public SerializableProperty(PropertyMetadata property)
+        public SerializableProperty(PropertyDTG property)
         {
             Name = property.Name;
             MetadataName = property.MetadataName;
-           SerType = new SerializableType(property.Type);
+           SerType = SerializableType.LoadType(property.SerType);
         }
     }
 }

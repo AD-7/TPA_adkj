@@ -1,0 +1,59 @@
+﻿using Data.Metadata_Model;
+using DTG;
+using DTG_Transfer.Service;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.Composition;
+using System.ComponentModel.Composition.Hosting;
+using System.Linq;
+
+namespace Data.SaveManager
+{
+    public class SaveManager
+    {
+    
+        [ImportMany(typeof(ISerialization))]
+        public IEnumerable<Lazy<ISerialization, IRepoMeta>> ser;
+        public  ISerialization serializer;
+
+        public void Save(AssemblyMetadata assemblyModel, string kindOfSerialize)
+        {
+            serializer = ser.Where(x => x.Metadata.Name == kindOfSerialize)
+                 .Select(x => x.Value).First();
+            AssemblyDTG assemblyDTG = MapperToDTG.MapperToDTG.AssemblyDtg(assemblyModel);
+            serializer.Serialize(assemblyDTG,"test");
+        }
+
+
+        public AssemblyMetadata Load(string path, string kindOfSerialize)
+        {
+            serializer = ser.Where(x => x.Metadata.Name == kindOfSerialize)
+                 .Select(x => x.Value).First();
+            AssemblyDTG assemblyDTG = serializer.Deserialize(path);
+            AssemblyMetadata assemblyModel = new AssemblyMetadata(assemblyDTG);
+            return assemblyModel;
+        }
+
+        public static SaveManager GetSaveManager()
+        {
+            SaveManager sm = new SaveManager();
+
+            AggregateCatalog catalog = new AggregateCatalog();
+            //catalog.Catalogs.Add(new AssemblyCatalog(typeof(SaveManager).Assembly));
+            catalog.Catalogs.Add(new DirectoryCatalog(@"../../Lib", "*.dll"));
+            CompositionContainer _cont = new CompositionContainer(catalog);
+
+
+            _cont.ComposeParts(sm);
+           
+
+            return sm;
+        }
+
+        public interface IRepoMeta
+        {
+            string Name { get; }
+        }
+
+    }
+}

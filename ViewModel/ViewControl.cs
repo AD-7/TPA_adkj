@@ -1,11 +1,11 @@
 ﻿
 using Data.Metadata_Model;
+using Data.SaveManager;
 using Microsoft.Win32;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows.Input;
-using Trace;
 using ViewModel.TreeViewModel;
 
 namespace ViewModel
@@ -17,8 +17,8 @@ namespace ViewModel
         public Reflector Reflector;
         public ObservableCollection<TreeViewBase> TV { get; set; }
         public ObservableCollection<string> methods { get; set; }
+        public SaveManager SaveManager { get; set; } 
         public string methodTrace { get; set; }
-        string file = "test";
         public string methodSer { get; set; }
         public ICommand LoadFileClicked { get; }
         public ICommand ShowTree { get; }
@@ -29,7 +29,8 @@ namespace ViewModel
         public ViewControl()
 
         {
-          //  tracer = new MyTraceSource("plik.txt");
+            MEFConfig.Instance.GetComp();
+            SaveManager = SaveManager.GetSaveManager();
             TV = new ObservableCollection<TreeViewBase>();
             methods = new ObservableCollection<string>();
             methods.Add("File");
@@ -42,6 +43,7 @@ namespace ViewModel
             Click_Ser = new DelegateCommand(Save);
             Reflector = new Reflector();
             Path = "";
+
            
         }
 
@@ -49,8 +51,7 @@ namespace ViewModel
         {
             if (TV.Count > 0)
             {
-                MEFConfig.Instance.kindOfSerialize = methodSer;
-                MEFConfig.Instance.GetComponentsSer(@"../../Lib").Serialize(Reflector, file);
+                SaveManager.Save(Reflector.AssemblyModel, methodSer);
             }
 
             MEFConfig.Instance.kindOfTrace = methodTrace;
@@ -65,9 +66,9 @@ namespace ViewModel
             }
 
 
-            MEFConfig.Instance.kindOfSerialize = methodSer;
-            Reflector = MEFConfig.Instance.serializer.Deserialize(Path);
-
+           
+          
+            Reflector.AssemblyModel = SaveManager.Load(Path, methodSer);
             AssemblyTreeView rootItem = new AssemblyTreeView(Reflector.AssemblyModel) { Name = Reflector.AssemblyModel.Name };
             string tempRootName = rootItem.Name;
             TV.Clear();
@@ -91,7 +92,7 @@ namespace ViewModel
             string info = "Wczytano plik " + Path;
 
             MEFConfig.Instance.kindOfTrace = methodTrace;
-            MEFConfig.Instance.GetComponents(@"../../Lib").TraceData(TraceEventType.Information, info);
+            MEFConfig.Instance.tracer.TraceData(TraceEventType.Information, info);
         }
        
         private void LoadTree()
@@ -110,10 +111,6 @@ namespace ViewModel
             }
 
         }
-
-      
-
-
       
         private void LoadXML()
         {
@@ -124,7 +121,7 @@ namespace ViewModel
        
             string info = "Wczytano plik " + Path;
             MEFConfig.Instance.kindOfTrace = methodTrace;
-            MEFConfig.Instance.GetComponents(@"../../Lib").TraceData(TraceEventType.Information, info);
+            MEFConfig.Instance.tracer.TraceData(TraceEventType.Information, info);
         }
 
 

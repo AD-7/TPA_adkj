@@ -1,46 +1,50 @@
-﻿using DTG;
-using Serialization.SerializableData;
+﻿using Data.Metadata_Model;
+using DTG;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Serialization
+namespace Data.MapperToDTG
 {
-    public static class MapperXml
+    public static class MapperToDTG
     {
-        public static AssemblyDTG AssemblyDtg(SerializableAssembly assemblyModel)
+
+        public static AssemblyDTG AssemblyDtg(AssemblyMetadata assemblyModel)
         {
             TypeDtgDictionary = new Dictionary<string, TypeDTG>();
             return new AssemblyDTG()
             {
                 Name = assemblyModel.Name,
                 MetadataName = assemblyModel.MetadataName,
-                Namespaces = assemblyModel.SerializableNamespaces?.Select(NamespaceDtg).ToList()
+                Namespaces = assemblyModel.Namespaces?.Select(NamespaceDtg).ToList()
             };
         }
 
-        private static NamespaceDTG NamespaceDtg(SerializableNamespace namespaceModel)
+        private static NamespaceDTG NamespaceDtg(NamespaceMetadata namespaceModel)
         {
             return new NamespaceDTG()
             {
                 Name = namespaceModel.Name,
                 MetadataName = namespaceModel.MetadataName,
-                Types = namespaceModel.SerializableTypes?.Select(LoadType).ToList()
+                Types = namespaceModel.Types?.Select(LoadType).ToList()
             };
         }
 
-        private static TypeDTG LoadType(SerializableType typeModel)
+        private static TypeDTG LoadType(TypeMetadata typeModel)
         {
             if (typeModel == null) return null;
             return GetType(typeModel.Name) ?? TypeDtg(typeModel);
         }
 
-        private static TypeDTG TypeDtg(SerializableType typeModel)
+        private static TypeDTG TypeDtg(TypeMetadata typeModel)
         {
             TypeDTG typeDTG = new TypeDTG()
             {
                 Name = typeModel.Name,
                 MetadataName = typeModel.MetadataName,
-                SernamespaceName = typeModel.SernamespaceName,
+                SernamespaceName = typeModel.namespaceName,
 
             };
 
@@ -49,24 +53,25 @@ namespace Serialization
             typeDTG.GenericArguments = typeModel.GenericArguments?.Select(LoadType).ToList();
             typeDTG.Interfaces = typeModel.Interfaces?.Select(LoadType).ToList();
             typeDTG.NestedTypes = typeModel.NestedTypes?.Select(LoadType).ToList();
-            typeDTG.SerMethods = typeModel.SerMethods?.Select(MethodDtg).ToList();
-            typeDTG.SerConstructors = typeModel.SerConstructors?.Select(MethodDtg).ToList();
-            typeDTG.SerProperties = typeModel.SerProperties?.Select(PropertyDtg).ToList();
+            typeDTG.SerMethods = typeModel.Methods?.Select(MethodDtg).ToList();
+            typeDTG.SerConstructors = typeModel.Constructors?.Select(MethodDtg).ToList();
+            typeDTG.SerProperties = typeModel.Properties?.Select(PropertyDtg).ToList();
+           
             return typeDTG;
         }
 
-        private static MethodDTG MethodDtg(SerializableMethod methodModel)
+        private static MethodDTG MethodDtg(MethodMetadata methodModel)
         {
             return new MethodDTG()
             {
-                Name = methodModel.Name,
+                Name= methodModel.Name,
                 MetadataName = methodModel.MetadataName,
-                SerReturnType = LoadType(methodModel.SerReturnType),
-                SerParameters = methodModel.SerParameters?.Select(ParameterDtg).ToList()
+                SerReturnType = LoadType(methodModel.ReturnType),
+                SerParameters = methodModel.Parameters?.Select(ParameterDtg).ToList()
             };
         }
 
-        private static ParameterDTG ParameterDtg(SerializableParameter parameterModel)
+        private static ParameterDTG ParameterDtg(ParameterMetadata parameterModel)
         {
             return new ParameterDTG()
             {
@@ -75,13 +80,13 @@ namespace Serialization
                 Type = LoadType(parameterModel.Type)
             };
         }
-        private static PropertyDTG PropertyDtg(SerializableProperty propertyModel)
+        private static PropertyDTG PropertyDtg(PropertyMetadata propertyModel)
         {
             return new PropertyDTG()
             {
                 Name = propertyModel.Name,
                 MetadataName = propertyModel.MetadataName,
-                SerType = LoadType(propertyModel.SerType)
+                SerType = LoadType(propertyModel.Type)
             };
         }
 
@@ -93,5 +98,13 @@ namespace Serialization
         }
 
 
+
     }
 }
+    
+
+
+
+
+
+

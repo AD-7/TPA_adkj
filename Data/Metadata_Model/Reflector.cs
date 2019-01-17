@@ -12,7 +12,7 @@ namespace Data.Metadata_Model
 
         public void Reflect(string path)
         {
-            Assembly assembly = Assembly.ReflectionOnlyLoadFrom(path);     
+            Assembly assembly = Assembly.LoadFrom(path);     
             AssemblyModel = new AssemblyMetadata(assembly);
         }
 

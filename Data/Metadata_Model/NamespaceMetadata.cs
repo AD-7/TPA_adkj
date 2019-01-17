@@ -1,4 +1,5 @@
 ﻿
+using DTG;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,13 +16,14 @@ namespace Data.Metadata_Model
  
         public string MetadataName { get;  set; }
        
-        public IEnumerable<TypeMetadata> Types { get; set; }
+        public List<TypeMetadata> Types { get; set; }
        
         internal NamespaceMetadata(string name, IEnumerable<Type> types)
         {
             Name = name;
             MetadataName = " Namespace: ";
-            Types = from type in types orderby type.Name select new TypeMetadata(type,"Type: ");
+            Types = types.OrderBy(t => t.Name)
+                    .Select(t => TypeMetadata.LoadType(t)).ToList();
         }
 
 
@@ -33,6 +35,12 @@ namespace Data.Metadata_Model
            
         }
        
+        public NamespaceMetadata(NamespaceDTG namespacee)
+        {
+            Name = namespacee.Name;
+            MetadataName = namespacee.MetadataName;
+            Types = namespacee.Types?.Select(t => TypeMetadata.LoadType(t)).ToList();
+        }
 
 
     }

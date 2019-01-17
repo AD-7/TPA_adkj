@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using DTG;
+using System.Runtime.Serialization;
 
 namespace Data.Metadata_Model
 {
@@ -19,6 +20,12 @@ namespace Data.Metadata_Model
             Type = type;
         }
 
+        public ParameterMetadata(ParameterDTG parameter)
+        {
+            Name = parameter.Name;
+            MetadataName = parameter.MetadataName;
+            Type = TypeMetadata.AddType(parameter.Type);
+        }
      
     }
 }

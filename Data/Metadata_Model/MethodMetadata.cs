@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using DTG;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
@@ -16,14 +17,14 @@ namespace Data.Metadata_Model
      
         public TypeMetadata ReturnType;
      
-        public IEnumerable<ParameterMetadata> Parameters;
+        public List<ParameterMetadata> Parameters;
 
         public MethodMetadata(MethodBase method)
         {
             MetadataName = "Method: ";
             Name = method.Name;
             ReturnType = EmitReturnType(method);
-            Parameters = EmitParameters(method.GetParameters());
+            Parameters = (EmitParameters(method.GetParameters())).ToList();
         }
         public MethodMetadata(string Name, string Metadataname) 
         {
@@ -48,7 +49,13 @@ namespace Data.Metadata_Model
                    select new ParameterMetadata(parameter.Name, TypeMetadata.EmitReference(parameter.ParameterType));
         }
 
-     
+        public MethodMetadata(MethodDTG method)
+        {
+            Name = method.Name;
+            MetadataName = method.MetadataName;
+            ReturnType = TypeMetadata.AddType(method.SerReturnType);
+            Parameters = method.SerParameters?.Select(p => new ParameterMetadata(p)).ToList();
+        }
 
     }
 }

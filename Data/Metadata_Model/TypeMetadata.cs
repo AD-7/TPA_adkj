@@ -1,4 +1,5 @@
 ﻿
+using DTG;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -21,17 +22,17 @@ namespace Data.Metadata_Model
 
         public string namespaceName;
   
-        public IEnumerable<TypeMetadata> GenericArguments;
+        public List<TypeMetadata> GenericArguments;
 
-        public IEnumerable<MethodMetadata> Methods { get; set; }
+        public List<MethodMetadata> Methods { get; set; }
     
-        public IEnumerable<MethodMetadata> Constructors { get; set; }
+        public List<MethodMetadata> Constructors { get; set; }
 
-        public IEnumerable<TypeMetadata> NestedTypes { get; set; }
+        public List<TypeMetadata> NestedTypes { get; set; }
 
-        public IEnumerable<TypeMetadata> Interfaces { get; set; }
+        public List<TypeMetadata> Interfaces { get; set; }
        
-        public IEnumerable<PropertyMetadata> Properties { get; set; }
+        public List<PropertyMetadata> Properties { get; set; }
         
        
 
@@ -44,16 +45,17 @@ namespace Data.Metadata_Model
         #region constructors
         internal TypeMetadata(Type type, string metadataName)
         {
-
+           
             Name = type.Name;
             MetadataName = metadataName;
+
             allTypes  = new Dictionary<string, TypeMetadata>();
-            GenericArguments = !type.IsGenericTypeDefinition ? null : TypeMetadata.EmitGenericArguments(type.GetGenericArguments());
-            Methods = MethodMetadata.EmitMethods(type.GetMethods());
-            Constructors = MethodMetadata.EmitMethods(type.GetConstructors());
-            NestedTypes = EmitNestedTypes(type.GetNestedTypes());
-            Interfaces = EmitInterfaces(type.GetInterfaces());
-            Properties = EmitProperties(type.GetProperties());
+            GenericArguments = !type.IsGenericTypeDefinition ? null : (TypeMetadata.EmitGenericArguments(type.GetGenericArguments())).ToList();
+            Methods = (MethodMetadata.EmitMethods(type.GetMethods())).ToList();
+            Constructors = (MethodMetadata.EmitMethods(type.GetConstructors())).ToList();
+            NestedTypes = (EmitNestedTypes(type.GetNestedTypes())).ToList();
+            Interfaces = (EmitInterfaces(type.GetInterfaces())).ToList();
+            Properties = (EmitProperties(type.GetProperties())).ToList();
             exists = true;
         }
 
@@ -64,6 +66,7 @@ namespace Data.Metadata_Model
             Name = name;
             MetadataName = metadataName;
             this.namespaceName = namespaceName;
+            allTypes = new Dictionary<string, TypeMetadata>();
         }
 
             public TypeMetadata(string name, string metadataName )
@@ -76,7 +79,20 @@ namespace Data.Metadata_Model
 
             public TypeMetadata(string name, string metadataName, string namespaceName, IEnumerable<TypeMetadata> genericArgs) : this(name, metadataName, namespaceName)
         {
-            GenericArguments = genericArgs;
+            GenericArguments = genericArgs.ToList();
+        }
+        public TypeMetadata(TypeDTG type)
+        {
+            Name = type.Name;
+            namespaceName = type.SernamespaceName;
+            DictionaryOfTypes.Instance.RegisterType(Name, this);
+            MetadataName = type.MetadataName;
+            GenericArguments = type.GenericArguments?.Select(LoadType).ToList();
+            NestedTypes = type.NestedTypes?.Select(LoadType).ToList();
+            Interfaces = type.Interfaces?.Select(LoadType).ToList();
+            Methods = type.SerMethods?.Select(m => new MethodMetadata(m)).ToList();
+            Constructors = type.SerConstructors?.Select(c => new MethodMetadata(c)).ToList();
+            Properties = type.SerProperties?.Select(p => new PropertyMetadata(p)).ToList();
         }
         #endregion
 
@@ -98,7 +114,28 @@ namespace Data.Metadata_Model
             allTypes.Add(type.FullName, tmp);
             return tmp;
         }
+        public static TypeMetadata AddType(TypeDTG type)
+        {
+            if(type != null && allTypes != null)
+            {
+                if (allTypes.ContainsKey(type.Name))
+                {
+                    if (allTypes[type.Name].exists)
+                    {
+                        return allTypes[type.Name];
+                    }
+                }
+                TypeMetadata tmp = new TypeMetadata(type);
 
+                if (allTypes.ContainsKey(type.Name))
+                {
+                    allTypes.Remove(type.Name);
+                }
+                allTypes.Add(type.Name, tmp);
+                return tmp;
+            }
+            return null;
+        }
         internal enum TypeKind
         {
             EnumType, StructType, InterfaceType, ClassType
@@ -108,6 +145,7 @@ namespace Data.Metadata_Model
         #region emiters
         internal static TypeMetadata EmitReference(Type type)
         {
+
             if (allTypes.ContainsKey(type.Name))
             {
                 return allTypes[type.Name];
@@ -124,7 +162,7 @@ namespace Data.Metadata_Model
                 tmp = new TypeMetadata(type.Name, "Type: ", type.GetNamespace(), EmitGenericArguments(type.GetGenericArguments()));
             }
 
-            if (type.FullName != null)
+            if (type.Name != null)
             {
                 allTypes.Add(type.Name, tmp);
             }
@@ -157,9 +195,15 @@ namespace Data.Metadata_Model
         }
         #endregion
 
+        public static TypeMetadata LoadType(Type type)
+        {
+            return DictionaryOfTypes.Instance.GetType(type.Name) ?? new TypeMetadata(type,"Type: ");
+        }
 
-
-
+        public static TypeMetadata LoadType(TypeDTG type)
+        {
+            return DictionaryOfTypes.Instance.GetType(type.Name) ?? new TypeMetadata(type); 
+        }
 
         
 

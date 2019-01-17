@@ -1,4 +1,4 @@
-﻿using Data.Metadata_Model;
+﻿using DTG;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -16,17 +16,17 @@ namespace Serialization.SerializableData
         public SerializableType SerReturnType;
    
     [DataMember(Name = "Parameters")]
-        public IEnumerable<SerializableParameter> SerParameters;
+        public List<SerializableParameter> SerParameters;
 
-        public SerializableMethod(MethodMetadata method)
+        public SerializableMethod(MethodDTG method)
         {
             Name = method.Name;
             MetadataName = method.MetadataName;
-            SerReturnType = new SerializableType( method.ReturnType);
-           
+            if(method.SerReturnType != null)
+            SerReturnType =  SerializableType.LoadType( method.SerReturnType);
 
-            SerParameters = from ParameterMetadata p in method.Parameters
-                            select new SerializableParameter(p);
+
+            SerParameters = method.SerParameters?.Select(p => new SerializableParameter(p)).ToList();
         }
     }
 }

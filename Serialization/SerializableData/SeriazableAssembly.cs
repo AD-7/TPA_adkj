@@ -1,10 +1,7 @@
-﻿using Data.Metadata_Model;
-using System;
+﻿using DTG;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Serialization.SerializableData
 
@@ -19,14 +16,13 @@ namespace Serialization.SerializableData
        
        
         [DataMember(Name = "NamespaceList")]
-        public IEnumerable<SerializableNamespace> SerializableNamespaces { get; set; }
+        public List<SerializableNamespace> SerializableNamespaces { get; set; }
 
-        public SerializableAssembly(AssemblyMetadata assembly)
+        public SerializableAssembly(AssemblyDTG assembly)
         {
             Name = assembly.Name;
             MetadataName = assembly.MetadataName;
-            SerializableNamespaces = from NamespaceMetadata n in assembly.Namespaces
-                         select new SerializableNamespace(n);
+            SerializableNamespaces = assembly.Namespaces?.Select(ns => new SerializableNamespace(ns)).ToList(); 
 
         }
 

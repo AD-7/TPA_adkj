@@ -30,16 +30,16 @@ namespace UnitTestsData
         public void NamespaceNameTest()
         {
 
-            Assert.AreEqual("Data", refl.AssemblyModel.Namespaces.ToList().ElementAt(0).Name);
+            Assert.AreEqual("Data.MapperToDTG", refl.AssemblyModel.Namespaces.ToList().ElementAt(0).Name);
             Assert.AreEqual("Data.Metadata_Model", refl.AssemblyModel.Namespaces.ToList().ElementAt(1).Name);
-            Assert.AreEqual("Data.Serialization", refl.AssemblyModel.Namespaces.ToList().ElementAt(2).Name);
+            Assert.AreEqual("Data.SaveManager", refl.AssemblyModel.Namespaces.ToList().ElementAt(2).Name);
 
         }
 
         [TestMethod]
         public void NamespaceCountTest()
         {
-            Assert.AreEqual(6, refl.AssemblyModel.Namespaces.ToList().Count);
+            Assert.AreEqual(3, refl.AssemblyModel.Namespaces.ToList().Count);
         }
 
 
@@ -48,7 +48,7 @@ namespace UnitTestsData
         {
             NamespaceMetadata namespace1 = refl.AssemblyModel.Namespaces.ToList().ElementAt(2);
 
-            Assert.AreEqual(1, namespace1.Types.ToList().Count);
+            Assert.AreEqual(2, namespace1.Types.ToList().Count);
         }
 
         [TestMethod]
@@ -57,8 +57,8 @@ namespace UnitTestsData
             NamespaceMetadata namespace1 = refl.AssemblyModel.Namespaces.ToList().ElementAt(0);
             NamespaceMetadata namespace2 = refl.AssemblyModel.Namespaces.ToList().ElementAt(1);
 
-            Assert.AreEqual("IMetadata", namespace1.Types.ToList().ElementAt(0).Name);
-            Assert.AreEqual("MethodMetadata", namespace2.Types.ToList().ElementAt(1).Name);
+            Assert.AreEqual("MapperToDTG", namespace1.Types.ToList().ElementAt(0).Name);
+            Assert.AreEqual("DictionaryOfTypes", namespace2.Types.ToList().ElementAt(1).Name);
 
         }
 
@@ -73,7 +73,7 @@ namespace UnitTestsData
             TypeMetadata typeMetadata1 = n1.Types.ToList().ElementAt(0);
             TypeMetadata typeMetadata2 = n2.Types.ToList().ElementAt(1);
 
-            Assert.AreEqual(4, typeMetadata1.Methods.ToList().Count);
+            Assert.AreEqual(5, typeMetadata1.Methods.ToList().Count);
             Assert.AreEqual(9, typeMetadata2.Methods.ToList().Count);
         }
 
@@ -86,8 +86,8 @@ namespace UnitTestsData
             TypeMetadata typeMetadata1 = n1.Types.ToList().ElementAt(0);
             TypeMetadata typeMetadata2 = n2.Types.ToList().ElementAt(1);
 
-            Assert.AreEqual("get_getChildren", typeMetadata1.Methods.ToList().ElementAt(0).Name);
-            Assert.AreEqual("set_MetadataName", typeMetadata2.Methods.ToList().ElementAt(1).Name);
+            Assert.AreEqual("AssemblyDtg", typeMetadata1.Methods.ToList().ElementAt(0).Name);
+            Assert.AreEqual("RegisterType", typeMetadata2.Methods.ToList().ElementAt(1).Name);
         }
 
         [TestMethod]
@@ -99,7 +99,7 @@ namespace UnitTestsData
             TypeMetadata typeMetadata1 = n1.Types.ToList().ElementAt(0);
             TypeMetadata typeMetadata2 = n2.Types.ToList().ElementAt(1);
 
-            Assert.AreEqual(0, typeMetadata1.Methods.ToList().ElementAt(0).Parameters.Count());
+            Assert.AreEqual(1, typeMetadata1.Methods.ToList().ElementAt(0).Parameters.Count());
           
         }
 
@@ -115,8 +115,8 @@ namespace UnitTestsData
             TypeMetadata typeMetadata1 = namespaceMetadata2.Types.ToList().ElementAt(3);
             TypeMetadata typeMetadata2 = namespaceMetadata2.Types.ToList().ElementAt(1);
 
-            Assert.AreEqual(3, typeMetadata2.Properties.ToList().Count);
-            Assert.AreEqual(3, typeMetadata1.Properties.ToList().Count);
+            Assert.AreEqual(1, typeMetadata2.Properties.ToList().Count);
+            Assert.AreEqual(2, typeMetadata1.Properties.ToList().Count);
         }
 
 

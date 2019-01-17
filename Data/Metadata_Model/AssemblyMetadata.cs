@@ -1,4 +1,5 @@
 ﻿
+using DTG;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,7 +17,7 @@ namespace Data.Metadata_Model
       
         public string MetadataName { get; set; }
   
-        public IEnumerable<NamespaceMetadata> Namespaces { get; set; }
+        public List<NamespaceMetadata> Namespaces { get; set; }
 
         public AssemblyMetadata()
         {
@@ -32,28 +33,20 @@ namespace Data.Metadata_Model
             Name = assembly.ManifestModule.Name;
             MetadataName = "Assembly: ";
             
-            Namespaces = from Type _type in assembly.GetTypes()
+            Namespaces = (from Type _type in assembly.GetTypes()
                          where _type.GetVisible()
                          group _type by _type.GetNamespace() into _group
                          orderby _group.Key
-                         select new NamespaceMetadata(_group.Key, _group);
+                         select new NamespaceMetadata(_group.Key, _group)).ToList();
         }
 
-
-        //public ObservableCollection<IMetadata> getChildren
-        //{
-
-        //    get
-        //    {
-        //        Tuple<string, IMetadata> metadata;
-        //        ObservableCollection<IMetadata> children = new ObservableCollection<IMetadata>();
-        //        foreach (IMetadata i in Namespaces)
-        //        {
-        //            children.Add(i);
-        //        }
-        //        return children;
-        //    }
-        //}
+        public AssemblyMetadata(AssemblyDTG assembly)
+        {
+            Name = assembly.Name;
+            MetadataName = assembly.MetadataName;
+            Namespaces = assembly.Namespaces?.Select(n => new NamespaceMetadata(n)).ToList();
+        }
+      
 
         
     }

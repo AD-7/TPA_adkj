@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using DTG;
+using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 
 namespace Data.Metadata_Model
@@ -25,6 +26,11 @@ namespace Data.Metadata_Model
             this.MetadataName = Metadataname;
         }
 
-       
+       public PropertyMetadata(PropertyDTG property)
+        {
+            Name = property.Name;
+            MetadataName = property.MetadataName;
+            Type = TypeMetadata.AddType(property.SerType);
+        }
     }
 }

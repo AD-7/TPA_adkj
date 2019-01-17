@@ -30,9 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMapper, Version=8.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutoMapper.8.0.0\lib\net461\AutoMapper.dll</HintPath>
-    </Reference>
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
@@ -51,6 +48,7 @@
     <Compile Include="DelegateCommand.cs" />
     <Compile Include="MEFConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TraceService\ITraceSource.cs" />
     <Compile Include="TreeViewModel\AssemblyTreeView.cs" />
     <Compile Include="TreeViewModel\MethodTreeView.cs" />
     <Compile Include="TreeViewModel\NamespaceTreeView.cs" />
@@ -61,21 +59,9 @@
     <Compile Include="ViewControl.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Data\Data.csproj">
+    <ProjectReference Include="..\Data\Logic.csproj">
       <Project>{5526f566-cd96-4634-8226-8b18f69fa928}</Project>
-      <Name>Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Interfaces\Interfaces.csproj">
-      <Project>{99750cbb-6cb7-4141-96fe-9adebe2f59f4}</Project>
-      <Name>Interfaces</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Serialization\Serialization.csproj">
-      <Project>{567b5754-1c52-4e35-94ba-42fb8309bcec}</Project>
-      <Name>Serialization</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Trace\Trace.csproj">
-      <Project>{ce782637-8de0-41ad-b2f7-7d9e46ca1fd7}</Project>
-      <Name>Trace</Name>
+      <Name>Logic</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

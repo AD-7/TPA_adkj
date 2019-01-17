@@ -1,10 +1,10 @@
-﻿using Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.IO;
 using System.Linq;
+using ViewModel.TraceService;
 
 namespace ViewModel
 {
@@ -37,21 +37,17 @@ namespace ViewModel
         [ImportMany(typeof(ITraceSource))]
         public IEnumerable<Lazy<ITraceSource, IRepoMeta>> trace;
 
-        [ImportMany(typeof(ISerialization))]
-        public IEnumerable<Lazy<ISerialization, IRepoMeta>> ser;
-
-        public ISerialization serializer;
+       
         public ITraceSource tracer;
         public string kindOfTrace = "File";
         public string kindOfSerialize = "File";
-
-        public ITraceSource GetComponents(string file)
+        public void GetComp()
         {
             try
             {
-                var catalog = new AggregateCatalog();
+                AggregateCatalog catalog = new AggregateCatalog();
                 catalog.Catalogs.Add(new AssemblyCatalog(typeof(MEFConfig).Assembly));
-                catalog.Catalogs.Add(new DirectoryCatalog(file, "*.dll"));
+                catalog.Catalogs.Add(new DirectoryCatalog(@"../../Lib", "*.dll"));
                 CompositionContainer _cont = new CompositionContainer(catalog);
 
 
@@ -60,10 +56,9 @@ namespace ViewModel
 
                 tracer = trace.Where(x => x.Metadata.Name == kindOfTrace)
                     .Select(x => x.Value).First();
-                serializer = ser.Where(x => x.Metadata.Name == kindOfSerialize)
-                   .Select(x => x.Value).First();
-                return tracer;
-            }
+               
+           
+            }     
             catch (FileNotFoundException)
             {
 
@@ -76,42 +71,9 @@ namespace ViewModel
             {
 
             }
-            return null;
+         
         }
-
-        public ISerialization GetComponentsSer(string file)
-        {
-            try
-            {
-                var catalog = new AggregateCatalog();
-                catalog.Catalogs.Add(new AssemblyCatalog(typeof(MEFConfig).Assembly));
-                catalog.Catalogs.Add(new DirectoryCatalog(file, "*.dll"));
-                CompositionContainer _cont = new CompositionContainer(catalog);
-
-
-                _cont.ComposeParts(this);
-
-
-                tracer = trace.Where(x => x.Metadata.Name == kindOfTrace)
-                    .Select(x => x.Value).First();
-                serializer = ser.Where(x => x.Metadata.Name == kindOfSerialize)
-                   .Select(x => x.Value).First();
-                return serializer;
-            }
-            catch (FileNotFoundException)
-            {
-
-            }
-            catch (CompositionException)
-            {
-
-            }
-            catch (DirectoryNotFoundException)
-            {
-
-            }
-            return null;
-        }
+       
     }
 }
 

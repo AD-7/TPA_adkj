@@ -1,4 +1,4 @@
-﻿using Data.Metadata_Model;
+﻿using DTG;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -15,15 +15,13 @@ namespace Serialization.SerializableData
        
    
     [DataMember(Name = "Type")]
-        public IEnumerable<SerializableType> SerializableTypes { get; set; }
+        public List<SerializableType> SerializableTypes { get; set; }
 
-        public SerializableNamespace(NamespaceMetadata namespacee)
+        public SerializableNamespace(NamespaceDTG namespacee)
         {
             Name = namespacee.Name;
             MetadataName = namespacee.MetadataName;
-            SerializableTypes = 
-                from TypeMetadata t in namespacee.Types
-                    select new SerializableType(t);
+            SerializableTypes = namespacee.Types?.Select(SerializableType.LoadType).ToList();
 
         }
 
