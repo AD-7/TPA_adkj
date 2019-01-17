@@ -1,4 +1,5 @@
-﻿using System;
+﻿﻿using System;
+using System.IO;
 using DatabaseSerialization;
 using DTG;
 using DTG_Transfer.Service;
@@ -28,6 +29,8 @@ namespace DbSerializationTests
         [TestMethod]
         public void TestMethod1()
         {
+            ser.Serialize(dtg);
+            Assert.IsTrue(File.Exists("fileSave.xml") == true);
         }
     }
 }

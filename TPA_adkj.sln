@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseSerialization", "Da
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerializationTests", "ReflectionTests\SerializationTests.csproj", "{561A15F1-EC84-4004-A78B-EA6B4358CEFE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbSerializationTests", "DbSerializationTests\DbSerializationTests.csproj", "{ACC3774D-EAB3-4B19-B669-B6244C207E15}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +79,10 @@ Global
 		{561A15F1-EC84-4004-A78B-EA6B4358CEFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{561A15F1-EC84-4004-A78B-EA6B4358CEFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{561A15F1-EC84-4004-A78B-EA6B4358CEFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACC3774D-EAB3-4B19-B669-B6244C207E15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACC3774D-EAB3-4B19-B669-B6244C207E15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACC3774D-EAB3-4B19-B669-B6244C207E15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACC3774D-EAB3-4B19-B669-B6244C207E15}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
