@@ -4,7 +4,7 @@ namespace DTG_Transfer.Service
 {
     public interface ISerialization
     {
-       void Serialize(AssemblyDTG assembly);
+       void Serialize(AssemblyDTG reflcetor);
 
         AssemblyDTG Deserialize();
     }
