@@ -48,7 +48,7 @@ namespace Reflection.Metadata_Model
            
             Name = type.Name;
             MetadataName = metadataName;
-
+            DictionaryOfTypes.Instance.RegisterType(Name, this);
             allTypes  = new Dictionary<string, TypeMetadata>();
             GenericArguments = !type.IsGenericTypeDefinition ? null : (TypeMetadata.EmitGenericArguments(type.GetGenericArguments())).ToList();
             Methods = (MethodMetadata.EmitMethods(type.GetMethods())).ToList();
@@ -96,46 +96,8 @@ namespace Reflection.Metadata_Model
         }
         #endregion
 
-        internal static TypeMetadata AddType(Type type)
-        {
-            if (allTypes.ContainsKey(type.FullName))
-            {
-                if (allTypes[type.FullName].exists)
-                {
-                    return allTypes[type.FullName];
-                }
-            }
-            TypeMetadata tmp = new TypeMetadata(type, "Type: ");
-
-            if (allTypes.ContainsKey(type.FullName))
-            {
-                allTypes.Remove(type.FullName);
-            }
-            allTypes.Add(type.FullName, tmp);
-            return tmp;
-        }
-        public static TypeMetadata AddType(TypeDTG type)
-        {
-            if(type != null && allTypes != null)
-            {
-                if (allTypes.ContainsKey(type.Name))
-                {
-                    if (allTypes[type.Name].exists)
-                    {
-                        return allTypes[type.Name];
-                    }
-                }
-                TypeMetadata tmp = new TypeMetadata(type);
-
-                if (allTypes.ContainsKey(type.Name))
-                {
-                    allTypes.Remove(type.Name);
-                }
-                allTypes.Add(type.Name, tmp);
-                return tmp;
-            }
-            return null;
-        }
+       
+        
         internal enum TypeKind
         {
             EnumType, StructType, InterfaceType, ClassType
@@ -146,27 +108,7 @@ namespace Reflection.Metadata_Model
         internal static TypeMetadata EmitReference(Type type)
         {
 
-            if (allTypes.ContainsKey(type.Name))
-            {
-                return allTypes[type.Name];
-            }
-
-            TypeMetadata tmp;
-
-            if (!type.IsGenericType)
-            {
-                tmp = new TypeMetadata(type.Name, "Type: ", type.GetNamespace());
-            }
-            else
-            {
-                tmp = new TypeMetadata(type.Name, "Type: ", type.GetNamespace(), EmitGenericArguments(type.GetGenericArguments()));
-            }
-
-            if (type.Name != null)
-            {
-                allTypes.Add(type.Name, tmp);
-            }
-            return tmp;
+           return  LoadType(type);
         }
 
         internal static IEnumerable<TypeMetadata> EmitGenericArguments(IEnumerable<Type> args)

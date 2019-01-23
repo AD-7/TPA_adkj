@@ -24,7 +24,7 @@ namespace Reflection.Metadata_Model
         {
             Name = parameter.Name;
             MetadataName = parameter.MetadataName;
-            Type = TypeMetadata.AddType(parameter.Type);
+            Type = TypeMetadata.LoadType(parameter.Type);
         }
      
     }

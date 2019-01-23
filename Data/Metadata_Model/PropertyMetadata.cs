@@ -30,7 +30,7 @@ namespace Reflection.Metadata_Model
         {
             Name = property.Name;
             MetadataName = property.MetadataName;
-            Type = TypeMetadata.AddType(property.SerType);
+            Type = TypeMetadata.LoadType(property.SerType);
         }
     }
 }

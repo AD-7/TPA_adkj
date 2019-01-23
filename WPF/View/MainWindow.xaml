@@ -23,9 +23,9 @@
 
         <Button Content="Load file" Command="{Binding LoadFileClicked}" HorizontalAlignment="Left" Margin="30,260,0,0" VerticalAlignment="Top" Width="85" Height="21" RenderTransformOrigin="0.15,0.484"/>
         <Button Content="Show Tree" Command="{Binding ShowTree}" HorizontalAlignment="Left" Margin="140,260,0,0" VerticalAlignment="Top" Width="85" Height="21" RenderTransformOrigin="1.525,-0.219"/>
-        <Button Content="Serialize" Command="{Binding Click_Ser}" HorizontalAlignment="Left" Margin="245,260,0,0" VerticalAlignment="Top" Width="100" Height="21" RenderTransformOrigin="0.746,0.01"/>
-        <Button Content="Deserialize" Command="{Binding Click_DeSer}" HorizontalAlignment="Left" Margin="375,260,0,0" VerticalAlignment="Top" Width="100" Height="21"/>
-        <Label Content="Tracing method: " HorizontalAlignment="Left" Margin="20,309,0,0" VerticalAlignment="Top" Width="100" Height="26"/>
+        <Button Content="Save" Command="{Binding Click_Ser}" HorizontalAlignment="Left" Margin="245,260,0,0" VerticalAlignment="Top" Width="100" Height="21" RenderTransformOrigin="0.746,0.01"/>
+        <Button Content="Load" Command="{Binding Click_DeSer}" HorizontalAlignment="Left" Margin="375,260,0,0" VerticalAlignment="Top" Width="100" Height="21"/>
+        <!--<Label Content="Tracing method: " HorizontalAlignment="Left" Margin="20,309,0,0" VerticalAlignment="Top" Width="100" Height="26"/>
         <ComboBox Margin="120,313,293.4,0" VerticalAlignment="Top"
                    ItemsSource="{Binding Path=methods}"    
                   SelectedItem="{Binding Path=methodTrace}"  
@@ -34,7 +34,7 @@
         <ComboBox Margin="355,313,63.4,0" VerticalAlignment="Top"
             ItemsSource="{Binding  Path=methods}"    
             SelectedItem="{Binding Path=methodSer}"  
-                  />
+                  />-->
 
 
     </Grid>

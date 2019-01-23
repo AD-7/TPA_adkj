@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Reflection.Metadata_Model
 {
-    public class DictionaryOfTypes
+    public sealed class DictionaryOfTypes
     {
         private static DictionaryOfTypes _instance = null;
 
@@ -35,7 +35,7 @@ namespace Reflection.Metadata_Model
 
         public void RegisterType(string name, TypeMetadata type)
         {
-          
+          if(!DictionaryOfTypes.Instance.ContainsKey(name))
             _data.Add(name, type);
         }
 

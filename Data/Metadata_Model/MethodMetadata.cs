@@ -53,7 +53,7 @@ namespace Reflection.Metadata_Model
         {
             Name = method.Name;
             MetadataName = method.MetadataName;
-            ReturnType = TypeMetadata.AddType(method.SerReturnType);
+            ReturnType = TypeMetadata.LoadType(method.SerReturnType);
             Parameters = method.SerParameters?.Select(p => new ParameterMetadata(p)).ToList();
         }
 
