@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System;
+using System.IO;
+using System.Windows;
 using ViewModel;
 
 namespace WPF
@@ -12,6 +14,8 @@ namespace WPF
         {
             InitializeComponent();
             DataContext = new ViewControl();
+            AppDomain.CurrentDomain.SetData(
+  "DataDirectory", Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ""));
         }
 
         

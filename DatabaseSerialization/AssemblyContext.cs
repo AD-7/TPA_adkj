@@ -1,21 +1,18 @@
-﻿using DatabaseSerialization.Model;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace DatabaseSerialization
 {
-    class ModelContext : DbContext
+    using System;
+    using System.Data.Entity;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Linq;
+    using DatabaseSerialization.Model;
+
+    public partial class AssemblyContext : DbContext
     {
-        public ModelContext() : base("AssemblyData")
+        public AssemblyContext()
+            : base("name=AssemblyContext")
         {
-            Database.SetInitializer<ModelContext>(new DropCreateDatabaseAlways<ModelContext>());
-
+            Database.SetInitializer(new DropCreateDatabaseAlways<AssemblyContext>());
         }
-
         public virtual DbSet<AssemblyDb> Assemblies { get; set; }
         public virtual DbSet<NamespaceDb> Namespaces { get; set; }
         public virtual DbSet<TypeDb> Types { get; set; }
@@ -25,8 +22,6 @@ namespace DatabaseSerialization
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            
         }
-
     }
 }

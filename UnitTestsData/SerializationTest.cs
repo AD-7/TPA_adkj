@@ -30,7 +30,7 @@ namespace UnitTestsData
         {
         
 
-            ser.Serialize(dtg, "path");
+            ser.Serialize(dtg);
             Assert.IsTrue(File.Exists("path.xml") == true);        
         }
 
@@ -38,8 +38,8 @@ namespace UnitTestsData
         [TestMethod]
         public void SerTest2()
         {
-            ser.Serialize(dtg, "path");
-            AssemblyDTG tmp = ser.Deserialize("path.xml");
+            ser.Serialize(dtg);
+            AssemblyDTG tmp = ser.Deserialize();
 
             Assert.AreEqual(tmp.Name, "Reflection.dll");
         }
@@ -47,8 +47,8 @@ namespace UnitTestsData
         [TestMethod]
         public void SerTest3()
         {
-            ser.Serialize(dtg, "path");
-            AssemblyDTG tmp = ser.Deserialize("path.xml");
+            ser.Serialize(dtg);
+            AssemblyDTG tmp = ser.Deserialize();
             Assert.AreEqual(tmp.Namespaces.Count, 3);
         }
 

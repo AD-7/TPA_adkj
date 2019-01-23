@@ -17,7 +17,7 @@ namespace Serialization
             SerializableAssembly serRefl = new SerializableAssembly(assembly); 
             FileStream file = new FileStream(fileName, FileMode.Create, FileAccess.Write);
 
-            DataContractSerializer SerializerObj = new DataContractSerializer(typeof(SerializableAssembly), null, 0x7FFF,  false, true, null);
+            DataContractSerializer SerializerObj = new DataContractSerializer(typeof(SerializableAssembly), null, int.MaxValue,  false, true, null);
 
             SerializerObj.WriteObject(file, serRefl);
             file.Close();
@@ -26,7 +26,7 @@ namespace Serialization
         public  AssemblyDTG Deserialize()
         {
            string fileName = "fileSave.xml";
-            DataContractSerializer SerializerObj = new DataContractSerializer(typeof(SerializableAssembly), null, 0x7FFF, false, true, null);
+            DataContractSerializer SerializerObj = new DataContractSerializer(typeof(SerializableAssembly), null, int.MaxValue, false, true, null);
 
             FileStream file = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.Read);
 

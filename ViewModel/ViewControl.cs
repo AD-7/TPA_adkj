@@ -41,12 +41,12 @@ namespace ViewModel
 
            
         }
-
+        //(localdb)\MSSQLLocalDB
         private  void Save()
         {
             if (TV.Count > 0)
             {
-                SaveManager.Save(Reflector.AssemblyModel, methodSer);
+                SaveManager.Save(Reflector.AssemblyModel);
             }
 
  
@@ -63,7 +63,7 @@ namespace ViewModel
 
             
           
-            Reflector.AssemblyModel = SaveManager.Load(methodSer);
+            Reflector.AssemblyModel = SaveManager.Load();
             AssemblyTreeView rootItem = new AssemblyTreeView(Reflector.AssemblyModel) { Name = Reflector.AssemblyModel.Name };
             string tempRootName = rootItem.Name;
             TV.Clear();

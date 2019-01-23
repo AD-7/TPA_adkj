@@ -12,12 +12,11 @@ using System.Threading.Tasks;
 namespace DatabaseSerialization
 {
     [Export(typeof(ISerialization))]
-    [ExportMetadata("Name", "Database")]
     public class DbSerialization : ISerialization
     {
         public AssemblyDTG Deserialize()
         {
-            using(ModelContext context = new ModelContext())
+            using(AssemblyContext context = new AssemblyContext())
             {
                 context.Namespaces.Load();
                 context.Types.Load();
@@ -38,9 +37,9 @@ namespace DatabaseSerialization
 
         public void Serialize(AssemblyDTG assembly)
         {
-            Database.SetInitializer(new DropCreateDatabaseAlways<ModelContext>());
-
-            using (ModelContext context = new ModelContext() )
+            Database.SetInitializer(new DropCreateDatabaseAlways<AssemblyContext>());
+      
+            using (AssemblyContext context = new AssemblyContext() )
             {
                 AssemblyDb assemblyToSave = new AssemblyDb(assembly);
                 context.Assemblies.Add(assemblyToSave);

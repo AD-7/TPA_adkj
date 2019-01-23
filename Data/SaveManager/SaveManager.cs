@@ -16,7 +16,7 @@ namespace Reflection.SaveManager
         public ISerialization serializer;
         
 
-        public void Save(AssemblyMetadata assemblyModel, string kindOfSerialize)
+        public void Save(AssemblyMetadata assemblyModel)
         {
          
             AssemblyDTG assemblyDTG = MapperToDTG.MapperToDTG.AssemblyDtg(assemblyModel);
@@ -24,7 +24,7 @@ namespace Reflection.SaveManager
         }
 
 
-        public AssemblyMetadata Load( string kindOfSerialize)
+        public AssemblyMetadata Load( )
         {
         
             AssemblyDTG assemblyDTG = serializer.Deserialize();
