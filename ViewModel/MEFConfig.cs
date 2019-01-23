@@ -34,31 +34,22 @@ namespace ViewModel
             string Name { get; }
         }
 
-        [ImportMany(typeof(ITraceSource))]
-        public IEnumerable<Lazy<ITraceSource, IRepoMeta>> trace;
+        [Import(typeof(ITraceSource))]
+        public ITraceSource tracer;
 
        
-        public ITraceSource tracer;
-        public void kindOfTrace(string kind)
-        {
-            tracer = trace.Where(x => x.Metadata.Name == kind)
-              .Select(x => x.Value).First();
-        }
-      
+       
         public void GetComp()
         {
             try
             {
                 AggregateCatalog catalog = new AggregateCatalog();
                 //catalog.Catalogs.Add(new AssemblyCatalog(typeof(MEFConfig).Assembly));
-                catalog.Catalogs.Add(new DirectoryCatalog(@"../../Lib", "*.dll"));
+                catalog.Catalogs.Add(new DirectoryCatalog(@"../../../Lib", "*.dll"));
                 CompositionContainer _cont = new CompositionContainer(catalog);
 
 
                 _cont.ComposeParts(this);
-
-                tracer = trace.Where(x => x.Metadata.Name == "File")
-           .Select(x => x.Value).First();
 
 
 
