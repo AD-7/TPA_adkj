@@ -18,7 +18,10 @@ namespace DbSerializationTests
         [TestInitialize]
         public void Init()
         {
-            ser = new DbSerialization();
+            AppDomain.CurrentDomain.SetData(
+ "DataDirectory", Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ""));
+        
+        ser = new DbSerialization();
             refl = new Reflector();
             refl.Reflect("Reflection.dll");
             dtg = MapperToDTG.AssemblyDtg(refl.AssemblyModel);

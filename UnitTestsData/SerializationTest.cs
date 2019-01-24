@@ -31,7 +31,7 @@ namespace UnitTestsData
         
 
             ser.Serialize(dtg);
-            Assert.IsTrue(File.Exists("path.xml") == true);        
+            Assert.IsTrue(File.Exists("fileSave.xml") == true);        
         }
 
 

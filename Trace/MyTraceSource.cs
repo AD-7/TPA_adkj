@@ -8,7 +8,6 @@ using ViewModel.TraceService;
 namespace Trace
 {
     [Export(typeof(ITraceSource))]
-    [ExportMetadata("Name","File")]
     public class MyTraceSource : ITraceSource
     {
      

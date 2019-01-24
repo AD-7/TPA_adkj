@@ -8,12 +8,11 @@ using ViewModel.TraceService;
 namespace DatabaseTrace
 {
     [Export(typeof(ITraceSource))]
-    [ExportMetadata("Name", "Database")]
     public class DbTrace : ITraceSource
     {
         public void TraceData(string mes)
         {
-            using (TraceContext context = new TraceContext())
+            using (Context context = new Context())
             {
                 context.Logs.Add(new TraceItem() { mes = mes, time = DateTime.Now });
                 context.SaveChanges();

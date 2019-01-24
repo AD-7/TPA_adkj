@@ -8,12 +8,11 @@ using System.Runtime.Serialization;
 namespace Serialization
 {
     [Export(typeof(ISerialization))]
-    [ExportMetadata("Name","File")]
     public   class SerXML :ISerialization
     {
         public void Serialize(AssemblyDTG assembly)
         {
-            string fileName = "fileSave.xml";
+            string fileName = Settings1.Default.path;
             SerializableAssembly serRefl = new SerializableAssembly(assembly); 
             FileStream file = new FileStream(fileName, FileMode.Create, FileAccess.Write);
 
@@ -25,7 +24,7 @@ namespace Serialization
 
         public  AssemblyDTG Deserialize()
         {
-           string fileName = "fileSave.xml";
+           string fileName = Settings1.Default.path;
             DataContractSerializer SerializerObj = new DataContractSerializer(typeof(SerializableAssembly), null, int.MaxValue, false, true, null);
 
             FileStream file = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.Read);

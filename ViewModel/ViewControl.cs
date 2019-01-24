@@ -41,7 +41,7 @@ namespace ViewModel
 
            
         }
-        //(localdb)\MSSQLLocalDB
+     
         private  void Save()
         {
             if (TV.Count > 0)
@@ -55,12 +55,7 @@ namespace ViewModel
 
         private void Read()
         {
-            if (methodSer == "File")
-            {
-                LoadXML();
-            }
-
-
+          
             
           
             Reflector.AssemblyModel = SaveManager.Load();
