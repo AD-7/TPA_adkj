@@ -17,7 +17,6 @@ namespace ViewModel
         public Reflector Reflector;
         public ObservableCollection<TreeViewBase> TV { get; set; }
         public ObservableCollection<string> methods { get; set; }
-        public SaveManager SaveManager { get; set; } 
         public string methodTrace { get; set; }
         public string methodSer { get; set; }
         public ICommand LoadFileClicked { get; }
@@ -30,7 +29,7 @@ namespace ViewModel
 
         {
             MEFConfig.Instance.GetComp();
-            SaveManager = SaveManager.GetSaveManager();
+   
             TV = new ObservableCollection<TreeViewBase>();
             LoadFileClicked = new DelegateCommand(Load);
             ShowTree = new DelegateCommand(LoadTree);
@@ -46,7 +45,7 @@ namespace ViewModel
         {
             if (TV.Count > 0)
             {
-                SaveManager.Save(Reflector.AssemblyModel);
+                MEFConfig.Instance.saveManager.Save(Reflector.AssemblyModel);
             }
 
  
@@ -58,7 +57,7 @@ namespace ViewModel
           
             
           
-            Reflector.AssemblyModel = SaveManager.Load();
+            Reflector.AssemblyModel = MEFConfig.Instance.saveManager.Load();
             AssemblyTreeView rootItem = new AssemblyTreeView(Reflector.AssemblyModel) { Name = Reflector.AssemblyModel.Name };
             string tempRootName = rootItem.Name;
             TV.Clear();

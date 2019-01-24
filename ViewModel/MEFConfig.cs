@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Reflection.SaveManager;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
@@ -37,6 +38,7 @@ namespace ViewModel
         [Import(typeof(ITraceSource))]
         public ITraceSource tracer;
 
+        public SaveManager saveManager;
        
        
         public void GetComp()
@@ -51,6 +53,8 @@ namespace ViewModel
 
                 _cont.ComposeParts(this);
 
+                saveManager = new SaveManager();
+                _cont.ComposeParts(saveManager);
 
 
             }     

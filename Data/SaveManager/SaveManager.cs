@@ -32,26 +32,9 @@ namespace Reflection.SaveManager
             return assemblyModel;
         }
 
-        public static SaveManager GetSaveManager()
-        {
-            SaveManager sm = new SaveManager();
+  
 
-            AggregateCatalog catalog = new AggregateCatalog();
-            //catalog.Catalogs.Add(new AssemblyCatalog(typeof(SaveManager).Assembly));
-            catalog.Catalogs.Add(new DirectoryCatalog(@"../../../Lib", "*.dll"));
-            CompositionContainer _cont = new CompositionContainer(catalog);
-
-
-            _cont.ComposeParts(sm);
-           
-
-            return sm;
-        }
-
-        public interface IRepoMeta
-        {
-            string Name { get; }
-        }
+      
 
     }
 }
