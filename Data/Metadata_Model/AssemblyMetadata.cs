@@ -28,17 +28,18 @@ namespace Reflection.Metadata_Model
             this.Name = Name;
             this.MetadataName = MetadataName;
         }
-        internal AssemblyMetadata(Assembly assembly) 
+        public AssemblyMetadata(Assembly assembly) 
         {
             Name = assembly.ManifestModule.Name;
             MetadataName = "Assembly: ";
-            
-            Namespaces = (from Type _type in assembly.GetTypes()
-                         where _type.GetVisible()
-                         group _type by _type.GetNamespace() into _group
-                         orderby _group.Key
-                         select new NamespaceMetadata(_group.Key, _group)).ToList();
-        }
+
+            Namespaces = assembly
+                    .GetTypes()?
+                    .GroupBy(t => t.Namespace)
+                    .OrderBy(grouping => grouping.Key)
+                    .Select(t => new NamespaceMetadata(t.Key, t.ToList()))
+                    .ToList();
+                    }
 
         public AssemblyMetadata(AssemblyDTG assembly)
         {

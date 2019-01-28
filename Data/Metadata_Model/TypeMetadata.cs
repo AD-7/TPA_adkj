@@ -43,7 +43,7 @@ namespace Reflection.Metadata_Model
 
 
         #region constructors
-        internal TypeMetadata(Type type, string metadataName)
+        public TypeMetadata(Type type, string metadataName)
         {
            
             Name = type.Name;
