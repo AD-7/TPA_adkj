@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows.Input;
 using ViewModel.TreeViewModel;
+using System.Windows;
 
 namespace ViewModel
 {
@@ -48,7 +49,7 @@ namespace ViewModel
                 MEFConfig.Instance.saveManager.Save(Reflector.AssemblyModel);
             }
 
- 
+            MessageBox.Show("Saved");
             MEFConfig.Instance.tracer.TraceData( "Dokonano serializacji");
         }
 
@@ -64,7 +65,7 @@ namespace ViewModel
             rootItem.Name = "Assembly: " + tempRootName;
             TV.Add(rootItem);
 
-       
+            MessageBox.Show("Loaded");
             MEFConfig.Instance.tracer.TraceData( "Dokonano deserializacji.");
         }
 
