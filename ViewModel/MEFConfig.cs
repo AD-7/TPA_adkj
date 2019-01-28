@@ -10,7 +10,7 @@ using ViewModel.TraceService;
 namespace ViewModel
 {
 
-    public sealed class MEFConfig
+    public sealed class MEFConfig : IDisposable
     {
         private static readonly MEFConfig instance = new MEFConfig();
 
@@ -39,8 +39,9 @@ namespace ViewModel
         public ITraceSource tracer;
 
         public SaveManager saveManager;
-       
-       
+        private CompositionContainer _cont;
+
+
         public void GetComp()
         {
             try
@@ -48,7 +49,7 @@ namespace ViewModel
                 AggregateCatalog catalog = new AggregateCatalog();
                 //catalog.Catalogs.Add(new AssemblyCatalog(typeof(MEFConfig).Assembly));
                 catalog.Catalogs.Add(new DirectoryCatalog(@"../../../Lib", "*.dll"));
-                CompositionContainer _cont = new CompositionContainer(catalog);
+              _cont = new CompositionContainer(catalog);
 
 
                 _cont.ComposeParts(this);
@@ -72,7 +73,11 @@ namespace ViewModel
             }
          
         }
-       
+
+        public void Dispose()
+        {
+            _cont?.Dispose();
+        }
     }
 }
 
