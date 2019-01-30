@@ -20,7 +20,7 @@ namespace ReflectionTests
         {
             ser = new SerXML();
             refl = new Reflector();
-            refl.Reflect("Reflection.dll");
+            refl.Reflect("TPA.ApplicationArchitecture.dll");
             dtg = MapperToDTG.AssemblyDtg(refl.AssemblyModel);
 
         }
@@ -28,8 +28,6 @@ namespace ReflectionTests
         [TestMethod]
         public void SerTest1()
         {
-
-
             ser.Serialize(dtg);
             Assert.IsTrue(File.Exists("fileSave.xml") == true);
         }
@@ -41,7 +39,7 @@ namespace ReflectionTests
             ser.Serialize(dtg);
             AssemblyDTG tmp = ser.Deserialize();
 
-            Assert.AreEqual(tmp.Name, "Reflection.dll");
+            Assert.AreEqual(tmp.Name, "TPA.ApplicationArchitecture.dll");
         }
 
         [TestMethod]
@@ -49,7 +47,7 @@ namespace ReflectionTests
         {
             ser.Serialize(dtg);
             AssemblyDTG tmp = ser.Deserialize();
-            Assert.AreEqual(tmp.Namespaces.Count, 3);
+            Assert.AreEqual(tmp.Namespaces.Count, 4);
         }
 
     }

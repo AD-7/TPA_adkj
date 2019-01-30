@@ -1,4 +1,4 @@
-﻿﻿using System;
+﻿using System;
 using System.IO;
 using DatabaseSerialization;
 using DTG;
@@ -18,12 +18,11 @@ namespace DbSerializationTests
         [TestInitialize]
         public void Init()
         {
-            AppDomain.CurrentDomain.SetData(
- "DataDirectory", Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ""));
-        
-        ser = new DbSerialization();
+            AppDomain.CurrentDomain.SetData("DataDirectory", Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ""));
+
+            ser = new DbSerialization();
             refl = new Reflector();
-            refl.Reflect("Reflection.dll");
+            refl.Reflect("TPA.ApplicationArchitecture.dll");
             dtg = MapperToDTG.AssemblyDtg(refl.AssemblyModel);
 
         }
@@ -34,7 +33,7 @@ namespace DbSerializationTests
         {
             ser.Serialize(dtg);
             AssemblyDTG tmp = ser.Deserialize();
-            Assert.AreEqual(tmp.Name, "Reflection.dll");
+            Assert.AreEqual(tmp.Name, "TPA.ApplicationArchitecture.dll");
         }
 
         [TestMethod]
@@ -42,7 +41,7 @@ namespace DbSerializationTests
         {
             ser.Serialize(dtg);
             AssemblyDTG tmp = ser.Deserialize();
-            Assert.AreEqual(tmp.Namespaces.Count, 3);
+            Assert.AreEqual(tmp.Namespaces.Count, 4);
         }
 
         [TestMethod]
@@ -51,9 +50,10 @@ namespace DbSerializationTests
             ser.Serialize(dtg);
             AssemblyDTG tmp = ser.Deserialize();
 
-            Assert.AreEqual("Reflection.SaveManager", tmp.Namespaces[0].Name);
-            Assert.AreEqual("Reflection.Metadata_Model", tmp.Namespaces[1].Name);
-            Assert.AreEqual("Reflection.MapperToDTG", tmp.Namespaces[2].Name);
+            Assert.AreEqual("TPA.ApplicationArchitecture.Presentation", tmp.Namespaces[0].Name);
+            Assert.AreEqual("TPA.ApplicationArchitecture.Data.CircularReference", tmp.Namespaces[1].Name);
+            Assert.AreEqual("TPA.ApplicationArchitecture.Data", tmp.Namespaces[2].Name);
+            Assert.AreEqual("TPA.ApplicationArchitecture.BusinessLogic", tmp.Namespaces[3].Name);
         }
 
         [TestMethod]
@@ -62,17 +62,17 @@ namespace DbSerializationTests
             ser.Serialize(dtg);
             AssemblyDTG tmp = ser.Deserialize();
 
-            Assert.AreEqual("get_Name", tmp.Namespaces[0].Types[0].SerMethods[0].Name);
+            Assert.AreEqual("ToString", tmp.Namespaces[0].Types[0].SerMethods[0].Name);
         }
 
 
         [TestMethod]
-        public void CheckFirstPropertieName()
+        public void CheckNumberOfMethodsInFirstType()
         {
             ser.Serialize(dtg);
             AssemblyDTG tmp = ser.Deserialize();
 
-            Assert.AreEqual("Name", tmp.Namespaces[0].Types[0].SerProperties[0].Name);
+            Assert.AreEqual(4, tmp.Namespaces[0].Types[0].SerMethods.ToArray().Length);
         }
 
 
