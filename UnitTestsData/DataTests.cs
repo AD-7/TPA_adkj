@@ -14,7 +14,7 @@ namespace UnitTestsData
         public void Init()
         {
             refl = new Reflector();
-            refl.Reflect("../TPA.ApplicationArchitecture.dll");
+            refl.Reflect("../../dllForTests/TPA.ApplicationArchitecture.dll");
         }
 
         [TestMethod]
