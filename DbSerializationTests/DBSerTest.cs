@@ -22,7 +22,7 @@ namespace DbSerializationTests
 
             ser = new DbSerialization();
             refl = new Reflector();
-            refl.Reflect("TPA.ApplicationArchitecture.dll");
+            refl.Reflect("../TPA.ApplicationArchitecture.dll");
             dtg = MapperToDTG.AssemblyDtg(refl.AssemblyModel);
 
         }
